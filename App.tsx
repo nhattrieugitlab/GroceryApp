@@ -7,7 +7,7 @@
 
 import React from 'react';
 import {
-  SafeAreaView, View,
+  SafeAreaView, Text, View,
 } from 'react-native';
 import Card from './src/components/Card';
 
@@ -19,9 +19,7 @@ function App(): JSX.Element {
       <View style={{ marginTop: 12 }}>
         <Card image={require('./src/assert/images/PikPng1.png')} name='Orginal Banana' price='5,99' weight='1kg,priceg' />
       </View>
-      <View>
-
-      </View>
+      <Text> Phú quí </Text>
     </SafeAreaView>
   );
 }
