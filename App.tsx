@@ -19,9 +19,6 @@ function App(): JSX.Element {
       <View style={{ marginTop: 12 }}>
         <Card image={require('./src/assert/images/PikPng1.png')} name='Orginal Banana' price='5,99' weight='1kg,priceg' />
       </View>
-      <View>
-
-      </View>
     </SafeAreaView>
   );
 }
