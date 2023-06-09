@@ -6,14 +6,13 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView, Text, View,
-} from 'react-native';
-import Card from './src/components/Card';
+import ShopScreen from './src/components/screens/ShopScreen';
+import ExploreScreen from './src/components/screens/ExploreScreen';
 
 function App(): JSX.Element {
 
   return (
+<<<<<<< HEAD
     <SafeAreaView style={{ padding: 50 }}>
       <Card 
       image={require('./src/assert/images/purepng1.png')}
@@ -25,6 +24,9 @@ function App(): JSX.Element {
       </View>
       <Text> Phú quí </Text>
     </SafeAreaView>
+=======
+    <ExploreScreen />
+>>>>>>> 595034ddf7c24ab891369ead89266c66efe29ee2
   );
 }
 
