@@ -8,7 +8,7 @@ type CardProps = {
     price: string
 }
 
-function Card({ image, name, weight, price }: CardProps): JSX.Element {
+function ProductCard({ image, name, weight, price }: CardProps): JSX.Element {
     return (
         <View style={styles.container}>
             <View style={styles.boxImage}>
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
     }
 
 })
-export default Card
+export default ProductCard;

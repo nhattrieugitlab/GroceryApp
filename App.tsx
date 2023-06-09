@@ -7,20 +7,17 @@
 
 import React from 'react';
 import {
-  SafeAreaView, Text, View,
+  SafeAreaView, View,
 } from 'react-native';
-import Card from './src/components/Card';
+import CategoryCard from './src/components/widgets/CategoryCard';
+import ProductCard from './src/components/widgets/ProductCard';
+import ShopSreen from './src/components/screens/ShopScreen';
+import ExploreScreen from './src/components/screens/ExploreScreen';
 
 function App(): JSX.Element {
 
   return (
-    <SafeAreaView style={{ padding: 50 }}>
-      <Card image={require('./src/assert/images/purepng1.png')} name='Red Apple' price='4,99' weight='1kg,priceg' />
-      <View style={{ marginTop: 12 }}>
-        <Card image={require('./src/assert/images/PikPng1.png')} name='Orginal Banana' price='5,99' weight='1kg,priceg' />
-      </View>
-      <Text> Phú quí </Text>
-    </SafeAreaView>
+    <ShopSreen />
   );
 }
 
