@@ -22,44 +22,44 @@ type productItem = {
 }
 
 const categoryData: categoryItem[] = [{
-    image: require('../../assert/images/c1.png'),
+    image: require('../../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF'
 }, {
-    image: require('../../assert/images/c2.png'),
+    image: require('../../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA'
 }, {
-    image: require('../../assert/images/c3.png'),
+    image: require('../../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC'
 }, {
-    image: require('../../assert/images/c4.png'),
+    image: require('../../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD'
 }, {
-    image: require('../../assert/images/c5.png'),
+    image: require('../../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299'
 }]
 
 const productData: productItem[] = [{
-    image: require('../../assert/images/p1.png'),
+    image: require('../../assets/images/p1.png'),
     name: 'Red Apple',
     weight: '1kg,priceg',
     price: '4,99'
 }, {
-    image: require('../../assert/images/p2.png'),
+    image: require('../../assets/images/p2.png'),
     name: 'Orginal Banana',
     weight: '1kg,priceg',
     price: '5,99'
 }, {
-    image: require('../../assert/images/p1.png'),
+    image: require('../../assets/images/p1.png'),
     name: 'Red Apple',
     weight: '1kg,priceg',
     price: '4,99'
 }, {
-    image: require('../../assert/images/p2.png'),
+    image: require('../../assets/images/p2.png'),
     name: 'Orginal Banana',
     weight: '1kg,priceg',
     price: '5,99'
@@ -81,13 +81,13 @@ const renderProductItem = ({ item }: { item: productItem }) => {
     )
 }
 
-function ShopSreen(): JSX.Element {
+function ShopScreen(): JSX.Element {
 
     return (
         <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
             <View style={{ paddingHorizontal: 16, paddingTop: 16 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
-                    <Image source={require('../../assert/images/location.png')} style={{ width: 16.88, height: 22.5 }} />
+                    <Image source={require('../../assets/images/location.png')} style={{ width: 16.88, height: 22.5 }} />
                     <Text style={{ fontWeight: '700', fontSize: 24, lineHeight: 28.8, color: '#FF5E00', marginLeft: 8.62 }}>
                         Lungangen
                     </Text>
@@ -142,4 +142,4 @@ function ShopSreen(): JSX.Element {
     );
 }
 
-export default ShopSreen;
+export default ShopScreen;

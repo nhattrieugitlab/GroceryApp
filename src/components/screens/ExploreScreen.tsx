@@ -11,103 +11,103 @@ type categoryItem = {
 }
 
 const categoryData: categoryItem[] = [{
-    image: require('../../assert/images/c1.png'),
+    image: require('../../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF'
 }, {
-    image: require('../../assert/images/c2.png'),
+    image: require('../../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA'
 }, {
-    image: require('../../assert/images/c3.png'),
+    image: require('../../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC'
 }, {
-    image: require('../../assert/images/c4.png'),
+    image: require('../../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD'
 }, {
-    image: require('../../assert/images/c5.png'),
+    image: require('../../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299'
 }, {
-    image: require('../../assert/images/c1.png'),
+    image: require('../../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF'
 }, {
-    image: require('../../assert/images/c2.png'),
+    image: require('../../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA'
 }, {
-    image: require('../../assert/images/c3.png'),
+    image: require('../../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC'
 }, {
-    image: require('../../assert/images/c4.png'),
+    image: require('../../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD'
 }, {
-    image: require('../../assert/images/c5.png'),
+    image: require('../../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299'
 }, {
-    image: require('../../assert/images/c1.png'),
+    image: require('../../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF'
 }, {
-    image: require('../../assert/images/c2.png'),
+    image: require('../../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA'
 }, {
-    image: require('../../assert/images/c3.png'),
+    image: require('../../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC'
 }, {
-    image: require('../../assert/images/c4.png'),
+    image: require('../../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD'
 }, {
-    image: require('../../assert/images/c5.png'),
+    image: require('../../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299'
 }, {
-    image: require('../../assert/images/c1.png'),
+    image: require('../../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF'
 }, {
-    image: require('../../assert/images/c2.png'),
+    image: require('../../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA'
 }, {
-    image: require('../../assert/images/c3.png'),
+    image: require('../../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC'
 }, {
-    image: require('../../assert/images/c4.png'),
+    image: require('../../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD'
 }, {
-    image: require('../../assert/images/c5.png'),
+    image: require('../../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299'
 }, {
-    image: require('../../assert/images/c1.png'),
+    image: require('../../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF'
 }, {
-    image: require('../../assert/images/c2.png'),
+    image: require('../../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA'
 }, {
-    image: require('../../assert/images/c3.png'),
+    image: require('../../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC'
 }, {
-    image: require('../../assert/images/c4.png'),
+    image: require('../../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD'
 }, {
-    image: require('../../assert/images/c5.png'),
+    image: require('../../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299'
 },]
