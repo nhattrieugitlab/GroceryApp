@@ -2,84 +2,97 @@ import {
   View,
   Text,
   ImageRequireSource,
+  ImageSourcePropType,
   Image,
   TouchableOpacity,
   StyleSheet,
   TextInput,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
+import TextInputcs from '../widgets/TextInput';
 
 type SignUpProps = {
-  image: ImageRequireSource;
   label?: string;
-  label1?: string;
-  label2?: string;
-  label3?: string;
-  color?: string;
+  imagekey: ImageSourcePropType;
+  imageEye: ImageSourcePropType;
+  // backgroundColor?: string;
 };
-// const [isshowPassword, setisshowPassword] = useState<boolean>(false);
-// const handleTogglePassword = () => {
-//   setisshowPassword(!isshowPassword);
+
+const categoryData: SignUpProps[] = [
+  {
+    label: 'Password',
+    imagekey: require('../../assets/images/key'),
+    imageEye: require('./media/images/visibility_24px.png'),
+  },
+  {
+    label: 'Comfirm Password',
+    imagekey: require('../../assets/images/key'),
+    imageEye: require('./media/images/visibility_24px.png'),
+  },
+];
+
+// const renderCategoryItem = ({item}: {item: SignUpProps}) => {
+//   return (
+//     <View style={{marginRight: 22, marginBottom: 27}}>
+//       <TextInputcs
+//         label={item.label}
+//         imagekey={item.imagekey}
+//         imageEye={item.imageEye}
+//       />
+//     </View>
+//   );
 // };
-const SignPass: React.FC<SignUpProps> = (
-  {image, label, label1, label2, label3},
-  color,
-) => {
+
+function SignPass(): JSX.Element {
   return (
     <ScrollView style={styles.body}>
       <Image source={require('../../assets/images/Arrow.png')} />
       <Text style={styles.textSignUp}>Sign Up</Text>
-      <Image style={styles.image} source={image} />
+      <Image
+        style={styles.image}
+        source={require('../../assets/images/phonepass.png')}
+      />
       <Text style={styles.textEnterPass}>Enter the password</Text>
       <Text style={styles.textContent}>
         For the security & safety please choose a password
       </Text>
       <View style={styles.PassContainer}>
-        <TextInput
-          placeholder={label}
-          style={[styles.textInput, {color: color || 'white'}]}>
-          {/* <Text style={styles.textLabel}>{label}</Text> */}
-        </TextInput>
-        <Image
-          style={styles.imageKey}
-          source={require('../../assets/images/key.png')}
-        />
-        <Image
-          style={styles.imageEye}
-          source={require('../../assets/images/visibility_24px.png')}
+        <TextInputcs
+          label={categoryData[0].label}
+          imageEye={categoryData[0].imageEye}
+          imagekey={categoryData[0].imagekey}
         />
       </View>
       <View style={styles.PassContainer}>
-        <TextInput
-          style={[styles.textInput, {color: color || 'white'}]}
-          placeholder={label1}></TextInput>
-        <Image
-          style={styles.imageKey}
-          source={require('./media/images/key.png')}
+        <TextInputcs
+          label={categoryData[1].label}
+          imageEye={categoryData[1].imageEye}
+          imagekey={categoryData[1].imagekey}
         />
-        <Image
-          style={styles.imageEye}
-          source={require('./media/images/visibility_24px.png')}
-        />
-        {/* <TouchableOpacity
-
-        // onPress={handleTogglePassword}
-        ></TouchableOpacity> */}
+        {/* {categoryData.map((item, index) => (
+          <View key={index} style={{marginRight: 22, marginBottom: 27}}>
+            <TextInputcs
+              label={item.label}
+              imagekey={item.imagekey}
+              imageEye={item.imageEye}
+            />
+          </View>
+        ))} */}
       </View>
       <TouchableOpacity style={styles.buttoncontainer}>
-        <Text style={styles.buttonLabel}>{label2}</Text>
+        <Text style={styles.buttonLabel}>Next</Text>
       </TouchableOpacity>
-      <Text style={styles.textlabel3}> Already have an account? {label3}</Text>
+      <Text style={styles.textlabel3}> Already have an account?Login</Text>
     </ScrollView>
   );
-};
+}
 
 export default SignPass;
 const styles = StyleSheet.create({
   image: {
-    width: 348,
-    height: 348,
+    alignSelf: 'center',
   },
   textSignUp: {
     fontSize: 24,
@@ -104,12 +117,14 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    position: 'relative',
-    borderRadius: 5,
-    backgroundColor: '#F3F3F3',
-    padding: 15,
-    height: 50,
-    marginTop: 10,
+    flex: 1,
+    paddingHorizontal: 48,
+    paddingVertical: 15,
+    fontFamily: 'Klarna Text',
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#AC8E71',
   },
   textInputPassWord: {
     borderRadius: 5,
