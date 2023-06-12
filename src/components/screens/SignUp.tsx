@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React from 'react';
 
@@ -17,29 +19,44 @@ type SignUpProps = {
   label3?: string;
   color?: string;
 };
+const categoryData: SignUpProps[] = [
+  {
+    label: 'Password',
+    image: require('../../assets/images/phone.png'),
+    label1: 'Enter your password',
+    label2: 'Sign Up',
+    label3: 'Login',
+    color: '#AC8E71',
+  },
+];
 const SignUp: React.FC<SignUpProps> = (
   {image, label, label1, label2, label3},
   color,
 ) => {
   return (
-    <View style={styles.body}>
-      <Image source={require('./media/images/Arrow.png')} />
-      <Text style={styles.textSignUp}>Sign Up</Text>
-      <Image style={styles.image} source={image} />
-      <TextInput
-        style={[styles.textInput, {color: color || 'white'}]}
-        placeholder={label}></TextInput>
-      <TextInput
-        style={styles.textInputPassWord}
-        placeholder={label1}  ></TextInput>
-      <Text style={styles.textContent}>
-        We need to verify you. We will send you a one time verification code.{' '}
-      </Text>
-      <TouchableOpacity style={styles.buttoncontainer}>
-        <Text style={styles.buttonLabel}>{label2}</Text>
-      </TouchableOpacity>
-      <Text style={styles.textlabel3}> Already have an account? {label3}</Text>
-    </View>
+    <ScrollView style={styles.body}>
+      <KeyboardAvoidingView behavior="position">
+        <Image source={require('../../assets/images/Arrow.png')} />
+        <Text style={styles.textSignUp}>Sign Up</Text>
+        <Image style={styles.image} source={categoryData[0].image} />
+        <TextInput
+          style={[styles.textInput, {color: color || 'white'}]}
+          placeholder={categoryData[0].label}></TextInput>
+        <TextInput
+          style={styles.textInputPassWord}
+          placeholder={categoryData[0].label1}></TextInput>
+        <Text style={styles.textContent}>
+          We need to verify you. We will send you a one time verification code.{' '}
+        </Text>
+        <TouchableOpacity style={styles.buttoncontainer}>
+          <Text style={styles.buttonLabel}>{categoryData[0].label2}</Text>
+        </TouchableOpacity>
+        <Text style={styles.textlabel3}>
+          {' '}
+          Already have an account? {categoryData[0].label3}
+        </Text>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
