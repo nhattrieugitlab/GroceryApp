@@ -3,7 +3,7 @@ import {
     FlatList,
     Image,
     ImageRequireSource,
-    SafeAreaView, Text, TouchableOpacity, View,
+    SafeAreaView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
 import CategoryCard from '../widgets/CategoryCard';
 import ProductCard from '../widgets/ProductCard';
@@ -84,11 +84,11 @@ const renderProductItem = ({ item }: { item: productItem }) => {
 function ShopScreen(): JSX.Element {
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-            <View style={{ paddingHorizontal: 16, paddingTop: 16 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
-                    <Image source={require('../../assets/images/location.png')} style={{ width: 16.88, height: 22.5 }} />
-                    <Text style={{ fontWeight: '700', fontSize: 24, lineHeight: 28.8, color: '#FF5E00', marginLeft: 8.62 }}>
+        <View style={styles.container}>
+            <View style={styles.containerPadding}>
+                <View style={styles.headerBox}>
+                    <Image source={require('../../assets/images/location.png')} style={styles.headerImage} />
+                    <Text style={styles.headerText}>
                         Lungangen
                     </Text>
                 </View>
@@ -141,5 +141,29 @@ function ShopScreen(): JSX.Element {
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#FFFFFF'
+    }, containerPadding: {
+        paddingHorizontal: 16,
+        paddingTop: 16
+    }, headerBox: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 16
+    }, headerText: {
+        fontWeight: '700',
+        fontSize: 24,
+        lineHeight: 28.8,
+        color: '#FF5E00',
+        marginLeft: 8.62
+    }, headerImage: {
+        width: 16.88,
+        height: 22.5
+    }
+})
 
 export default ShopScreen;
