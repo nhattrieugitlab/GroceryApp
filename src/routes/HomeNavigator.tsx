@@ -2,6 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ExploreScreen from '../views/ExploreScreen';
 import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
 import {AppIcons} from '../constant/IconPath';
+import IconBottomTabBar from '../components/IconBottomTabBar';
 type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
@@ -59,7 +60,6 @@ const HomeNavigator = () => {
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#FF5E00',
         tabBarInactiveTintColor: '#6D3805',
-        tabBarLabelStyle: styles.label,
         tabBarStyle: styles.bottomBar,
         headerShown: false,
       }}>
@@ -67,23 +67,13 @@ const HomeNavigator = () => {
         return (
           <HomeBottomTabNavigator.Screen
             options={{
-              tabBarIcon: ({color, focused}) => {
+              tabBarIcon: ({color}) => {
                 return (
-                  <View
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      width: 40,
-                      height: 20,
-                    }}>
-                    <Image
-                      style={[styles.iconTab, {tintColor: color}]}
-                      source={eachTab.icon}
-                    />
-                    <Text style={[styles.label, {color: color}]}>
-                      {eachTab.name}
-                    </Text>
-                  </View>
+                  <IconBottomTabBar
+                    label={eachTab.name}
+                    icon={eachTab.icon}
+                    color={color}
+                  />
                 );
               },
             }}
@@ -97,17 +87,6 @@ const HomeNavigator = () => {
   );
 };
 const styles = StyleSheet.create({
-  iconTab: {
-    width: 18,
-    height: 18,
-  },
-  label: {
-    marginTop: 3,
-    fontWeight: '400',
-    fontSize: 10,
-    lineHeight: 12,
-    letterSpacing: -0.17,
-  },
   bottomBar: {
     paddingBottom: 20,
     borderColor: '#E9E9E9',
