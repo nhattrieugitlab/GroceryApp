@@ -12,7 +12,7 @@ import ShopScreen from './src/components/screens/ShopScreen';
 function App(): JSX.Element {
 
   return (
-    <ShopScreen />
+    <ExploreScreen />
   );
 }
 
