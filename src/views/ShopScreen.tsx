@@ -5,8 +5,8 @@ import {
     ImageRequireSource,
     SafeAreaView, StyleSheet, Text, TouchableOpacity, View,
 } from 'react-native';
-import CategoryCard from '../widgets/CategoryCard';
-import ProductCard from '../widgets/ProductCard';
+import CategoryCard from '../components/CategoryCard';
+import ProductCard from '../components/ProductCard';
 
 type categoryItem = {
     image: ImageRequireSource,

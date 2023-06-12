@@ -11,7 +11,7 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
-import TextInputcs from '../widgets/TextInput';
+import TextInputcs from '../TextInput';
 
 type SignUpProps = {
   label?: string;
