@@ -1,21 +1,21 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ExploreScreen from '../views/ExploreScreen';
-import {Image, ImageSourcePropType, StyleSheet} from 'react-native';
+import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
 import {AppIcons} from '../constant/IconPath';
 type HomeTabParamList = {
-  ShopScreen: undefined;
-  ExploreScreen: undefined;
-  CartScreen: undefined;
-  FavoriteScreen: undefined;
-  AccountScreen: undefined;
+  Shop: undefined;
+  Explore: undefined;
+  Cart: undefined;
+  Favorite: undefined;
+  Account: undefined;
 };
 const HomeBottomTabNavigator = createBottomTabNavigator<HomeTabParamList>();
 enum HomeTabNames {
-  Shop = 'ShopScreen',
-  Explore = 'ExploreScreen',
-  Cart = 'CartScreen',
-  Favorite = 'FavoriteScreen',
-  Account = 'AccountScreen',
+  Shop = 'Shop',
+  Explore = 'Explore',
+  Cart = 'Cart',
+  Favorite = 'Favorite',
+  Account = 'Account',
 }
 type HomeTab = {
   component: React.FC;
@@ -56,6 +56,7 @@ const HomeNavigator = () => {
   return (
     <HomeBottomTabNavigator.Navigator
       screenOptions={{
+        tabBarShowLabel: false,
         tabBarActiveTintColor: '#FF5E00',
         tabBarInactiveTintColor: '#6D3805',
         tabBarLabelStyle: styles.label,
@@ -68,10 +69,21 @@ const HomeNavigator = () => {
             options={{
               tabBarIcon: ({color, focused}) => {
                 return (
-                  <Image
-                    style={[styles.iconTab, {tintColor: color}]}
-                    source={eachTab.icon}
-                  />
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 40,
+                      height: 20,
+                    }}>
+                    <Image
+                      style={[styles.iconTab, {tintColor: color}]}
+                      source={eachTab.icon}
+                    />
+                    <Text style={[styles.label, {color: color}]}>
+                      {eachTab.name}
+                    </Text>
+                  </View>
                 );
               },
             }}
@@ -90,6 +102,7 @@ const styles = StyleSheet.create({
     height: 18,
   },
   label: {
+    marginTop: 3,
     fontWeight: '400',
     fontSize: 10,
     lineHeight: 12,
