@@ -28,7 +28,7 @@ const SignPass: React.FC<SignUpProps> = (
 ) => {
   return (
     <ScrollView style={styles.body}>
-      <Image source={require('./media/images/Arrow.png')} />
+      <Image source={require('../../assets/images/Arrow.png')} />
       <Text style={styles.textSignUp}>Sign Up</Text>
       <Image style={styles.image} source={image} />
       <Text style={styles.textEnterPass}>Enter the password</Text>
@@ -43,11 +43,11 @@ const SignPass: React.FC<SignUpProps> = (
         </TextInput>
         <Image
           style={styles.imageKey}
-          source={require('./media/images/key.png')}
+          source={require('../../assets/images/key.png')}
         />
         <Image
           style={styles.imageEye}
-          source={require('./media/images/visibility_24px.png')}
+          source={require('../../assets/images/visibility_24px.png')}
         />
       </View>
       <View style={styles.PassContainer}>

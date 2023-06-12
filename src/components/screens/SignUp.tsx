@@ -23,7 +23,7 @@ const SignUp: React.FC<SignUpProps> = (
 ) => {
   return (
     <View style={styles.body}>
-      <Image source={require('./media/images/Arrow.png')} />
+      <Image source={require('../../assets/images/Arrow.png')} />
       <Text style={styles.textSignUp}>Sign Up</Text>
       <Image style={styles.image} source={image} />
       <TextInput
