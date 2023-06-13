@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import PasswordInput from '../components/PasswordInput';
+import Button from '../components/Button';
 
 function EnterPasswordScreen(): JSX.Element {
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
@@ -20,6 +21,7 @@ function EnterPasswordScreen(): JSX.Element {
       <Image source={require('../assets/images/Arrow.png')} />
       <Text style={styles.textSignUp}>Sign Up</Text>
       <Image
+        resizeMode="contain"
         style={styles.image}
         source={require('../assets/images/phonepass.png')}
       />
@@ -32,9 +34,7 @@ function EnterPasswordScreen(): JSX.Element {
         isShowPassword={isShowPasswordComfirm}
         label={'Confirm Password'}
       />
-      <TouchableOpacity style={styles.buttoncontainer}>
-        <Text style={styles.buttonLabel}>Next</Text>
-      </TouchableOpacity>
+      <Button label="Next" />
       <Text style={styles.textlabel3}> Already have an account?Login</Text>
     </ScrollView>
   );
@@ -42,6 +42,7 @@ function EnterPasswordScreen(): JSX.Element {
 
 const styles = StyleSheet.create({
   image: {
+    height: 280,
     alignSelf: 'center',
   },
   textSignUp: {
@@ -55,35 +56,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  imageKey: {
-    position: 'absolute',
-    top: 25,
-    left: 20,
-  },
-  imageEye: {
-    position: 'absolute',
-    top: 20,
-    right: 30,
-  },
-
-  textInput: {
-    flex: 1,
-    paddingHorizontal: 48,
-    paddingVertical: 15,
-    fontFamily: 'Klarna Text',
-    fontWeight: '400',
-    fontSize: 16,
-    lineHeight: 19,
-    color: '#AC8E71',
-  },
-  textInputPassWord: {
-    borderRadius: 5,
-    backgroundColor: '#F3F3F3',
-    padding: 15,
-    height: 50,
-    marginTop: 16,
-  },
-  textLabel: {},
   textEnterPass: {
     fontWeight: '700',
     fontSize: 20,
@@ -112,12 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF5E00',
     marginTop: 17,
   },
-  buttonLabel: {
-    fontWeight: '700',
-    fontSize: 17,
-    lineHeight: 22,
-    color: 'white',
-  },
+
   textlabel3: {
     fontSize: 16,
     fontWeight: '400',
@@ -125,9 +92,6 @@ const styles = StyleSheet.create({
     color: '#7F4E1D',
     marginTop: 10,
     textAlign: 'center',
-  },
-  PassContainer: {
-    position: 'relative',
   },
 });
 export default EnterPasswordScreen;
