@@ -4,6 +4,7 @@ import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
 import {AppIcons} from '../constant/IconPath';
 import IconBottomTabBar from '../components/IconBottomTabBar';
 import ShopScreen from '../views/ShopScreen';
+import FavoriteScreen from '../views/FavoriteScreen';
 type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
@@ -41,7 +42,7 @@ const HomeTabs: HomeTab[] = [
     icon: AppIcons.IconCart,
   },
   {
-    component: ExploreScreen,
+    component: FavoriteScreen,
     name: HomeTabNames.Favorite,
     icon: AppIcons.IconFavorie,
   },

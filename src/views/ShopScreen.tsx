@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
+import SearchInput from '../components/SearchInput';
 
 type categoryItem = {
   image: ImageRequireSource;
@@ -115,12 +116,7 @@ function ShopScreen(): JSX.Element {
           />
           <Text style={styles.headerText}>Lungangen</Text>
         </View>
-        <View style={{marginTop: 18}}>
-          <View
-            style={{borderRadius: 7, height: 48, backgroundColor: '#F3F3F3'}}>
-            <Text>Replace with search widget</Text>
-          </View>
-        </View>
+        <SearchInput />
         <View
           style={{
             marginTop: 34,
@@ -215,6 +211,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   headerBox: {
+    marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
