@@ -1,43 +1,38 @@
-import { Text, View, StyleSheet, TextInput, Image, } from "react-native";
-type TextInputProps = {
+import {View, StyleSheet, TextInput, Image} from 'react-native';
+import {AppIcons} from '../constant/IconPath';
 
+const SearchInput = ({}) => {
+  return (
+    <View style={styles.container}>
+      <TextInput
+        placeholderTextColor={'#6D380591'}
+        style={styles.input}
+        placeholder="Search"
+      />
+      <Image style={styles.icon} source={AppIcons.IconSearch} />
+    </View>
+  );
 };
-
-const searchInput: React.FC<TextInputProps> = ({ }) => {
-    return (
-        <View style={styles.container}>
-
-            <Image style={styles.img} source={require('../assets/icon/search.png')} />
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your email"
-            />
-        </View>
-
-    );
-}
 const styles = StyleSheet.create({
-    img: {
-        top: 25,
-        left: 21,
-        width: 20,
-        height: 20,
-        position: 'absolute',
-    },
-    container: {
-        width: '100%',
-        height: 300,
-        position: 'relative',
-        marginStart: 20
-    },
-    input: {
-        position: 'absolute',
-        width: 343,
-        height: 48,
-        margin: 12,
-        paddingStart: 35,
-        borderRadius: 10,
-        backgroundColor: ' rgba(254,233,182,0.4)',
-    },
+  icon: {
+    left: 17,
+    top: 14,
+    position: 'absolute',
+    width: 20,
+    height: 20,
+  },
+  container: {
+    position: 'relative',
+    width: '100%',
+    height: 48,
+  },
+  input: {
+    paddingLeft: 42,
+    color: '#6D380591',
+    width: '100%',
+    height: 48,
+    borderRadius: 10,
+    backgroundColor: '#F3F3F3',
+  },
 });
-export default searchInput;
+export default SearchInput;

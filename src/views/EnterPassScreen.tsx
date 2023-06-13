@@ -1,12 +1,4 @@
-import {
-  View,
-  Text,
-  ImageSourcePropType,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {Text, Image, StyleSheet, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import PasswordInput from '../components/PasswordInput';
 import Button from '../components/Button';

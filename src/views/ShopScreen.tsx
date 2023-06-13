@@ -3,14 +3,13 @@ import {
   FlatList,
   Image,
   ImageRequireSource,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import CategoryCard from './components/CategoryCard';
-import ProductCard from './components/ProductCard';
+import CategoryCard from '../components/CategoryCard';
+import ProductCard from '../components/ProductCard';
 
 type categoryItem = {
   image: ImageRequireSource;
@@ -27,27 +26,27 @@ type productItem = {
 
 const categoryData: categoryItem[] = [
   {
-    image: require('../../assets/images/c1.png'),
+    image: require('../assets/images/c1.png'),
     title: 'Fruits',
     backgroundColor: '#EDD0FF',
   },
   {
-    image: require('../../assets/images/c2.png'),
+    image: require('../assets/images/c2.png'),
     title: 'Vegtables',
     backgroundColor: '#FFD9BA',
   },
   {
-    image: require('../../assets/images/c3.png'),
+    image: require('../assets/images/c3.png'),
     title: 'Meat',
     backgroundColor: '#FACCCC',
   },
   {
-    image: require('../../assets/images/c4.png'),
+    image: require('../assets/images/c4.png'),
     title: 'Fish',
     backgroundColor: '#FBC1BD',
   },
   {
-    image: require('../../assets/images/c5.png'),
+    image: require('../assets/images/c5.png'),
     title: 'Sea food',
     backgroundColor: '#FFE299',
   },
@@ -55,25 +54,25 @@ const categoryData: categoryItem[] = [
 
 const productData: productItem[] = [
   {
-    image: require('../../assets/images/p1.png'),
+    image: require('../assets/images/p1.png'),
     name: 'Red Apple',
     weight: '1kg,priceg',
     price: '4,99',
   },
   {
-    image: require('../../assets/images/p2.png'),
+    image: require('../assets/images/p2.png'),
     name: 'Orginal Banana',
     weight: '1kg,priceg',
     price: '5,99',
   },
   {
-    image: require('../../assets/images/p1.png'),
+    image: require('../assets/images/p1.png'),
     name: 'Red Apple',
     weight: '1kg,priceg',
     price: '4,99',
   },
   {
-    image: require('../../assets/images/p2.png'),
+    image: require('../assets/images/p2.png'),
     name: 'Orginal Banana',
     weight: '1kg,priceg',
     price: '5,99',
@@ -111,7 +110,7 @@ function ShopScreen(): JSX.Element {
       <View style={styles.containerPadding}>
         <View style={styles.headerBox}>
           <Image
-            source={require('../../assets/images/location.png')}
+            source={require('../assets/images/location.png')}
             style={styles.headerImage}
           />
           <Text style={styles.headerText}>Lungangen</Text>

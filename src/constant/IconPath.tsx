@@ -8,4 +8,8 @@ export const AppIcons = {
   IconShowPassword: require('../assets/icon/ic_showpassword.png'),
   IconHindePassword: require('../assets/icon/ic_hindepassword.png'),
   IconKey: require('../assets/icon/ic_key.png'),
+  IconSearch: require('../assets/icon/ic_search.png'),
+};
+export const AppImage = {
+  WelcomeImgae: require('../assets/images/img_welcome.png'),
 };

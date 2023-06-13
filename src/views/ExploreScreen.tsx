@@ -7,7 +7,8 @@ import {
   ImageRequireSource,
   FlatList,
 } from 'react-native';
-import CategoryCard from './components/CategoryCard';
+import CategoryCard from '../components/CategoryCard';
+import SearchInput from '../components/SearchInput';
 
 type categoryItem = {
   image: ImageRequireSource;
@@ -171,12 +172,7 @@ const ExploreScreen = (): React.JSX.Element => {
           }}>
           Categories
         </Text>
-        <View style={{marginTop: 18}}>
-          <View
-            style={{borderRadius: 7, height: 48, backgroundColor: '#F3F3F3'}}>
-            <Text>Replace with search widget</Text>
-          </View>
-        </View>
+        <SearchInput />
       </View>
       <View style={{alignItems: 'center'}}>
         <FlatList

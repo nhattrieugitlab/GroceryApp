@@ -3,9 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import HomeNavigator from './HomeNavigator';
 import {View} from 'react-native';
 import {LightTheme} from '../constant/Theme';
+import AuthStackNavigator from './AuthNavigator';
 const AppStack = createNativeStackNavigator();
 enum AppStackNames {
-  Home = 'HomeScreen',
+  Home = 'HomeNavigator',
+  Auth = 'AuthNavigator',
 }
 
 const AppNavigator = () => {
@@ -18,7 +20,12 @@ const AppNavigator = () => {
           }}>
           <AppStack.Screen
             name={AppStackNames.Home}
-            component={HomeNavigator}></AppStack.Screen>
+            component={HomeNavigator}
+          />
+          <AppStack.Screen
+            name={AppStackNames.Auth}
+            component={AuthStackNavigator}
+          />
         </AppStack.Navigator>
       </NavigationContainer>
     </View>
