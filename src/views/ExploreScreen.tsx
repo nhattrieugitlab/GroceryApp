@@ -7,7 +7,7 @@ import {
   ImageRequireSource,
   FlatList,
 } from 'react-native';
-import CategoryCard from '../components/CategoryCard';
+import CategoryCard from './components/CategoryCard';
 
 type categoryItem = {
   image: ImageRequireSource;

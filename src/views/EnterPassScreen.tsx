@@ -1,86 +1,37 @@
 import {
   View,
   Text,
-  ImageRequireSource,
   ImageSourcePropType,
   Image,
   TouchableOpacity,
   StyleSheet,
-  TextInput,
   ScrollView,
-  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
-import TextInputcs from '../TextInput';
+import PasswordInput from '../components/PasswordInput';
 
-type SignUpProps = {
-  label?: string;
-  imagekey: ImageSourcePropType;
-  imageEye: ImageSourcePropType;
-  // backgroundColor?: string;
-};
+function EnterPasswordScreen(): JSX.Element {
+  const [isShowPassword, setShowPassWord] = useState<boolean>(false);
+  const [isShowPasswordComfirm, setShowPassWordComfirm] =
+    useState<boolean>(false);
 
-const categoryData: SignUpProps[] = [
-  {
-    label: 'Password',
-    imagekey: require('../../assets/images/key'),
-    imageEye: require('./media/images/visibility_24px.png'),
-  },
-  {
-    label: 'Comfirm Password',
-    imagekey: require('../../assets/images/key'),
-    imageEye: require('./media/images/visibility_24px.png'),
-  },
-];
-
-// const renderCategoryItem = ({item}: {item: SignUpProps}) => {
-//   return (
-//     <View style={{marginRight: 22, marginBottom: 27}}>
-//       <TextInputcs
-//         label={item.label}
-//         imagekey={item.imagekey}
-//         imageEye={item.imageEye}
-//       />
-//     </View>
-//   );
-// };
-
-function SignPass(): JSX.Element {
   return (
     <ScrollView style={styles.body}>
-      <Image source={require('../../assets/images/Arrow.png')} />
+      <Image source={require('../assets/images/Arrow.png')} />
       <Text style={styles.textSignUp}>Sign Up</Text>
       <Image
         style={styles.image}
-        source={require('../../assets/images/phonepass.png')}
+        source={require('../assets/images/phonepass.png')}
       />
       <Text style={styles.textEnterPass}>Enter the password</Text>
       <Text style={styles.textContent}>
         For the security & safety please choose a password
       </Text>
-      <View style={styles.PassContainer}>
-        <TextInputcs
-          label={categoryData[0].label}
-          imageEye={categoryData[0].imageEye}
-          imagekey={categoryData[0].imagekey}
-        />
-      </View>
-      <View style={styles.PassContainer}>
-        <TextInputcs
-          label={categoryData[1].label}
-          imageEye={categoryData[1].imageEye}
-          imagekey={categoryData[1].imagekey}
-        />
-        {/* {categoryData.map((item, index) => (
-          <View key={index} style={{marginRight: 22, marginBottom: 27}}>
-            <TextInputcs
-              label={item.label}
-              imagekey={item.imagekey}
-              imageEye={item.imageEye}
-            />
-          </View>
-        ))} */}
-      </View>
+      <PasswordInput isShowPassword={isShowPassword} label={'Password'} />
+      <PasswordInput
+        isShowPassword={isShowPasswordComfirm}
+        label={'Confirm Password'}
+      />
       <TouchableOpacity style={styles.buttoncontainer}>
         <Text style={styles.buttonLabel}>Next</Text>
       </TouchableOpacity>
@@ -89,7 +40,6 @@ function SignPass(): JSX.Element {
   );
 }
 
-export default SignPass;
 const styles = StyleSheet.create({
   image: {
     alignSelf: 'center',
@@ -150,7 +100,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   body: {
-    margin: 20,
+    padding: 16,
     width: '100%',
   },
   buttoncontainer: {
@@ -160,7 +110,7 @@ const styles = StyleSheet.create({
     width: 343,
     borderRadius: 30,
     backgroundColor: '#FF5E00',
-    marginTop: 50,
+    marginTop: 17,
   },
   buttonLabel: {
     fontWeight: '700',
@@ -180,3 +130,4 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
 });
+export default EnterPasswordScreen;

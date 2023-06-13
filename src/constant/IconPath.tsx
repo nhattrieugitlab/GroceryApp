@@ -4,4 +4,8 @@ export const AppIcons = {
   IconAccount: require('../assets/icon/ic_account.png'),
   IconCart: require('../assets/icon/ic_cart.png'),
   IconFavorie: require('../assets/icon/ic_favorite.png'),
+  //
+  IconShowPassword: require('../assets/icon/ic_showpassword.png'),
+  IconHindePassword: require('../assets/icon/ic_hindepassword.png'),
+  IconKey: require('../assets/icon/ic_key.png'),
 };

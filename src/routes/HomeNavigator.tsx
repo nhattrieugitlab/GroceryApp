@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ExploreScreen from '../views/ExploreScreen';
 import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
 import {AppIcons} from '../constant/IconPath';
-import IconBottomTabBar from '../components/IconBottomTabBar';
+import IconBottomTabBar from '../views/components/IconBottomTabBar';
 type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
