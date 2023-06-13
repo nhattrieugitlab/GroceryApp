@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProp> = ({
 
 const ButtonStyle = StyleSheet.create({
   container: {
-    margin: 20,
+    marginTop: 17,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
