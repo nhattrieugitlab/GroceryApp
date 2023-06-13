@@ -7,11 +7,11 @@
 
 import React from 'react';
 import AppNavigator from './src/routes/AppNavigator';
-import Mycard from './src/views/Mycard';
+
 function App(): JSX.Element {
   //cmt cua thanh
-  // return <AppNavigator />;
-  return <Mycard />;
+  return <AppNavigator />;
+ 
   
 
 }
