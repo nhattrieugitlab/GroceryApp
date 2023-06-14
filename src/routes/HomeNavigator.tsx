@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ExploreScreen from '../views/ExploreScreen';
-import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
+import {ImageSourcePropType, StyleSheet} from 'react-native';
 import {AppIcons} from '../constant/IconPath';
 import IconBottomTabBar from '../components/IconBottomTabBar';
 import ShopScreen from '../views/ShopScreen';
@@ -52,9 +52,6 @@ const HomeTabs: HomeTab[] = [
     icon: AppIcons.IconAccount,
   },
 ];
-type TabBarIconProps = {
-  focused: boolean;
-};
 const HomeNavigator = () => {
   return (
     <HomeBottomTabNavigator.Navigator

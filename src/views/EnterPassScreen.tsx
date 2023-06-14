@@ -7,7 +7,6 @@ function EnterPasswordScreen(): JSX.Element {
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [isShowPasswordComfirm, setShowPassWordComfirm] =
     useState<boolean>(false);
-
   return (
     <ScrollView style={styles.body}>
       <Image source={require('../assets/images/Arrow.png')} />
