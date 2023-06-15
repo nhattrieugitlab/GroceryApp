@@ -11,6 +11,7 @@ import {
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 import SearchInput from '../components/SearchInput';
+import ScreenContainer from '../components/ScreenContainer';
 
 type categoryItem = {
   image: ImageRequireSource;
@@ -107,7 +108,7 @@ const renderProductItem = ({item}: {item: productItem}) => {
 
 function ShopScreen(): JSX.Element {
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
       <View style={styles.containerPadding}>
         <View style={styles.headerBox}>
           <Image
@@ -197,7 +198,7 @@ function ShopScreen(): JSX.Element {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-    </View>
+    </ScreenContainer>
   );
 }
 

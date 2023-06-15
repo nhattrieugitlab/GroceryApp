@@ -3,13 +3,13 @@ import {
   ImageRequireSource,
   Image,
   TouchableOpacity,
-  StyleSheet,
   TextInput,
   ScrollView,
+  StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
 import React from 'react';
-
+import ScreenContainer from '../components/ScreenContainer';
 type SignUpProps = {
   image: ImageRequireSource;
   label?: string;
@@ -33,29 +33,32 @@ const SignUp: React.FC<SignUpProps> = (
   color,
 ) => {
   return (
-    <ScrollView style={styles.body}>
-      <KeyboardAvoidingView behavior="position">
-        <Image source={require('../../assets/images/Arrow.png')} />
-        <Text style={styles.textSignUp}>Sign Up</Text>
-        <Image style={styles.image} source={categoryData[0].image} />
-        <TextInput
-          style={[styles.textInput, {color: color || 'white'}]}
-          placeholder={categoryData[0].label}></TextInput>
-        <TextInput
-          style={styles.textInputPassWord}
-          placeholder={categoryData[0].label1}></TextInput>
-        <Text style={styles.textContent}>
-          We need to verify you. We will send you a one time verification code.{' '}
-        </Text>
-        <TouchableOpacity style={styles.buttoncontainer}>
-          <Text style={styles.buttonLabel}>{categoryData[0].label2}</Text>
-        </TouchableOpacity>
-        <Text style={styles.textlabel3}>
-          {' '}
-          Already have an account? {categoryData[0].label3}
-        </Text>
-      </KeyboardAvoidingView>
-    </ScrollView>
+    <ScreenContainer>
+      <ScrollView style={styles.body}>
+        <KeyboardAvoidingView behavior="position">
+          <Image source={require('../../assets/images/Arrow.png')} />
+          <Text style={styles.textSignUp}>Sign Up</Text>
+          <Image style={styles.image} source={categoryData[0].image} />
+          <TextInput
+            style={[styles.textInput, {color: color || 'white'}]}
+            placeholder={categoryData[0].label}></TextInput>
+          <TextInput
+            style={styles.textInputPassWord}
+            placeholder={categoryData[0].label1}></TextInput>
+          <Text style={styles.textContent}>
+            We need to verify you. We will send you a one time verification
+            code.{' '}
+          </Text>
+          <TouchableOpacity style={styles.buttoncontainer}>
+            <Text style={styles.buttonLabel}>{categoryData[0].label2}</Text>
+          </TouchableOpacity>
+          <Text style={styles.textlabel3}>
+            {' '}
+            Already have an account? {categoryData[0].label3}
+          </Text>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </ScreenContainer>
   );
 };
 

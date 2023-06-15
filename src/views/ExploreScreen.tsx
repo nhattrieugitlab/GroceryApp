@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import SearchInput from '../components/SearchInput';
+import {Screen} from 'react-native-screens';
+import ScreenContainer from '../components/ScreenContainer';
 
 type categoryItem = {
   image: ImageRequireSource;
@@ -158,7 +160,7 @@ const renderCategoryItem = ({item}: {item: categoryItem}) => {
 
 const ExploreScreen = (): React.JSX.Element => {
   return (
-    <View style={{flex: 1, backgroundColor: '#FFFFFF'}}>
+    <ScreenContainer>
       <View style={{paddingHorizontal: 16, paddingTop: 16}}>
         <Text
           style={{
@@ -183,7 +185,7 @@ const ExploreScreen = (): React.JSX.Element => {
           showsVerticalScrollIndicator={false}
         />
       </View>
-    </View>
+    </ScreenContainer>
   );
 };
 

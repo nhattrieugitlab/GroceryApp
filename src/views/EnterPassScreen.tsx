@@ -2,32 +2,35 @@ import {Text, Image, StyleSheet, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import PasswordInput from '../components/PasswordInput';
 import Button from '../components/Button';
+import ScreenContainer from '../components/ScreenContainer';
 
 function EnterPasswordScreen(): JSX.Element {
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [isShowPasswordComfirm, setShowPassWordComfirm] =
     useState<boolean>(false);
   return (
-    <ScrollView style={styles.body}>
-      <Image source={require('../assets/images/Arrow.png')} />
-      <Text style={styles.textSignUp}>Sign Up</Text>
-      <Image
-        resizeMode="contain"
-        style={styles.image}
-        source={require('../assets/images/phonepass.png')}
-      />
-      <Text style={styles.textEnterPass}>Enter the password</Text>
-      <Text style={styles.textContent}>
-        For the security & safety please choose a password
-      </Text>
-      <PasswordInput isShowPassword={isShowPassword} label={'Password'} />
-      <PasswordInput
-        isShowPassword={isShowPasswordComfirm}
-        label={'Confirm Password'}
-      />
-      <Button label="Next" />
-      <Text style={styles.textlabel3}> Already have an account?Login</Text>
-    </ScrollView>
+    <ScreenContainer>
+      <ScrollView style={styles.body}>
+        <Image source={require('../assets/images/Arrow.png')} />
+        <Text style={styles.textSignUp}>Sign Up</Text>
+        <Image
+          resizeMode="contain"
+          style={styles.image}
+          source={require('../assets/images/phonepass.png')}
+        />
+        <Text style={styles.textEnterPass}>Enter the password</Text>
+        <Text style={styles.textContent}>
+          For the security & safety please choose a password
+        </Text>
+        <PasswordInput isShowPassword={isShowPassword} label={'Password'} />
+        <PasswordInput
+          isShowPassword={isShowPasswordComfirm}
+          label={'Confirm Password'}
+        />
+        <Button label="Next" />
+        <Text style={styles.textlabel3}> Already have an account?Login</Text>
+      </ScrollView>
+    </ScreenContainer>
   );
 }
 

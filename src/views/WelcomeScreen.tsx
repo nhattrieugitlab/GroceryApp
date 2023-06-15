@@ -2,10 +2,11 @@ import {Image, ScrollView, StyleSheet, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppImage} from '../constant/IconPath';
 import Button from '../components/Button';
+import ScreenContainer from '../components/ScreenContainer';
 
 const WelComeScreen = () => {
   return (
-    <SafeAreaView style={styles.body}>
+    <ScreenContainer>
       <ScrollView>
         <Image style={styles.img} source={AppImage.WelcomeImgae} />
         <Text style={styles.label1}>Realax and shop</Text>
@@ -22,7 +23,7 @@ const WelComeScreen = () => {
           borderColor="#FF5E00"
         />
       </ScrollView>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 const styles = StyleSheet.create({
@@ -43,10 +44,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 24,
     marginTop: 33,
-  },
-  body: {
-    padding: 16,
-    flex: 1,
   },
   img: {
     alignSelf: 'center',

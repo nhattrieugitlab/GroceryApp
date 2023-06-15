@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import CartItem from '../components/CartItem'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import CartItem from '../components/CartItem';
+import {ScreenContainer} from 'react-native-screens';
 
 const CartScreen = () => {
   return (
-    <View style = {styles.body}>
-      <View style={{paddingHorizontal: 16, paddingTop: 16,}}>
+    <ScreenContainer>
+      <View style={{paddingHorizontal: 16, paddingTop: 16}}>
         <Text
           style={{
             fontWeight: '700',
@@ -19,30 +20,30 @@ const CartScreen = () => {
           Cart
         </Text>
         <View>
-        <CartItem price= {'$5,99 kg'}
-      label= {'Red Apple'}
-      image = {require('../assets/images/apple.png')}/>
-      <CartItem price= {'$5,99 kg'}
-      label= {'Orginal Banana'}
-      image = {require('../assets/images/Banana.png')}/>
-      <CartItem price= {'$5,99 kg'}
-      label= {'Avocado Bowl'}
-      image = {require('../assets/images/avocado.png')}/>
-      <CartItem price= {'$5,99 kg'}
-      label= {'Salmon'}
-      image = {require('../assets/images/salmon.png')}/>
+          <CartItem
+            price={'$5,99 kg'}
+            label={'Red Apple'}
+            image={require('../assets/images/apple.png')}
+          />
+          <CartItem
+            price={'$5,99 kg'}
+            label={'Orginal Banana'}
+            image={require('../assets/images/Banana.png')}
+          />
+          <CartItem
+            price={'$5,99 kg'}
+            label={'Avocado Bowl'}
+            image={require('../assets/images/avocado.png')}
+          />
+          <CartItem
+            price={'$5,99 kg'}
+            label={'Salmon'}
+            image={require('../assets/images/salmon.png')}
+          />
         </View>
-        
       </View>
-    </View>
-  )
-}
+    </ScreenContainer>
+  );
+};
 
-export default CartScreen
-
-const styles = StyleSheet.create({
-    body:{
-        flex:1,
-        backgroundColor:'#FFFFFF',
-    }
-})
+export default CartScreen;

@@ -19,12 +19,12 @@ const AppNavigator = () => {
             headerShown: false,
           }}>
           <AppStack.Screen
-            name={AppStackNames.Home}
-            component={HomeNavigator}
-          />
-          <AppStack.Screen
             name={AppStackNames.Auth}
             component={AuthStackNavigator}
+          />
+          <AppStack.Screen
+            name={AppStackNames.Home}
+            component={HomeNavigator}
           />
         </AppStack.Navigator>
       </NavigationContainer>

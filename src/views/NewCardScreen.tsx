@@ -3,10 +3,12 @@ import React from 'react';
 import TabBar from '../components/Tabbar';
 import Button from '../components/Button';
 import IconBottomTabBar from '../components/IconBottomTabBar';
+import {ScreenContainer} from 'react-native-screens';
 
 const NewCardScreen: React.FC = () => {
   return (
-    <View style={styles.container}>
+    <ScreenContainer>
+      {' '}
       <Image
         style={styles.imageBack}
         source={require('../assets/icon/Back.png')}
@@ -27,7 +29,7 @@ const NewCardScreen: React.FC = () => {
       <View style={styles.button}>
         <Button label="Add Card" />
       </View>
-    </View>
+    </ScreenContainer>
   );
 };
 

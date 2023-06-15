@@ -3,10 +3,11 @@ import React from 'react';
 import TabBar from '../components/Tabbar';
 import Button from '../components/Button';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import ScreenContainer from '../components/ScreenContainer';
 
 const FavoriteScreen: React.FC = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <ScreenContainer>
       <ScrollView>
         <Image
           style={styles.imageBack}
@@ -23,7 +24,7 @@ const FavoriteScreen: React.FC = () => {
         </Text>
         <Button label="Start shoping" />
       </ScrollView>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 };
 
