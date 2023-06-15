@@ -57,9 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
   },
-  container: {
-    padding: 16,
-  },
+
   imageBack: {
     width: 9,
     height: 14,

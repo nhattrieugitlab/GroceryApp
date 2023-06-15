@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  Image,
-  ImageRequireSource,
-  FlatList,
-} from 'react-native';
+import {View, Text, ImageRequireSource, FlatList} from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import SearchInput from '../components/SearchInput';
-import {Screen} from 'react-native-screens';
 import ScreenContainer from '../components/ScreenContainer';
 
 type categoryItem = {

@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     justifyContent: 'center',
   },
-
   textEnterPass: {
     fontWeight: '700',
     fontSize: 20,
@@ -78,7 +77,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF5E00',
     marginTop: 17,
   },
-
   textlabel3: {
     fontSize: 16,
     fontWeight: '400',
