@@ -34,7 +34,7 @@ const SignUp: React.FC<SignUpProps> = (
 ) => {
   return (
     <ScreenContainer>
-      <ScrollView style={styles.body}>
+      <ScrollView>
         <KeyboardAvoidingView behavior="position">
           <Image source={require('../../assets/images/Arrow.png')} />
           <Text style={styles.textSignUp}>Sign Up</Text>
@@ -101,9 +101,7 @@ const styles = StyleSheet.create({
     color: '#7F4E1D',
     marginTop: 10,
   },
-  body: {
-    width: '100%',
-  },
+
   buttoncontainer: {
     height: 50,
     justifyContent: 'center',

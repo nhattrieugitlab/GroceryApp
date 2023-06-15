@@ -4,8 +4,8 @@ import EnterPasswordScreen from './src/views/EnterPassScreen';
 import WelComeScreen from './src/views/WelcomeScreen';
 import AuthStackNavigator from './src/routes/AuthNavigator';
 import SignUp from './src/views/ComfirmPasswordScreen';
-import axios from 'axios';
+import PaymentScreen from './src/views/PayMentScreen';
 function App(): JSX.Element {
-  return <AppNavigator />;
+  return <PaymentScreen />;
 }
 export default App;
