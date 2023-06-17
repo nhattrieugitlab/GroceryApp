@@ -6,7 +6,9 @@ import AuthStackNavigator from './src/routes/AuthNavigator';
 import SignUp from './src/views/ComfirmPasswordScreen';
 import PaymentScreen from './src/views/PayMentScreen';
 import ComfirmPasswordScreen from './src/views/ComfirmPasswordScreen';
+import VerifiPassScreen from './src/views/VerifiPassScreen';
+import LoginScreen from './src/views/LoginScreen';
 function App(): JSX.Element {
-  return <ComfirmPasswordScreen />;
+  return <LoginScreen />;
 }
 export default App;
