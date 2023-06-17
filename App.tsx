@@ -5,7 +5,8 @@ import WelComeScreen from './src/views/WelcomeScreen';
 import AuthStackNavigator from './src/routes/AuthNavigator';
 import SignUp from './src/views/ComfirmPasswordScreen';
 import PaymentScreen from './src/views/PayMentScreen';
+import ComfirmPasswordScreen from './src/views/ComfirmPasswordScreen';
 function App(): JSX.Element {
-  return <PaymentScreen />;
+  return <ComfirmPasswordScreen />;
 }
 export default App;
