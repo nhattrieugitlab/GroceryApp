@@ -8,7 +8,9 @@ import PaymentScreen from './src/views/PayMentScreen';
 import ComfirmPasswordScreen from './src/views/ComfirmPasswordScreen';
 import VerifiPassScreen from './src/views/VerifiPassScreen';
 import LoginScreen from './src/views/LoginScreen';
+
 function App(): JSX.Element {
   return <LoginScreen />;
+
 }
 export default App;
