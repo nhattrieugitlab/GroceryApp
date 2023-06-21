@@ -2,11 +2,9 @@ import {
   Text,
   ImageRequireSource,
   Image,
-  TouchableOpacity,
   TextInput,
   ScrollView,
   StyleSheet,
-  KeyboardAvoidingView,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -33,7 +31,7 @@ function VerifiPassScreen(): JSX.Element {
           </Text>
         </View>
         <Text style={{color: '#7F4E1D'}}> Chỗ Này Để Thành Làm</Text>
-        <Button label="Sign Up" />
+        <Button onPress={() => {}} label="Sign Up" />
       </ScrollView>
     </ScreenContainer>
   );

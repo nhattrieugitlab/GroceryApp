@@ -1,3 +1,1 @@
-export type PayMentCard {
-  nameOnCard?: string;
-}
+export type PayMentCard = {};
