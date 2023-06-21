@@ -7,66 +7,73 @@ import {
   ScrollView,
   StyleSheet,
   KeyboardAvoidingView,
+  View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import ScreenContainer from '../components/ScreenContainer';
-type SignUpProps = {
-  image: ImageRequireSource;
-  label?: string;
-  label1?: string;
-  label2?: string;
-  label3?: string;
-  color?: string;
-};
-const categoryData: SignUpProps[] = [
-  {
-    label: 'Password',
-    image: require('../../assets/images/phone.png'),
-    label1: 'Enter your password',
-    label2: 'Sign Up',
-    label3: 'Login',
-    color: '#AC8E71',
-  },
-];
-const SignUp: React.FC<SignUpProps> = (
-  {image, label, label1, label2, label3},
-  color,
-) => {
+import PasswordInput from '../components/PasswordInput';
+import Button from '../components/Button';
+import CountryPicker2 from '../components/CountryPicker2';
+
+function ComfirmPasswordScreen(): JSX.Element {
+  const [isShowPassword, setShowPassWord] = useState<boolean>(false);
+  const [isShowPasswordComfirm, setShowPassWordComfirm] =
+    useState<boolean>(false);
   return (
     <ScreenContainer>
       <ScrollView>
         <KeyboardAvoidingView behavior="position">
-          <Image source={require('../../assets/images/Arrow.png')} />
+          <Image source={require('../assets/images/Arrow.png')} />
           <Text style={styles.textSignUp}>Sign Up</Text>
-          <Image style={styles.image} source={categoryData[0].image} />
-          <TextInput
-            style={[styles.textInput, {color: color || 'white'}]}
-            placeholder={categoryData[0].label}></TextInput>
-          <TextInput
-            style={styles.textInputPassWord}
-            placeholder={categoryData[0].label1}></TextInput>
+          <Image
+            style={styles.image}
+            source={require('../assets/images/phone.png')}
+          />
+          <View style={styles.textinputContainer}>
+            <TextInput
+              style={styles.textInput}
+              placeholderTextColor={'#AC8E71'}
+              placeholder="Name SurName"></TextInput>
+          </View>
+
+          <View style={styles.textinputContainer}>
+            <View style={{paddingLeft: 12, paddingTop: 11}}>
+              <CountryPicker2 />
+            </View>
+
+            <TextInput
+              style={styles.textInputPhone}
+              placeholderTextColor={'#AC8E71'}
+              placeholder="Phone Number"
+            />
+          </View>
+
           <Text style={styles.textContent}>
             We need to verify you. We will send you a one time verification
             code.{' '}
           </Text>
-          <TouchableOpacity style={styles.buttoncontainer}>
-            <Text style={styles.buttonLabel}>{categoryData[0].label2}</Text>
-          </TouchableOpacity>
-          <Text style={styles.textlabel3}>
-            {' '}
-            Already have an account? {categoryData[0].label3}
-          </Text>
+          <Button label="Next" />
+          <Text style={styles.textlabel3}> Already have an account? Login</Text>
         </KeyboardAvoidingView>
       </ScrollView>
     </ScreenContainer>
   );
-};
+}
 
-export default SignUp;
+export default ComfirmPasswordScreen;
 const styles = StyleSheet.create({
   image: {
     width: 348,
     height: 348,
+  },
+  textinputContainer: {
+    height: 48,
+    borderRadius: 5,
+    backgroundColor: '#F3F3F3',
+    marginTop: 16,
+
+    flexDirection: 'row',
+    width: '100%',
   },
   textSignUp: {
     fontSize: 24,
@@ -75,15 +82,25 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     lineHeight: 40,
     textAlign: 'center',
-    marginRight: 20,
     justifyContent: 'center',
   },
   textInput: {
-    borderRadius: 5,
-    backgroundColor: '#F3F3F3',
-    padding: 15,
-    height: 50,
-    marginTop: 10,
+    height: '100%',
+    paddingLeft: 27,
+    fontFamily: 'Klarna Text',
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#AC8E71',
+  },
+  textInputPhone: {
+    height: '100%',
+    paddingLeft: 22,
+    fontFamily: 'Klarna Text',
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 19,
+    color: '#AC8E71',
   },
   textInputPassWord: {
     borderRadius: 5,
