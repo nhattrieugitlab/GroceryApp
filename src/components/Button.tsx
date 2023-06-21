@@ -1,22 +1,30 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 type ButtonProp = {
+  onPress: Function;
   backGroundColor?: string; //undifine
   label: string;
   textColor?: string;
   borderColor?: string;
+  style?: ViewStyle;
 };
 const Button: React.FC<ButtonProp> = ({
   label,
+  onPress,
   backGroundColor,
   textColor,
   borderColor,
+  style,
 }) => {
   return (
     <TouchableOpacity
+      onPress={() => {
+        onPress();
+      }}
       style={[
         ButtonStyle.container,
         {backgroundColor: backGroundColor || '#FF5E00'},
         borderColor != undefined && {borderColor: borderColor, borderWidth: 1},
+        style,
       ]}>
       <Text style={[ButtonStyle.buttonLabel, {color: textColor || 'white'}]}>
         {label}

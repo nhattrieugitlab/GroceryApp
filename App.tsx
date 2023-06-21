@@ -4,8 +4,11 @@ import EnterPasswordScreen from './src/views/EnterPassScreen';
 import WelComeScreen from './src/views/WelcomeScreen';
 import AuthStackNavigator from './src/routes/AuthNavigator';
 import SignUp from './src/views/ComfirmPasswordScreen';
-import PaymentScreen from './src/views/PayMentScreen';
+import PaymentScreen from './src/views/paymentscreen/PaymentScreen';
+import Test from './src/views/Tesxt';
+import SelectPaymentMethodScreen from './src/views/SelectPaymentMethodScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 function App(): JSX.Element {
-  return <PaymentScreen />;
+  return <Test />;
 }
 export default App;

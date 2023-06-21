@@ -1,17 +1,11 @@
-import {
-  ImageSourcePropType,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, View, ViewStyle} from 'react-native';
 type TabBarProps = {
   label: string;
+  style?: ViewStyle;
 };
-const TabBar: React.FC<TabBarProps> = ({label}) => {
+const TabBar: React.FC<TabBarProps> = ({label, style}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style && style]}>
       <Text style={styles.label}>{label}</Text>
     </View>
   );
@@ -24,7 +18,6 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    width: 122,
     height: 29,
     color: '#FF5E00',
     fontFamily: 'Klarna Text',
