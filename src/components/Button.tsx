@@ -6,9 +6,11 @@ type ButtonProp = {
   textColor?: string;
   borderColor?: string;
   style?: ViewStyle;
+  disable?: boolean;
 };
 const Button: React.FC<ButtonProp> = ({
   label,
+  disable,
   onPress,
   backGroundColor,
   textColor,
@@ -17,6 +19,7 @@ const Button: React.FC<ButtonProp> = ({
 }) => {
   return (
     <TouchableOpacity
+      disabled={disable}
       onPress={() => {
         onPress();
       }}
@@ -25,6 +28,7 @@ const Button: React.FC<ButtonProp> = ({
         {backgroundColor: backGroundColor || '#FF5E00'},
         borderColor != undefined && {borderColor: borderColor, borderWidth: 1},
         style,
+        disable && {backgroundColor: '#e4e4e3'},
       ]}>
       <Text style={[ButtonStyle.buttonLabel, {color: textColor || 'white'}]}>
         {label}
@@ -35,7 +39,6 @@ const Button: React.FC<ButtonProp> = ({
 
 const ButtonStyle = StyleSheet.create({
   container: {
-    marginTop: 17,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',

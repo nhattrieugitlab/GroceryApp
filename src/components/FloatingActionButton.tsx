@@ -5,27 +5,39 @@ import {
   ViewStyle,
   TouchableOpacity,
 } from 'react-native';
-
-const FloatingActionButton: React.FC<{
-  style: ViewStyle;
+type FloatingActionButtonProps = {
+  style?: ViewStyle;
   icon: ImageSourcePropType;
-}> = ({style, icon}) => {
+  onPress: Function;
+};
+const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
+  style,
+  icon,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity style={[style, styles.container]}>
-      <Image
-        style={{tintColor: 'white', height: 15, width: 15}}
-        source={icon}
-      />
+    <TouchableOpacity
+      onPress={() => {
+        onPress();
+      }}
+      style={[style, styles.container]}>
+      <Image style={styles.icon} source={icon} />
     </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
+  icon: {tintColor: 'white', height: 15, width: 15},
   container: {
     width: 48,
     justifyContent: 'center',
     alignItems: 'center',
     height: 48,
     elevation: 5,
+    borderRadius: 24,
+    backgroundColor: '#FF5E00',
+    position: 'absolute',
+    bottom: 100,
+    right: 30,
   },
 });
 export default FloatingActionButton;

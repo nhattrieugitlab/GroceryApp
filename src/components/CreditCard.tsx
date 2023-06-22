@@ -85,6 +85,7 @@ const CardInfo: React.FC<{name: string; exDate: string}> = ({name, exDate}) => {
 };
 const styles = StyleSheet.create({
   cardInfoTitle: {
+    width: 100,
     fontSize: 10,
     lineHeight: 22,
     color: 'white',

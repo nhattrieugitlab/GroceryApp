@@ -7,6 +7,8 @@ import SignUp from './src/views/ComfirmPasswordScreen';
 import PaymentScreen from './src/views/paymentscreen/PaymentScreen';
 import SelectPaymentMethodScreen from './src/views/SelectPaymentMethodScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import Test from './src/views/TEST';
+import App2 from './src/views/Test2';
 function App(): JSX.Element {
   return <SelectPaymentMethodScreen />;
 }
