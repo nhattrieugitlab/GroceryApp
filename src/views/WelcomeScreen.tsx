@@ -1,22 +1,35 @@
 import {Image, ScrollView, StyleSheet, Text} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {AppImage} from '../constant/IconPath';
 import Button from '../components/Button';
 import ScreenContainer from '../components/ScreenContainer';
-
+import {useNavigation} from '@react-navigation/native';
+import {AuthStackParamList} from '../routes/AuthNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 const WelComeScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   return (
     <ScreenContainer>
       <ScrollView>
         <Image style={styles.img} source={AppImage.WelcomeImgae} />
         <Text style={styles.label1}>Realax and shop</Text>
         <Text style={styles.label2}>
-          {' '}
           Shop online and get grocories delivered from stores to your home in as
           fast as 1 hour .
         </Text>
-        <Button label="Sign up" />
         <Button
+          onPress={() => {
+            console.log('ád');
+            navigation.navigate('SignInScreen');
+          }}
+          label="Sign up"
+        />
+        <Button
+          onPress={() => {
+            console.log('ád');
+            navigation.navigate('SignInScreen');
+          }}
+          style={{marginTop: 10}}
           textColor="#FF5E00"
           label="Sign in"
           backGroundColor="white"

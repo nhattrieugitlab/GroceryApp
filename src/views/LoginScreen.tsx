@@ -1,33 +1,32 @@
 import {
   Text,
-  ImageRequireSource,
   Image,
   TouchableOpacity,
   TextInput,
   ScrollView,
   StyleSheet,
-  KeyboardAvoidingView,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
-import PasswordInput from '../components/PasswordInput';
 import CountryPicker2 from '../components/CountryPicker2';
 import {AppIcons} from '../constant/IconPath';
+import TabBar from '../components/Tabbar';
+import {useNavigation} from '@react-navigation/native';
+import {AppStackParams} from '../routes/AppNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 function LoginScreen(): JSX.Element {
+  const appNavigation =
+    useNavigation<NativeStackNavigationProp<AppStackParams>>();
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [isShowPasswordComfirm, setShowPassWordComfirm] =
     useState<boolean>(false);
   return (
     <ScreenContainer>
-      <ScrollView>
-        <Image
-          style={{width: 8.49, height: 14}}
-          source={require('../assets/icon/Back.png')}
-        />
-        <Text style={styles.textSignUp}>Sign in</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <TabBar showBackButton onBackPress={() => {}} label="SignUp" />
         <Image
           style={styles.image}
           source={require('../assets/images/PhoneKey.png')}
@@ -76,8 +75,13 @@ function LoginScreen(): JSX.Element {
             />
           </TouchableOpacity>
         </View>
-        <Text style={styles.textForgot}>Forgote Password</Text>
-        <Button label="Sign in" />
+        <Text style={styles.textForgot}>Forget Password</Text>
+        <Button
+          onPress={() => {
+            appNavigation.navigate('HomeNavigator');
+          }}
+          label="Sign in"
+        />
         <Text style={styles.textAccount}> Don't have an account? Sign Up</Text>
       </ScrollView>
     </ScreenContainer>
@@ -104,12 +108,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textForgot: {
+    marginVertical: 20,
     fontSize: 14,
     fontWeight: '400',
     color: '#FF5E00',
     lineHeight: 17,
     alignSelf: 'flex-end',
-    marginTop: 2,
   },
   textInputPhone: {
     height: '100%',
@@ -121,6 +125,7 @@ const styles = StyleSheet.create({
     color: '#AC8E71',
   },
   textInputPass: {
+    width: '100%',
     height: '100%',
     paddingLeft: 22,
     fontFamily: 'Klarna Text',

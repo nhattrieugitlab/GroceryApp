@@ -22,7 +22,11 @@ const CreditCard: React.FC<CreditCardProps> = ({
   type,
 }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => {
+        onSelectCard();
+      }}
+      style={styles.container}>
       <ImageBackground
         imageStyle={{
           width: '100%',

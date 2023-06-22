@@ -1,47 +1,81 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CartItem from '../components/CartItem';
-import {ScreenContainer} from 'react-native-screens';
+import TabBar from '../components/Tabbar';
+import ScreenContainer from '../components/ScreenContainer';
+import Button from '../components/Button';
+import {FlatList, ImageSourcePropType, ListRenderItem} from 'react-native';
+import {Product} from '../datatypes/Product';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {CartNavigationParams} from '../routes/CartNavigatior';
 
+const fakeData: Product[] = [
+  {
+    name: 'Red Apple',
+    image: require('../assets/images/apple.png'),
+    price: 323000,
+  },
+  {
+    name: 'Orginal Banana',
+    image: require('../assets/images/Banana.png'),
+    price: 343000,
+  },
+  {
+    name: 'Avocado Bowl',
+    image: require('../assets/images/avocado.png'),
+    price: 53000,
+  },
+  {
+    name: 'Red Apple',
+    image: require('../assets/images/apple.png'),
+    price: 323000,
+  },
+  {
+    name: 'Orginal Banana',
+    image: require('../assets/images/Banana.png'),
+    price: 343000,
+  },
+  {
+    name: 'Avocado Bowl',
+    image: require('../assets/images/avocado.png'),
+    price: 53000,
+  },
+  {
+    name: 'Red Apple',
+    image: require('../assets/images/apple.png'),
+    price: 323000,
+  },
+  {
+    name: 'Orginal Banana',
+    image: require('../assets/images/Banana.png'),
+    price: 343000,
+  },
+  {
+    name: 'Avocado Bowl',
+    image: require('../assets/images/avocado.png'),
+    price: 53000,
+  },
+];
 const CartScreen = () => {
+  const cartNavigation =
+    useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
+  const renderItem: ListRenderItem<Product> = ({item}) => {
+    return <CartItem price={item.price} label={item.name} image={item.image} />;
+  };
   return (
     <ScreenContainer>
-      <View style={{paddingHorizontal: 16, paddingTop: 16}}>
-        <Text
-          style={{
-            fontWeight: '700',
-            fontSize: 24,
-            lineHeight: 28.8,
-            color: '#FF5E00',
-            marginLeft: 8.62,
-            marginTop: 16,
-            textAlign: 'center',
-          }}>
-          Cart
-        </Text>
-        <View>
-          <CartItem
-            price={'$5,99 kg'}
-            label={'Red Apple'}
-            image={require('../assets/images/apple.png')}
-          />
-          <CartItem
-            price={'$5,99 kg'}
-            label={'Orginal Banana'}
-            image={require('../assets/images/Banana.png')}
-          />
-          <CartItem
-            price={'$5,99 kg'}
-            label={'Avocado Bowl'}
-            image={require('../assets/images/avocado.png')}
-          />
-          <CartItem
-            price={'$5,99 kg'}
-            label={'Salmon'}
-            image={require('../assets/images/salmon.png')}
-          />
-        </View>
-      </View>
+      <TabBar label="Cart " />
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        renderItem={renderItem}
+        data={fakeData}
+      />
+      <Button
+        onPress={() => {
+          cartNavigation.navigate('PaymentNavigator');
+        }}
+        label="Checkout"
+      />
     </ScreenContainer>
   );
 };

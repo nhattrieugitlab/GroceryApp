@@ -8,8 +8,8 @@ import PaymentScreen from './src/views/paymentscreen/PaymentScreen';
 import SelectPaymentMethodScreen from './src/views/SelectPaymentMethodScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Test from './src/views/TEST';
-import App2 from './src/views/Test2';
+import CartScreen from './src/views/CartScreen';
 function App(): JSX.Element {
-  return <SelectPaymentMethodScreen />;
+  return <AppNavigator />;
 }
 export default App;

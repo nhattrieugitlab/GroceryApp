@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import ScreenContainer from '../components/ScreenContainer';
 
-const FavoriteScreen: React.FC = () => {
+const FavoriteScreen = () => {
   return (
     <ScreenContainer>
       <ScrollView>

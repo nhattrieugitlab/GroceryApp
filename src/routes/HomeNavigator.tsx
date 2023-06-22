@@ -5,6 +5,8 @@ import {AppIcons} from '../constant/IconPath';
 import IconBottomTabBar from '../components/IconBottomTabBar';
 import ShopScreen from '../views/ShopScreen';
 import FavoriteScreen from '../views/FavoriteScreen';
+import CartScreen from '../views/CartScreen';
+import CartNavigatior from './CartNavigatior';
 type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
@@ -37,7 +39,7 @@ const HomeTabs: HomeTab[] = [
     icon: AppIcons.IconExplore,
   },
   {
-    component: ExploreScreen,
+    component: CartNavigatior,
     name: HomeTabNames.Cart,
     icon: AppIcons.IconCart,
   },

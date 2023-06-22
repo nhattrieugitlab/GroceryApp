@@ -3,6 +3,7 @@ import {
   FlatList,
   Image,
   ImageRequireSource,
+  ListRenderItem,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,18 +13,12 @@ import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 import SearchInput from '../components/SearchInput';
 import ScreenContainer from '../components/ScreenContainer';
+import {Product} from '../datatypes/Product';
 
 type categoryItem = {
   image: ImageRequireSource;
   title: string;
   backgroundColor: string;
-};
-
-type productItem = {
-  image: ImageRequireSource;
-  name: string;
-  weight: string;
-  price: string;
 };
 
 const categoryData: categoryItem[] = [
@@ -54,30 +49,30 @@ const categoryData: categoryItem[] = [
   },
 ];
 
-const productData: productItem[] = [
+const productData: Product[] = [
   {
     image: require('../assets/images/p1.png'),
     name: 'Red Apple',
-    weight: '1kg,priceg',
-    price: '4,99',
+    weight: 1,
+    price: 85000,
   },
   {
     image: require('../assets/images/p2.png'),
     name: 'Orginal Banana',
-    weight: '1kg,priceg',
-    price: '5,99',
+    weight: 2,
+    price: 132000,
   },
   {
     image: require('../assets/images/p1.png'),
     name: 'Red Apple',
-    weight: '1kg,priceg',
-    price: '4,99',
+    weight: 1,
+    price: 12000,
   },
   {
     image: require('../assets/images/p2.png'),
     name: 'Orginal Banana',
-    weight: '1kg,priceg',
-    price: '5,99',
+    weight: 6,
+    price: 143000,
   },
 ];
 
@@ -93,7 +88,7 @@ const renderCategoryItem = ({item}: {item: categoryItem}) => {
   );
 };
 
-const renderProductItem = ({item}: {item: productItem}) => {
+const renderProductItem: ListRenderItem<Product> = ({item}) => {
   return (
     <View style={{margin: 5, marginRight: 11, marginBottom: 16}}>
       <ProductCard

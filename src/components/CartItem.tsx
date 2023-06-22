@@ -7,10 +7,11 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
+import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
 
 type Props = {
   label: string;
-  price: string;
+  price: number;
   image: ImageSourcePropType;
 };
 function CartItem({label, image, price}: Props): JSX.Element {
@@ -38,7 +39,7 @@ function CartItem({label, image, price}: Props): JSX.Element {
           </TouchableOpacity>
         </View>
       </View>
-      <Text style={styles.priceLabel}>{price}</Text>
+      <Text style={styles.priceLabel}>{formatVNCurrencyTypeNumber(price)}</Text>
     </View>
   );
 }
@@ -47,16 +48,13 @@ export default CartItem;
 
 const styles = StyleSheet.create({
   image: {
-    alignSelf: 'center',
     width: 100,
     height: 100,
     resizeMode: 'contain',
   },
   nameAndNumber: {
-    flexDirection: 'column',
-    marginLeft: 20,
+    width: 150,
     justifyContent: 'space-between',
-    width: 200,
   },
   priceLabel: {
     top: 20,
@@ -100,7 +98,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: 100,
-    backgroundColor: 'white',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',

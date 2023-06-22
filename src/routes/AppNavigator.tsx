@@ -4,12 +4,15 @@ import HomeNavigator from './HomeNavigator';
 import {View} from 'react-native';
 import {LightTheme} from '../constant/Theme';
 import AuthStackNavigator from './AuthNavigator';
-const AppStack = createNativeStackNavigator();
+const AppStack = createNativeStackNavigator<AppStackParams>();
 enum AppStackNames {
   Home = 'HomeNavigator',
   Auth = 'AuthNavigator',
 }
-
+export type AppStackParams = {
+  HomeNavigator: undefined;
+  AuthNavigator: undefined;
+};
 const AppNavigator = () => {
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>

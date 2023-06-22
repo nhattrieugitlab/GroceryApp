@@ -4,7 +4,6 @@ import {
   Image,
   View,
   ViewStyle,
-  ImageSourcePropType,
   TouchableOpacity,
 } from 'react-native';
 import {AppIcons} from '../constant/IconPath';
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
   label: {
     textAlign: 'center',
     height: 29,
+    lineHeight: 29,
     color: '#FF5E00',
     fontFamily: 'Klarna Text',
     fontSize: 24,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 2,
     width: '100%',
-    height: 50,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

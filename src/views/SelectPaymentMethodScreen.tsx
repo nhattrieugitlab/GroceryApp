@@ -1,4 +1,11 @@
-import {View, ScrollView} from 'react-native';
+import {
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import ScreenContainer from '../components/ScreenContainer';
 import TabBar from '../components/Tabbar';
 import Button from '../components/Button';
@@ -8,6 +15,9 @@ import CheckBox from '../components/CheckBox';
 import FloatingActionButton from '../components/FloatingActionButton';
 import {AppIcons} from '../constant/IconPath';
 import AddCrediCardModal from '../components/modal/AddCreditCardModal';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {PaymentMethodNavigatorParams} from '../routes/PaymentmethodNavigator';
 export type CrediCard = {
   name: string;
   cvv: string;
@@ -48,19 +58,39 @@ const SelectPaymentMethodScreen = () => {
       return [...prevCrediCard, newCredtiCard];
     });
   }, []);
-  console.log(isShowModal);
+  const completeSelect = async (newDefaulPaymentMethod: string) => {
+    paymentNavigation.navigate('PaymentScreen', {
+      defaultMethod: newDefaulPaymentMethod,
+    });
+  };
+  const paymentNavigation =
+    useNavigation<NativeStackNavigationProp<PaymentMethodNavigatorParams>>();
   return (
     <ScreenContainer>
-      <TabBar label="Payment method" />
+      <TabBar showBackButton onBackPress={() => {}} label="Payment method" />
       <ScrollView showsVerticalScrollIndicator={false}>
+        <TouchableOpacity
+          onPress={() => {
+            completeSelect('Cash on delivery');
+          }}
+          style={styles.deliveryContainer}>
+          <Image source={AppIcons.IconDelivery} />
+          <Text style={styles.deliveryText}>Cash on delivery</Text>
+        </TouchableOpacity>
+        <CheckBox
+          checked={defaulPaymentMethod === 'cash on delivery'}
+          onSelected={() => {
+            setDefaultPaymentMethod('cash on delivery');
+          }}
+          label="Use as default payment method"
+        />
         {creditCards.map(item => {
-          console.log(item.number);
           return (
             <View key={item.number}>
               <CreditCard
                 exprityDate={item.exDate}
                 onSelectCard={() => {
-                  setDefaultPaymentMethod(item.number);
+                  completeSelect(item.number);
                 }}
                 cardNumber={item.number}
                 name={item.name}
@@ -83,7 +113,15 @@ const SelectPaymentMethodScreen = () => {
         }}
         icon={AppIcons.IconAdd}
       />
-      <Button style={{marginTop: 30}} onPress={() => {}} label="Done" />
+      <Button
+        style={{marginTop: 30}}
+        onPress={() => {
+          paymentNavigation.navigate('PaymentScreen', {
+            defaultMethod: defaulPaymentMethod,
+          });
+        }}
+        label="Done"
+      />
       <AddCrediCardModal
         setShowModal={setShowModal}
         onAddCard={AddCard}
@@ -92,4 +130,21 @@ const SelectPaymentMethodScreen = () => {
     </ScreenContainer>
   );
 };
+const styles = StyleSheet.create({
+  deliveryText: {
+    marginLeft: 20,
+    marginVertical: 10,
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#FF5E00',
+  },
+  deliveryContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginVertical: 10,
+    height: 48,
+    borderRadius: 8,
+    flexDirection: 'row',
+  },
+});
 export default SelectPaymentMethodScreen;

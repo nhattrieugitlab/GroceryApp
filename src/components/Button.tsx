@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 type ButtonProp = {
   onPress: Function;
@@ -53,4 +54,4 @@ const ButtonStyle = StyleSheet.create({
     color: 'white',
   },
 });
-export default Button;
+export default memo(Button);
