@@ -14,6 +14,7 @@ export const AppIcons = {
   IconArrowToBottom: require('../assets/icon/ic_arrow_to_bottom.png'),
   IconCart2: require('../assets/icon/ic_cart2.png'),
   IconArrowToRight: require('../assets/icon/ic_arr_to_right.png'),
+  IconAdd: require('../assets/icon/ic_add.png'),
 };
 export const AppImage = {
   WelcomeImgae: require('../assets/images/img_welcome.png'),

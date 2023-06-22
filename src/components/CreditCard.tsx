@@ -7,10 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import formatCardNumber from '../utilities/FormatCreaditCardNumber';
-import CheckBox from './CheckBox';
-import {useState} from 'react';
 type CreditCardProps = {
-  type?: 'masterCard' | 'visaCard' | undefined;
+  type?: string;
   name: string;
   onSelectCard: Function;
   cardNumber: string;
@@ -24,14 +22,14 @@ const CreditCard: React.FC<CreditCardProps> = ({
   type,
 }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={styles.container}>
       <ImageBackground
         imageStyle={{
           width: '100%',
           borderRadius: 18,
         }}
         resizeMode="contain"
-        style={styles.container}
+        style={{flex: 1}}
         source={
           type
             ? require('../assets/images/br_creditcard.png')
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     elevation: 2,
     marginVertical: 20,
-    width: '99%',
+    width: '100%',
     height: 200,
   },
 });

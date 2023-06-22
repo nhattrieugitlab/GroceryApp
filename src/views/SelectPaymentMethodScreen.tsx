@@ -5,6 +5,8 @@ import Button from '../components/Button';
 import CreditCard from '../components/CreditCard';
 import {useState, useEffect} from 'react';
 import CheckBox from '../components/CheckBox';
+import FloatingActionButton from '../components/FloatingActionButton';
+import {AppIcons} from '../constant/IconPath';
 const PaymentMethods = [
   {
     name: 'Hoang Van Thanh 1',
@@ -41,6 +43,7 @@ const SelectPaymentMethodScreen = () => {
           return (
             <View key={item.cardNumber}>
               <CreditCard
+                exprityDate={item.exDate}
                 onSelectCard={() => {
                   setDefaultPaymentMethod(item.cardNumber);
                 }}
@@ -59,7 +62,17 @@ const SelectPaymentMethodScreen = () => {
           );
         })}
       </ScrollView>
-      <Button onPress={() => {}} label="Done" />
+      <FloatingActionButton
+        style={{
+          borderRadius: 24,
+          backgroundColor: '#FF5E00',
+          position: 'absolute',
+          bottom: 100,
+          right: 30,
+        }}
+        icon={AppIcons.IconAdd}
+      />
+      <Button style={{marginTop: 30}} onPress={() => {}} label="Done" />
     </ScreenContainer>
   );
 };
