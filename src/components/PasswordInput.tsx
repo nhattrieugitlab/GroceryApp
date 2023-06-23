@@ -10,9 +10,15 @@ import {AppIcons} from '../constant/IconPath';
 import {logInTextInputStyles} from './style/TextInputStyle';
 
 type PasswordInputProp = {
+  placeHolder?: string;
+  setShowPassword: Function;
   isShowPassword: boolean;
 };
-function PasswordInput({isShowPassword}: PasswordInputProp): JSX.Element {
+function PasswordInput({
+  isShowPassword,
+  setShowPassword,
+  placeHolder,
+}: PasswordInputProp): JSX.Element {
   return (
     <View style={logInTextInputStyles.container}>
       <Image
@@ -23,10 +29,14 @@ function PasswordInput({isShowPassword}: PasswordInputProp): JSX.Element {
       <TextInput
         secureTextEntry={!isShowPassword}
         style={[logInTextInputStyles.textInput, {paddingHorizontal: 45}]}
-        placeholder={'Enter your password'}
+        placeholder={placeHolder || 'Enter your password'}
         placeholderTextColor={'#AC8E71'}
       />
-      <TouchableOpacity style={styles.showPassIconConatainer}>
+      <TouchableOpacity
+        onPress={() => {
+          setShowPassword(!isShowPassword);
+        }}
+        style={styles.showPassIconConatainer}>
         <Image
           style={styles.showPassIcon}
           resizeMode="contain"

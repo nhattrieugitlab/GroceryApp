@@ -8,16 +8,15 @@ import {AppStackParams} from '../routes/AppNavigator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import PhoneNumberInput from '../components/PhoneNumberInput';
 import PasswordInput from '../components/PasswordInput';
-
 function LoginScreen(): JSX.Element {
   const appNavigation =
     useNavigation<NativeStackNavigationProp<AppStackParams>>();
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
-  const [isShowPasswordComfirm, setShowPassWordComfirm] =
-    useState<boolean>(false);
   return (
     <ScreenContainer>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}>
         <TabBar showBackButton onBackPress={() => {}} label="Sig In" />
         <Image
           style={styles.image}
@@ -27,7 +26,10 @@ function LoginScreen(): JSX.Element {
           Enter your phone number and password to access your account
         </Text>
         <PhoneNumberInput showCountryPicker />
-        <PasswordInput isShowPassword={false} />
+        <PasswordInput
+          setShowPassword={setShowPassWord}
+          isShowPassword={isShowPassword}
+        />
         <Text style={styles.textForgot}>Forget Password</Text>
         <Button
           onPress={() => {

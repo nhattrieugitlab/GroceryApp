@@ -20,7 +20,8 @@ export const AppIcons = {
   IconDelivery: require('../assets/icon/ic_delivery.png'),
 };
 export const AppImage = {
-  WelcomeImgae: require('../assets/images/img_welcome.png'),
+  Welcome: require('../assets/images/img_welcome.png'),
+  EnterPhoneNumber: require('../assets/images/enter_phonenumber_img.png'),
 };
 export const AppAnimation = {
   Location: require('../assets/animation/anm_location.json'),

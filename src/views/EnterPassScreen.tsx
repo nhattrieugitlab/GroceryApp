@@ -22,12 +22,17 @@ function EnterPasswordScreen(): JSX.Element {
         <Text style={styles.textContent}>
           For the security & safety please choose a password
         </Text>
-        <PasswordInput isShowPassword={isShowPassword} label={'Password'} />
         <PasswordInput
-          isShowPassword={isShowPasswordComfirm}
-          label={'Confirm Password'}
+          setShowPassword={setShowPassWord}
+          isShowPassword={isShowPassword}
+          placeHolder={'Password'}
         />
-        <Button label="Next" />
+        <PasswordInput
+          setShowPassword={setShowPassWordComfirm}
+          isShowPassword={isShowPasswordComfirm}
+          placeHolder={'Confirm Password'}
+        />
+        <Button onPress={() => {}} label="Next" />
         <Text style={styles.textlabel3}> Already have an account?Login</Text>
       </ScrollView>
     </ScreenContainer>
