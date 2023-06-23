@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import {AuthStackParamList} from '../routes/AuthNavigator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import VerifyCodeInput from '../components/VerifyCodeInput';
+// qui vip pro
 function VerifyCodeScreen(): JSX.Element {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
