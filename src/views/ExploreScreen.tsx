@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ImageRequireSource, FlatList} from 'react-native';
+import {View, Text, ImageRequireSource, FlatList, SafeAreaView} from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import SearchInput from '../components/SearchInput';
 import ScreenContainer from '../components/ScreenContainer';
@@ -140,7 +140,7 @@ const categoryData: categoryItem[] = [
 
 const renderCategoryItem = ({item}: {item: categoryItem}) => {
   return (
-    <View style={{marginRight: 22, marginBottom: 27}}>
+    <View style={{marginRight: 22, marginBottom: 32}}>
       <CategoryCard
         image={item.image}
         title={item.title}
@@ -152,7 +152,7 @@ const renderCategoryItem = ({item}: {item: categoryItem}) => {
 
 const ExploreScreen = (): React.JSX.Element => {
   return (
-    <ScreenContainer>
+    <SafeAreaView>
       <View style={{paddingHorizontal: 16, paddingTop: 16}}>
         <Text
           style={{
@@ -166,18 +166,20 @@ const ExploreScreen = (): React.JSX.Element => {
           }}>
           Categories
         </Text>
-        <SearchInput />
+        <View style={{marginTop: 16}}>
+          <SearchInput />
+        </View>
       </View>
       <View style={{alignItems: 'center'}}>
         <FlatList
-          style={{marginTop: 29, paddingLeft: 16}}
+          style={{marginTop: 16,paddingTop: 16, paddingLeft: 16, marginBottom: 240}}
           data={categoryData}
           renderItem={renderCategoryItem}
           numColumns={3}
           showsVerticalScrollIndicator={false}
         />
       </View>
-    </ScreenContainer>
+    </SafeAreaView>
   );
 };
 
