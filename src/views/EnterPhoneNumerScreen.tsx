@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import {logInTextInputStyles} from '../components/style/TextInputStyle';
 import React, {useState} from 'react';
@@ -13,11 +14,15 @@ import Button from '../components/Button';
 import TabBar from '../components/Tabbar';
 import PhoneNumberInput from '../components/PhoneNumberInput';
 import {AppImage} from '../constant/IconPath';
-
+import {useNavigation} from '@react-navigation/native';
+import {AuthStackParamList} from '../routes/AuthNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 function EnterPhoneNumberScreen(): JSX.Element {
   // const appNavigation =
   //   useNavigation<NativeStackNavigationProp<AppStackParams>>();
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   return (
     <ScreenContainer>
       <ScrollView
@@ -35,8 +40,18 @@ function EnterPhoneNumberScreen(): JSX.Element {
         </View>
         <PhoneNumberInput showCountryPicker />
         <Text style={styles.textForgot}>Forget Password</Text>
-        <Button onPress={() => {}} label="Next" />
-        <Text style={styles.textAccount}>Already have an account? Login</Text>
+        <Button
+          onPress={() => {
+            navigation.navigate('EnterPassWordScreen');
+          }}
+          label="Next"
+        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('SignInScreen');
+          }}>
+          <Text style={styles.textAccount}>Already have an account? Login</Text>
+        </TouchableOpacity>
       </ScrollView>
     </ScreenContainer>
   );
