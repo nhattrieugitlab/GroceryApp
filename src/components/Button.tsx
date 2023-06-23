@@ -9,7 +9,6 @@ type ButtonProp = {
   style?: ViewStyle;
   disable?: boolean;
 };
-// pháp test commit
 const Button: React.FC<ButtonProp> = ({
   label,
   disable,
