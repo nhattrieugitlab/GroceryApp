@@ -24,5 +24,6 @@ export const AppImage = {
   EnterPhoneNumber: require('../assets/images/enter_phonenumber_img.png'),
 };
 export const AppAnimation = {
+  EmptyCart: require('../assets/animation/anm_empty_cart.json'),
   Location: require('../assets/animation/anm_location.json'),
 };

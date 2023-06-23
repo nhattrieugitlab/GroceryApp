@@ -10,12 +10,13 @@ import React, {useState} from 'react';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
 
 type Props = {
+  amount: number;
   label: string;
   price: number;
   image: ImageSourcePropType;
 };
-function CartItem({label, image, price}: Props): JSX.Element {
-  const [count, setCount] = useState<number>(2);
+function CartItem({label, image, price, amount}: Props): JSX.Element {
+  const [count, setCount] = useState<number>(amount);
   return (
     <View style={styles.container}>
       <Image source={image} style={styles.image} />
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    resizeMode: 'contain',
+    resizeMode: 'stretch',
   },
   nameAndNumber: {
     width: 150,

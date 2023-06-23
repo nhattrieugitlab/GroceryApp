@@ -7,6 +7,9 @@ import ShopScreen from '../views/ShopScreen';
 import FavoriteScreen from '../views/FavoriteScreen';
 import CartScreen from '../views/CartScreen';
 import CartNavigatior from './CartNavigatior';
+import {useSelector} from 'react-redux';
+import {ProductsStateType} from '../redux/productSlice';
+import {RootState} from '../redux/store';
 type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
@@ -55,6 +58,8 @@ const HomeTabs: HomeTab[] = [
   },
 ];
 const HomeNavigator = () => {
+  const itemOnCard = useSelector((state: RootState) => state.product.products);
+  const itemOnCardCount = itemOnCard.length; // lay so luong item co trong gio hang
   return (
     <HomeBottomTabNavigator.Navigator
       screenOptions={{
@@ -71,6 +76,8 @@ const HomeNavigator = () => {
               tabBarIcon: ({color}) => {
                 return (
                   <IconBottomTabBar
+                    amountCartItem={itemOnCardCount}
+                    cartTab={eachTab.name === 'Cart'}
                     label={eachTab.name}
                     icon={eachTab.icon}
                     color={color}

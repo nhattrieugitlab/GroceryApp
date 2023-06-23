@@ -3,12 +3,18 @@ type IconBottomTabBarProps = {
   icon: ImageSourcePropType;
   label: string;
   color: string;
+  amountCartItem?: number;
+  cartTab: boolean;
 };
 const IconBottomTabBar = ({
   color,
   icon,
   label,
+  cartTab,
+  amountCartItem,
 }: IconBottomTabBarProps): React.JSX.Element => {
+  const itemCount = amountCartItem || 0;
+  const isShowCountItems = cartTab && itemCount > 0;
   return (
     <View style={styles.iconContainer}>
       <Image
@@ -16,6 +22,31 @@ const IconBottomTabBar = ({
         style={[styles.iconTab, {tintColor: color}]}
         source={icon}
       />
+      {isShowCountItems && (
+        <View
+          style={{
+            right: -5,
+            top: -5,
+            borderRadius: 8.5,
+            width: 17,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 17,
+            position: 'absolute',
+            backgroundColor: 'red',
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              fontSize: 10,
+              fontWeight: '400',
+            }}>
+            {amountCartItem && amountCartItem >= 10
+              ? '9+'
+              : amountCartItem + ''}
+          </Text>
+        </View>
+      )}
       <Text style={[styles.label, {color: color}]}>{label}</Text>
     </View>
   );

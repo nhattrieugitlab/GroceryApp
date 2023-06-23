@@ -1,23 +1,44 @@
 import {
   View,
   Text,
-  ImageRequireSource,
   Image,
   TouchableOpacity,
   StyleSheet,
   ImageSourcePropType,
+  ToastAndroid,
 } from 'react-native';
 import React from 'react';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
-
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../redux/store';
+import {add} from '../redux/productSlice';
 type CardProps = {
+  id: number;
   image: ImageSourcePropType;
   name: string;
   weight?: number;
   price: number;
 };
 
-function ProductCard({image, name, weight, price}: CardProps): JSX.Element {
+function ProductCard({image, name, weight, price, id}: CardProps): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
+  const itemsOnCart = useSelector((state: RootState) => state.product.products);
+  const addProduct = async () => {
+    if (itemsOnCart.length > 0) {
+      let isItemExit = itemsOnCart.find(prod => prod.id === id);
+      if (!isItemExit) {
+        dispatch(add({amount: 1, id, image, name, weight, price}));
+      } else {
+        ToastAndroid.showWithGravity(
+          'Product is already exits in your cart',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+        );
+      }
+    } else {
+      dispatch(add({amount: 1, id, image, name, weight, price}));
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.boxImage}>
@@ -28,7 +49,7 @@ function ProductCard({image, name, weight, price}: CardProps): JSX.Element {
         <Text style={styles.weight}>{weight}kg,priceg</Text>
         <Text style={styles.price}>{formatVNCurrencyTypeNumber(price)}</Text>
       </View>
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity onPress={addProduct} style={styles.addButton}>
         <View style={styles.boxImageAdd}>
           <View
             style={[{width: '100%', height: 2.15, top: 5.12}, styles.line]}

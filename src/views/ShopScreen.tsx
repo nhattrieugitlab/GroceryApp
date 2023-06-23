@@ -51,26 +51,82 @@ const categoryData: categoryItem[] = [
 
 const productData: Product[] = [
   {
+    amount: 1,
+    id: 1,
     image: require('../assets/images/p1.png'),
     name: 'Red Apple',
     weight: 1,
     price: 85000,
   },
   {
-    image: require('../assets/images/p2.png'),
+    amount: 1,
+    id: 2,
+    image: require('../assets/images/banana.png'),
     name: 'Orginal Banana',
     weight: 2,
     price: 132000,
   },
   {
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
+    amount: 1,
+    id: 3,
+    image: require('../assets/images/avocado.png'),
+    name: 'Avocado',
     weight: 1,
     price: 12000,
   },
   {
-    image: require('../assets/images/p2.png'),
-    name: 'Orginal Banana',
+    amount: 1,
+    id: 4,
+    image: require('../assets/images/salmon.png'),
+    name: 'Salmon',
+    weight: 6,
+    price: 143000,
+  },
+  {
+    amount: 1,
+    id: 10,
+    image: require('../assets/images/orance.png'),
+    name: 'Orange',
+    weight: 6,
+    price: 113000,
+  },
+  {
+    amount: 1,
+    id: 5,
+    image: require('../assets/images/paple.png'),
+    name: 'Paple',
+    weight: 6,
+    price: 73000,
+  },
+  {
+    amount: 1,
+    id: 6,
+    image: require('../assets/images/mango.png'),
+    name: 'Mango',
+    weight: 6,
+    price: 123000,
+  },
+  {
+    amount: 1,
+    id: 7,
+    image: require('../assets/images/salmon.png'),
+    name: 'Salmon',
+    weight: 6,
+    price: 113000,
+  },
+  {
+    amount: 1,
+    id: 8,
+    image: require('../assets/images/straw.png'),
+    name: 'Strawberry',
+    weight: 6,
+    price: 93000,
+  },
+  {
+    amount: 1,
+    id: 9,
+    image: require('../assets/images/peach.png'),
+    name: 'Peach',
     weight: 6,
     price: 143000,
   },
@@ -92,6 +148,7 @@ const renderProductItem: ListRenderItem<Product> = ({item}) => {
   return (
     <View style={{margin: 5, marginRight: 11, marginBottom: 16}}>
       <ProductCard
+        id={item.id}
         image={item.image}
         name={item.name}
         weight={item.weight}
