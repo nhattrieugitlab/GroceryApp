@@ -1,7 +1,9 @@
 import CountryPicker from 'rn-country-picker';
-const CountryPicker2 = () => {
+import {ViewStyle} from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+const CountryPicker2: React.FC<{style: ViewStyle}> = ({style}) => {
   return (
     <CountryPicker
+      containerStyle={style}
       disable={false}
       animationType={'slide'}
       language="en"

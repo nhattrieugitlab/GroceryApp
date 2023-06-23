@@ -7,38 +7,28 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {AppIcons} from '../constant/IconPath';
+import {logInTextInputStyles} from './style/TextInputStyle';
 
 type PasswordInputProp = {
-  label?: string;
   isShowPassword: boolean;
 };
-function PasswordInput({
-  label,
-  isShowPassword,
-}: PasswordInputProp): JSX.Element {
+function PasswordInput({isShowPassword}: PasswordInputProp): JSX.Element {
   return (
-    <View style={styles.container}>
+    <View style={logInTextInputStyles.container}>
       <Image
         resizeMode="contain"
-        style={[styles.icon, {width: 13, height: 17, left: 13, top: 17.5}]}
+        style={[styles.lockIcon]}
         source={AppIcons.IconKey}
       />
       <TextInput
-        style={[styles.textInput]}
-        placeholder={label}
-        placeholderTextColor={'#AC8E71'}></TextInput>
-      <TouchableOpacity>
+        secureTextEntry={!isShowPassword}
+        style={[logInTextInputStyles.textInput, {paddingHorizontal: 45}]}
+        placeholder={'Enter your password'}
+        placeholderTextColor={'#AC8E71'}
+      />
+      <TouchableOpacity style={styles.showPassIconConatainer}>
         <Image
-          style={[
-            styles.icon,
-            {
-              width: 25,
-              height: 20,
-              tintColor: '#FF5E00',
-              top: 13.5,
-              right: 13,
-            },
-          ]}
+          style={styles.showPassIcon}
           resizeMode="contain"
           source={AppIcons.IconShowPassword}
         />
@@ -49,26 +39,25 @@ function PasswordInput({
 export default PasswordInput;
 
 const styles = StyleSheet.create({
-  container: {
-    height: 48,
-    borderRadius: 5,
-    backgroundColor: '#F3F3F3',
-    marginTop: 16,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    width: '100%',
-  },
-  icon: {
+  showPassIconConatainer: {
     alignSelf: 'center',
     position: 'absolute',
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 9,
+    right: 13,
   },
-  textInput: {
-    height: '100%',
-    paddingLeft: 50,
-    fontFamily: 'Klarna Text',
-    fontWeight: '400',
-    fontSize: 16,
-    lineHeight: 19,
-    color: '#AC8E71',
+  showPassIcon: {
+    tintColor: '#FF5E00',
+  },
+  lockIcon: {
+    alignSelf: 'center',
+    position: 'absolute',
+    width: 13,
+    height: 17,
+    top: 15.5,
+    left: 15,
   },
 });
