@@ -1,20 +1,19 @@
-import {
-  Text,
-  ImageRequireSource,
-  Image,
-  TextInput,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
-import React, {useState} from 'react';
+import {Text, Image, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useState, useRef} from 'react';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
-
-function VerifiPassScreen(): JSX.Element {
+import {useNavigation} from '@react-navigation/native';
+import {AuthStackParamList} from '../routes/AuthNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import VerifyCodeInput from '../components/VerifyCodeInput';
+function VerifyCodeScreen(): JSX.Element {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+  const [code, setCode] = useState(['', '', '', '', '']);
+  const otpInputRefs = useRef([]);
   return (
     <ScreenContainer>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Image
           style={{width: 8.49, height: 14}}
           source={require('../assets/icon/Back.png')}
@@ -30,13 +29,25 @@ function VerifiPassScreen(): JSX.Element {
             We have sent SMS to: 046 XXX XX XX
           </Text>
         </View>
-        <Text style={{color: '#7F4E1D'}}> Chỗ Này Để Thành Làm</Text>
-        <Button onPress={() => {}} label="Sign Up" />
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <VerifyCodeInput />
+          <VerifyCodeInput />
+          <VerifyCodeInput />
+          <VerifyCodeInput />
+          <VerifyCodeInput />
+        </View>
       </ScrollView>
+      <Button
+        style={{marginTop: 30}}
+        onPress={() => {
+          navigation.navigate('SignInScreen');
+        }}
+        label="Sign Up"
+      />
     </ScreenContainer>
   );
 }
-export default VerifiPassScreen;
+export default VerifyCodeScreen;
 const styles = StyleSheet.create({
   textSignUp: {
     fontSize: 24,

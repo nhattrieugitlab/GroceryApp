@@ -24,7 +24,6 @@ const PaymentScreen = () => {
     useNavigation<NativeStackNavigationProp<PaymentMethodNavigatorParams>>();
   const route = useRoute<PaymentScreenProps['route']>();
   const {defaultMethod}: any = route.params || 'cash on delivery';
-  console.log('change card', defaultMethod);
   return (
     <ScreenContainer>
       <ScrollView showsVerticalScrollIndicator={false}>

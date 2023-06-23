@@ -11,7 +11,7 @@ const WelComeScreen = () => {
   return (
     <ScreenContainer>
       <ScrollView>
-        <Image style={styles.img} source={AppImage.WelcomeImgae} />
+        <Image style={styles.img} source={AppImage.Welcome} />
         <Text style={styles.label1}>Realax and shop</Text>
         <Text style={styles.label2}>
           Shop online and get grocories delivered from stores to your home in as
@@ -19,14 +19,12 @@ const WelComeScreen = () => {
         </Text>
         <Button
           onPress={() => {
-            console.log('ád');
-            navigation.navigate('SignInScreen');
+            navigation.navigate('EnterPhoneNumberScreen');
           }}
           label="Sign up"
         />
         <Button
           onPress={() => {
-            console.log('ád');
             navigation.navigate('SignInScreen');
           }}
           style={{marginTop: 10}}

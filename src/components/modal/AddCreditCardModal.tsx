@@ -57,14 +57,13 @@ const AddCrediCardModal: React.FC<AddCrediCardModalProps> = ({
   );
   return (
     <Modal
-      onTouchCancel={() => {}}
       onDismiss={() => {
         setShowModal(false);
       }}
       visible={isShowModal}
-      animationType="slide"
-      style={{backgroundColor: 'red'}}>
+      animationType="slide">
       <TabBar
+        style={{padding: 24}}
         onBackPress={() => {
           setShowModal(false);
         }}

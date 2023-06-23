@@ -37,7 +37,7 @@ const TabBar: React.FC<TabBarProps> = ({
 const styles = StyleSheet.create({
   btnBackContainer: {
     position: 'absolute',
-    left: 24,
+    left: 0,
     top: 14,
     width: 16.88,
     height: 22,

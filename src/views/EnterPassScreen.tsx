@@ -1,18 +1,32 @@
-import {Text, Image, StyleSheet, ScrollView} from 'react-native';
+import {
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import PasswordInput from '../components/PasswordInput';
 import Button from '../components/Button';
 import ScreenContainer from '../components/ScreenContainer';
-
+import TabBar from '../components/Tabbar';
+import {useNavigation} from '@react-navigation/native';
+import {AuthStackParamList} from '../routes/AuthNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 function EnterPasswordScreen(): JSX.Element {
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [isShowPasswordComfirm, setShowPassWordComfirm] =
     useState<boolean>(false);
+  const navigation =
+    useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   return (
     <ScreenContainer>
       <ScrollView style={styles.body}>
-        <Image source={require('../assets/images/Arrow.png')} />
-        <Text style={styles.textSignUp}>Sign Up</Text>
+        <TabBar
+          showBackButton
+          onBackPress={() => {}}
+          label="Comfirm password"
+        />
         <Image
           resizeMode="contain"
           style={styles.image}
@@ -32,8 +46,19 @@ function EnterPasswordScreen(): JSX.Element {
           isShowPassword={isShowPasswordComfirm}
           placeHolder={'Confirm Password'}
         />
-        <Button onPress={() => {}} label="Next" />
-        <Text style={styles.textlabel3}> Already have an account?Login</Text>
+        <Button
+          style={{marginTop: 20}}
+          onPress={() => {
+            navigation.navigate('VerifyCodeScreen');
+          }}
+          label="Next"
+        />
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('EnterPassWordScreen');
+          }}>
+          <Text style={styles.textlabel3}>Already have an account? Login</Text>
+        </TouchableOpacity>
       </ScrollView>
     </ScreenContainer>
   );
@@ -44,16 +69,7 @@ const styles = StyleSheet.create({
     height: 280,
     alignSelf: 'center',
   },
-  textSignUp: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#FF5E00',
-    letterSpacing: 0.4,
-    lineHeight: 40,
-    textAlign: 'center',
-    marginRight: 20,
-    justifyContent: 'center',
-  },
+
   textEnterPass: {
     fontWeight: '700',
     fontSize: 20,
@@ -73,15 +89,7 @@ const styles = StyleSheet.create({
     padding: 16,
     width: '100%',
   },
-  buttoncontainer: {
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 343,
-    borderRadius: 30,
-    backgroundColor: '#FF5E00',
-    marginTop: 17,
-  },
+
   textlabel3: {
     fontSize: 16,
     fontWeight: '400',

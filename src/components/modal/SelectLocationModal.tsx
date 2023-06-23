@@ -21,9 +21,10 @@ const SelectLocationModal: React.FC<SelectLocationProps> = ({
     latitude: 0,
   });
   useEffect(() => {
-    requestLocationPermission(() => {
-      getCurrentLocation(setCurrentLocation);
-    });
+    isShowModal &&
+      requestLocationPermission(() => {
+        getCurrentLocation(setCurrentLocation);
+      });
   }, []);
   return (
     <Modal

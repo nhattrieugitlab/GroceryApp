@@ -41,7 +41,6 @@ const SelectLocationCard: React.FC<{
         setShowModal={setShowSelectLocationModal}
         onGetLocationComplete={() => {}}
       />
-
       <SelectAddressModal
         isShowModal={isShowSelectAddressModal}
         setShowModal={setShowSelectAddressModal}
