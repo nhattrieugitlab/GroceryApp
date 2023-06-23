@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  SafeAreaView
 } from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
@@ -78,7 +79,7 @@ const productData: Product[] = [
 
 const renderCategoryItem = ({item}: {item: categoryItem}) => {
   return (
-    <View style={{marginRight: 10}}>
+    <View style={{width: 120}}>
       <CategoryCard
         image={item.image}
         title={item.title}
@@ -90,7 +91,7 @@ const renderCategoryItem = ({item}: {item: categoryItem}) => {
 
 const renderProductItem: ListRenderItem<Product> = ({item}) => {
   return (
-    <View style={{margin: 5, marginRight: 11, marginBottom: 16}}>
+    <View style={{margin: 5, width: 170, marginBottom: 16}}>
       <ProductCard
         image={item.image}
         name={item.name}
@@ -103,7 +104,7 @@ const renderProductItem: ListRenderItem<Product> = ({item}) => {
 
 function ShopScreen(): JSX.Element {
   return (
-    <ScreenContainer>
+    <SafeAreaView>
       <View style={styles.containerPadding}>
         <View style={styles.headerBox}>
           <Image
@@ -193,7 +194,7 @@ function ShopScreen(): JSX.Element {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-    </ScreenContainer>
+    </SafeAreaView>
   );
 }
 
