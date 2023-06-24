@@ -8,13 +8,13 @@ import {
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView,
+  SafeAreaView
 } from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 import SearchInput from '../components/SearchInput';
 import ScreenContainer from '../components/ScreenContainer';
-import {Product} from '../datatypes/Product';
+import { Product } from '../datatypes/Product';
 
 type categoryItem = {
   image: ImageRequireSource;
@@ -52,26 +52,23 @@ const categoryData: categoryItem[] = [
 
 const productData: Product[] = [
   {
-    amount: 1,
-    id: 1,
+    id: 0,
     image: require('../assets/images/p1.png'),
     name: 'Red Apple',
     weight: 1,
     price: 85000,
   },
   {
-    amount: 1,
-    id: 2,
-    image: require('../assets/images/banana.png'),
+    id: 1,
+    image: require('../assets/images/p2.png'),
     name: 'Orginal Banana',
     weight: 2,
     price: 132000,
   },
   {
-    amount: 1,
-    id: 3,
-    image: require('../assets/images/avocado.png'),
-    name: 'Avocado',
+    id: 2,
+    image: require('../assets/images/p1.png'),
+    name: 'Red Apple',
     weight: 1,
     price: 12000,
   },
@@ -133,9 +130,9 @@ const productData: Product[] = [
   },
 ];
 
-const renderCategoryItem = ({item}: {item: categoryItem}) => {
+const renderCategoryItem = ({ item }: { item: categoryItem }) => {
   return (
-    <View style={{width: 120}}>
+    <View style={{ width: 120 }}>
       <CategoryCard
         image={item.image}
         title={item.title}
@@ -145,9 +142,9 @@ const renderCategoryItem = ({item}: {item: categoryItem}) => {
   );
 };
 
-const renderProductItem: ListRenderItem<Product> = ({item}) => {
+const renderProductItem: ListRenderItem<Product> = ({ item }) => {
   return (
-    <View style={{margin: 5, width: 170, marginBottom: 16}}>
+    <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
       <ProductCard
         id={item.id}
         image={item.image}
@@ -204,7 +201,7 @@ function ShopScreen(): JSX.Element {
       </View>
       <View>
         <FlatList
-          style={{marginTop: 32, paddingLeft: 16}}
+          style={{ marginTop: 32, paddingLeft: 16 }}
           data={categoryData}
           renderItem={renderCategoryItem}
           horizontal
@@ -244,7 +241,7 @@ function ShopScreen(): JSX.Element {
       </View>
       <View>
         <FlatList
-          style={{marginTop: 28, paddingLeft: 16}}
+          style={{ marginTop: 28, paddingLeft: 16 }}
           data={productData}
           renderItem={renderProductItem}
           horizontal
