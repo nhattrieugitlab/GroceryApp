@@ -1,7 +1,7 @@
 import ScreenContainer from '../../components/ScreenContainer';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, ListRenderItem} from 'react-native';
 import SelectLocationCard from './SelectLocationCard';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {AddressToString} from '../../utilities/AddressToString';
 import {Address} from '../../datatypes/LocationDataTypes';
 import TabBar from '../../components/Tabbar';
@@ -15,6 +15,16 @@ import {
   PaymentMethodNavigatorParams,
   PaymentScreenProps,
 } from '../../routes/PaymentmethodNavigator';
+import Button from '../../components/Button';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../redux/store';
+import {emptyCart} from '../../redux/productSlice';
+import {FlatList} from 'react-native-gesture-handler';
+import {delivery, deliverys} from '../../constant/FakeDate';
+import DeliveryCard from '../../components/DeliveryCard';
+import ShowItemAlert from '../../utilities/ShowItemAlert';
+import getTotalAmount from '../../utilities/GetCartTotalAmount';
+import formatVNCurrencyTypeNumber from '../../utilities/CurrencyConverter';
 const PaymentScreen = () => {
   const [address, setAddress] = useState<string>('');
 
@@ -22,8 +32,32 @@ const PaymentScreen = () => {
     useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
   const paymentNavigation =
     useNavigation<NativeStackNavigationProp<PaymentMethodNavigatorParams>>();
+
   const route = useRoute<PaymentScreenProps['route']>();
+  const dispatch = useDispatch<AppDispatch>();
+
   const {defaultMethod}: any = route.params || 'cash on delivery';
+
+  const [delivery, setDelivery] = useState<delivery>(deliverys[0]);
+  const itemOnCart = useSelector((state: RootState) => state.product.products);
+  useEffect(() => {
+    let totalMount = getTotalAmount(itemOnCart) + delivery.price;
+    setTotal(totalMount);
+  }, [delivery]);
+  const [total, setTotal] = useState(0);
+  const renderDeliveryItem: ListRenderItem<delivery> = ({item}) => {
+    return (
+      <DeliveryCard
+        setDelivery={() => {
+          setDelivery(item);
+        }}
+        name={item.name}
+        isSelected={item.name === delivery.name}
+        time={item.time}
+        img={item.img}
+      />
+    );
+  };
   return (
     <ScreenContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -42,7 +76,11 @@ const PaymentScreen = () => {
           }}
         />
         <ExpectedTimeCard />
-        <ShowItemCard />
+        <ShowItemCard
+          onPress={() => {
+            ShowItemAlert(itemOnCart);
+          }}
+        />
         <PaymentMethodCard
           cashOnDelivery={defaultMethod === 'Cash on delivery'}
           onPress={() => {
@@ -50,9 +88,21 @@ const PaymentScreen = () => {
           }}
           cardNumber={defaultMethod}
         />
+        <FlatList
+          showsHorizontalScrollIndicator={false}
+          renderItem={renderDeliveryItem}
+          horizontal
+          data={deliverys}
+        />
       </ScrollView>
+      <Button
+        onPress={() => {
+          dispatch(emptyCart());
+        }}
+        style={{marginTop: 10}}
+        label={`Check out ${formatVNCurrencyTypeNumber(total)}`}
+      />
     </ScreenContainer>
   );
 };
-export const PaymentScreenStyles = StyleSheet.create({});
 export default PaymentScreen;

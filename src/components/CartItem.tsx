@@ -32,7 +32,7 @@ function CartItem({id, label, image, price, amount}: Props): JSX.Element {
   };
   const renderDeleteMenu = () => (
     <TouchableOpacity
-      onPress={() => {
+      onPress={async () => {
         dispatch(remove({...product}));
       }}
       style={{

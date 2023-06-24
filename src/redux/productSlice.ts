@@ -39,7 +39,10 @@ export const productSlice = createSlice({
       });
       state.products = newCart;
     },
+    emptyCart: state => {
+      state.products = [];
+    },
   },
 });
-export const {add, increase, remove, reduce} = productSlice.actions;
+export const {add, increase, remove, reduce, emptyCart} = productSlice.actions;
 export default productSlice.reducer;

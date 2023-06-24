@@ -14,6 +14,7 @@ import {useState, useEffect} from 'react';
 import AnimatedLottieView from 'lottie-react-native';
 import {AppAnimation} from '../constant/IconPath';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
+import getTotalAmount from '../utilities/GetCartTotalAmount';
 const CartScreen = () => {
   const cartNavigation =
     useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
@@ -29,18 +30,8 @@ const CartScreen = () => {
     );
   };
   const itemOnCart = useSelector((state: RootState) => state.product.products);
-
-  const getTotalAmount = () => {
-    return itemOnCart.reduce((accumulator, product) => {
-      let total = 0;
-      product.amount
-        ? (total = accumulator + product.price * product.amount)
-        : accumulator + total;
-      return total;
-    }, 0);
-  };
   useEffect(() => {
-    setTotalAmount(getTotalAmount());
+    setTotalAmount(getTotalAmount(itemOnCart));
   }, [itemOnCart]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const itemOnCardCount = itemOnCart.length;
