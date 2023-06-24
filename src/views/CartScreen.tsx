@@ -20,6 +20,7 @@ const CartScreen = () => {
   const renderItem: ListRenderItem<Product> = ({item}) => {
     return (
       <CartItem
+        id={item.id}
         amount={item.amount || 0}
         price={item.price}
         label={item.name}
@@ -32,7 +33,6 @@ const CartScreen = () => {
   const getTotalAmount = () => {
     return itemOnCart.reduce((accumulator, product) => {
       let total = 0;
-      console.log(product.amount);
       product.amount
         ? (total = accumulator + product.price * product.amount)
         : accumulator + total;
@@ -50,6 +50,15 @@ const CartScreen = () => {
       {itemOnCardCount > 0 ? (
         <>
           <FlatList
+            ItemSeparatorComponent={() => (
+              <View
+                style={{
+                  marginVertical: 5,
+                  height: 1,
+                  backgroundColor: '#6D380517',
+                }}
+              />
+            )}
             extraData={(item: Product) => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={renderItem}
