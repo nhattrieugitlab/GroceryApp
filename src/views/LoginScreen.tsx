@@ -8,16 +8,20 @@ import {AppStackParams} from '../routes/AppNavigator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import PhoneNumberInput from '../components/PhoneNumberInput';
 import PasswordInput from '../components/PasswordInput';
+import {validatePhoneNumber} from '../utilities/ValidatePhoneNumber';
+import {validatePass} from '../utilities/ValidatePass';
 function LoginScreen(): JSX.Element {
   const appNavigation =
     useNavigation<NativeStackNavigationProp<AppStackParams>>();
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
+  const [phoneNumber, setphoneNumber] = useState<string>('');
+  const [isCardNumberErr, setCardNumberErr] = useState<boolean>(false);
   return (
     <ScreenContainer>
       <ScrollView
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}>
-        <TabBar showBackButton onBackPress={() => {}} label="Sig In" />
+        <TabBar showBackButton onBackPress={() => {}} label="Sign In" />
         <Image
           style={styles.image}
           source={require('../assets/images/PhoneKey.png')}
@@ -25,10 +29,27 @@ function LoginScreen(): JSX.Element {
         <Text style={styles.textSend}>
           Enter your phone number and password to access your account
         </Text>
-        <PhoneNumberInput showCountryPicker />
+        <PhoneNumberInput
+          showCountryPicker
+          errMessage="Phone number is invalid"
+          onChanePhoneNumber={(phoneNumber: string) => {
+            setphoneNumber(phoneNumber);
+            let isHasErr = !validatePhoneNumber(phoneNumber, setphoneNumber);
+            setCardNumberErr(isHasErr);
+            console.log('isHasErr', isCardNumberErr);
+          }}
+          err={isCardNumberErr}
+          value={phoneNumber}
+        />
         <PasswordInput
+          errMessage="Password is invalid"
+          err={isShowPassword}
           setShowPassword={setShowPassWord}
           isShowPassword={isShowPassword}
+          onChangeText={(pass: string) => {
+            let isHasErr = !validatePass(pass, setShowPassWord);
+            setShowPassWord(isHasErr);
+          }}
         />
         <Text style={styles.textForgot}>Forget Password</Text>
         <Button

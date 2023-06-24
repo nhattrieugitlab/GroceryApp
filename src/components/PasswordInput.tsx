@@ -5,6 +5,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 import {AppIcons} from '../constant/IconPath';
 import {logInTextInputStyles} from './style/TextInputStyle';
@@ -13,11 +14,19 @@ type PasswordInputProp = {
   placeHolder?: string;
   setShowPassword: Function;
   isShowPassword: boolean;
+  value?: string;
+  onChangeText?: Function;
+  err: boolean;
+  errMessage?: string;
 };
 function PasswordInput({
   isShowPassword,
   setShowPassword,
   placeHolder,
+  value,
+  onChangeText,
+  err,
+  errMessage,
 }: PasswordInputProp): JSX.Element {
   return (
     <View style={logInTextInputStyles.container}>
@@ -27,8 +36,16 @@ function PasswordInput({
         source={AppIcons.IconKey}
       />
       <TextInput
+        value={value}
         secureTextEntry={!isShowPassword}
-        style={[logInTextInputStyles.textInput, {paddingHorizontal: 45}]}
+        onChangeText={(text: string) => {
+          onChangeText && onChangeText(text);
+        }}
+        style={[
+          logInTextInputStyles.textInput,
+          {paddingHorizontal: 45},
+          err && {borderBottomColor: 'red', borderBottomWidth: 1},
+        ]}
         placeholder={placeHolder || 'Enter your password'}
         placeholderTextColor={'#AC8E71'}
       />
@@ -43,6 +60,11 @@ function PasswordInput({
           source={AppIcons.IconShowPassword}
         />
       </TouchableOpacity>
+      {err && (
+        <Text style={{fontSize: 14, fontWeight: '400', color: 'red'}}>
+          {errMessage}
+        </Text>
+      )}
     </View>
   );
 }
