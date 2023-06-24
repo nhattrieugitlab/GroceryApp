@@ -62,7 +62,7 @@ const productData: Product[] = [
   {
     amount: 1,
     id: 2,
-    image: require('../assets/images/Banana.png'),
+    image: require('../assets/images/banana.png'),
     name: 'Orginal Banana',
     weight: 2,
     price: 132000,

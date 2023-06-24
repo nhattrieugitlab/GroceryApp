@@ -24,7 +24,6 @@ export const deliverys: delivery[] = [
   {
     name: 'vtp',
     img: require('../assets/images/ghtk.png'),
-
     price: 53000,
     time: '1 days',
   },
