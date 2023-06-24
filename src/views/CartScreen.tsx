@@ -14,12 +14,14 @@ import {useState, useEffect} from 'react';
 import AnimatedLottieView from 'lottie-react-native';
 import {AppAnimation} from '../constant/IconPath';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
+import getTotalAmount from '../utilities/GetCartTotalAmount';
 const CartScreen = () => {
   const cartNavigation =
     useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
   const renderItem: ListRenderItem<Product> = ({item}) => {
     return (
       <CartItem
+        id={item.id}
         amount={item.amount || 0}
         price={item.price}
         label={item.name}
@@ -28,19 +30,8 @@ const CartScreen = () => {
     );
   };
   const itemOnCart = useSelector((state: RootState) => state.product.products);
-
-  const getTotalAmount = () => {
-    return itemOnCart.reduce((accumulator, product) => {
-      let total = 0;
-      console.log(product.amount);
-      product.amount
-        ? (total = accumulator + product.price * product.amount)
-        : accumulator + total;
-      return total;
-    }, 0);
-  };
   useEffect(() => {
-    setTotalAmount(getTotalAmount());
+    setTotalAmount(getTotalAmount(itemOnCart));
   }, [itemOnCart]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const itemOnCardCount = itemOnCart.length;
@@ -50,6 +41,15 @@ const CartScreen = () => {
       {itemOnCardCount > 0 ? (
         <>
           <FlatList
+            ItemSeparatorComponent={() => (
+              <View
+                style={{
+                  marginVertical: 5,
+                  height: 1,
+                  backgroundColor: '#6D380517',
+                }}
+              />
+            )}
             extraData={(item: Product) => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={renderItem}

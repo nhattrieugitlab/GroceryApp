@@ -2,9 +2,13 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {cardStyle} from './CardStyle';
 import {AppIcons} from '../../constant/IconPath';
 
-const ShowItemCard = () => {
+const ShowItemCard: React.FC<{onPress: Function}> = ({onPress}) => {
   return (
-    <TouchableOpacity style={[cardStyle.container, styles.container]}>
+    <TouchableOpacity
+      onPress={() => {
+        onPress();
+      }}
+      style={[cardStyle.container, styles.container]}>
       <View style={styles.labelContainer}>
         <Image
           resizeMode="center"
