@@ -3,6 +3,7 @@ import AppNavigator from './src/routes/AppNavigator';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import ItemPayMent from './src/components/ItemPayMent';
 function App(): JSX.Element {
   return (
     <Provider store={store}>
@@ -11,5 +12,6 @@ function App(): JSX.Element {
       </GestureHandlerRootView>
     </Provider>
   );
+  
 }
 export default App;
