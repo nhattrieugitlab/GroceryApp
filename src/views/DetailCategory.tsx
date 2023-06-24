@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   ScrollView
 } from 'react-native';
+import { productData } from '../constant/FakeDate';
+
 import TabBar from '../components/Tabbar';
 import SearchInput from '../components/SearchInput';
 import { Product } from '../datatypes/Product';
@@ -21,66 +23,6 @@ type filterItem = {
   id: number,
   value: string
 }
-
-const productData: Product[] = [
-  {
-    id: 0,
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
-    weight: 1,
-    price: 85000,
-  },
-  {
-    id: 1,
-    image: require('../assets/images/p2.png'),
-    name: 'Orginal Banana',
-    weight: 2,
-    price: 132000,
-  },
-  {
-    id: 2,
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
-    weight: 1,
-    price: 12000,
-  },
-  {
-    id: 3,
-    image: require('../assets/images/p2.png'),
-    name: 'Orginal Banana',
-    weight: 6,
-    price: 143000,
-  },
-  {
-    id: 4,
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
-    weight: 1,
-    price: 85000,
-  },
-  {
-    id: 5,
-    image: require('../assets/images/p2.png'),
-    name: 'Orginal Banana',
-    weight: 2,
-    price: 132000,
-  },
-  {
-    id: 6,
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
-    weight: 1,
-    price: 12000,
-  },
-  {
-    id: 7,
-    image: require('../assets/images/p2.png'),
-    name: 'Orginal Banana',
-    weight: 6,
-    price: 143000,
-  },
-];
-
 const filter: filterItem[] = [{
   id: 0,
   value: "Fruits"
@@ -130,6 +72,7 @@ function DetailCategory({ item }: ScreenProps): JSX.Element {
       return (
         <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
           <ProductCard
+            id={item.id}
             image={item.image}
             name={item.name}
             weight={item.weight}

@@ -10,6 +10,7 @@ import {
   View,
   SafeAreaView
 } from 'react-native';
+import { productData } from '../constant/FakeDate';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 import SearchInput from '../components/SearchInput';
@@ -50,85 +51,7 @@ const categoryData: categoryItem[] = [
   },
 ];
 
-const productData: Product[] = [
-  {
-    id: 0,
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
-    weight: 1,
-    price: 85000,
-  },
-  {
-    id: 1,
-    image: require('../assets/images/p2.png'),
-    name: 'Orginal Banana',
-    weight: 2,
-    price: 132000,
-  },
-  {
-    id: 2,
-    image: require('../assets/images/p1.png'),
-    name: 'Red Apple',
-    weight: 1,
-    price: 12000,
-  },
-  {
-    amount: 1,
-    id: 4,
-    image: require('../assets/images/salmon.png'),
-    name: 'Salmon',
-    weight: 6,
-    price: 143000,
-  },
-  {
-    amount: 1,
-    id: 10,
-    image: require('../assets/images/orance.png'),
-    name: 'Orange',
-    weight: 6,
-    price: 113000,
-  },
-  {
-    amount: 1,
-    id: 5,
-    image: require('../assets/images/paple.png'),
-    name: 'Paple',
-    weight: 6,
-    price: 73000,
-  },
-  {
-    amount: 1,
-    id: 6,
-    image: require('../assets/images/mango.png'),
-    name: 'Mango',
-    weight: 6,
-    price: 123000,
-  },
-  {
-    amount: 1,
-    id: 7,
-    image: require('../assets/images/salmon.png'),
-    name: 'Salmon',
-    weight: 6,
-    price: 113000,
-  },
-  {
-    amount: 1,
-    id: 8,
-    image: require('../assets/images/straw.png'),
-    name: 'Strawberry',
-    weight: 6,
-    price: 93000,
-  },
-  {
-    amount: 1,
-    id: 9,
-    image: require('../assets/images/peach.png'),
-    name: 'Peach',
-    weight: 6,
-    price: 143000,
-  },
-];
+
 
 const renderCategoryItem = ({ item }: { item: categoryItem }) => {
   return (

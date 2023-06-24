@@ -1,5 +1,5 @@
-import {ImageSourcePropType} from 'react-native';
-import {Product} from '../datatypes/Product';
+import { ImageSourcePropType } from 'react-native';
+import { Product } from '../datatypes/Product';
 export const fakeCartData: Product[] = [];
 export type delivery = {
   time: string;
@@ -33,5 +33,86 @@ export const deliverys: delivery[] = [
 
     price: 21200,
     time: '1-2 days',
+  },
+];
+export const productData: Product[] = [
+  {
+    id: 0,
+    image: require('../assets/images/apple.png'),
+    name: 'Red Apple',
+    weight: 1,
+    price: 85000,
+  },
+  {
+    amount: 1,
+    id: 2,
+    image: require('../assets/images/salmon.png'),
+    name: 'Salmon',
+    weight: 6,
+    price: 143000,
+  },
+  {
+    amount: 1,
+    id: 3,
+    image: require('../assets/images/orance.png'),
+    name: 'Orange',
+    weight: 6,
+    price: 113000,
+  },
+  {
+    amount: 1,
+    id: 4,
+    image: require('../assets/images/paple.png'),
+    name: 'Paple',
+    weight: 6,
+    price: 73000,
+  },
+  {
+    amount: 1,
+    id: 5,
+    image: require('../assets/images/mango.png'),
+    name: 'Mango',
+    weight: 6,
+    price: 123000,
+  },
+  {
+    amount: 1,
+    id: 6,
+    image: require('../assets/images/watermelo.png'),
+    name: 'Water Melon',
+    weight: 6,
+    price: 113000,
+  },
+  {
+    amount: 1,
+    id: 7,
+    image: require('../assets/images/straw.png'),
+    name: 'Strawberry',
+    weight: 6,
+    price: 93000,
+  },
+  {
+    amount: 1,
+    id: 8,
+    image: require('../assets/images/peach.png'),
+    name: 'Peach',
+    weight: 6,
+    price: 143000,
+  },
+
+  {
+    amount: 1,
+    id: 9,
+    image: require('../assets/images/grape.png'),
+    name: 'Grapee',
+    weight: 6,
+    price: 123000,
+  }, {
+    amount: 1,
+    id: 11,
+    image: require('../assets/images/greenapple.png'),
+    name: 'Green apple',
+    weight: 6,
+    price: 123000,
   },
 ];

@@ -1,16 +1,16 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ExploreScreen from '../views/ExploreScreen';
-import {ImageSourcePropType, StyleSheet} from 'react-native';
-import {AppIcons} from '../constant/IconPath';
+import { ImageSourcePropType, StyleSheet } from 'react-native';
+import { AppIcons } from '../constant/IconPath';
 import IconBottomTabBar from '../components/IconBottomTabBar';
 import ShopScreen from '../views/ShopScreen';
 import FavoriteScreen from '../views/FavoriteScreen';
 import CartScreen from '../views/CartScreen';
 import CartNavigatior from './CartNavigatior';
-import {useSelector} from 'react-redux';
-import {ProductsStateType} from '../redux/productSlice';
-import {RootState} from '../redux/store';
-type HomeTabParamList = {
+import { useSelector } from 'react-redux';
+import { ProductsStateType } from '../redux/productSlice';
+import { RootState } from '../redux/store';
+export type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
   Cart: undefined;
@@ -73,7 +73,7 @@ const HomeNavigator = () => {
         return (
           <HomeBottomTabNavigator.Screen
             options={{
-              tabBarIcon: ({color}) => {
+              tabBarIcon: ({ color }) => {
                 return (
                   <IconBottomTabBar
                     amountCartItem={itemOnCardCount}
