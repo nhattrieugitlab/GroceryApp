@@ -8,7 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView
+  SafeAreaView,
 } from 'react-native';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
@@ -62,7 +62,7 @@ const productData: Product[] = [
   {
     amount: 1,
     id: 2,
-    image: require('../assets/images/banana.png'),
+    image: require('../assets/images/Banana.png'),
     name: 'Orginal Banana',
     weight: 2,
     price: 132000,
