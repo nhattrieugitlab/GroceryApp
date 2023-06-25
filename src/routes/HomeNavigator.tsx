@@ -10,6 +10,7 @@ import CartNavigatior from './CartNavigatior';
 import { useSelector } from 'react-redux';
 import { ProductsStateType } from '../redux/productSlice';
 import { RootState } from '../redux/store';
+import ShopNavigator from './ShopNavigator';
 export type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
@@ -32,7 +33,7 @@ type HomeTab = {
 };
 const HomeTabs: HomeTab[] = [
   {
-    component: ShopScreen,
+    component: ShopNavigator,
     name: HomeTabNames.Shop,
     icon: AppIcons.IconShop,
   },

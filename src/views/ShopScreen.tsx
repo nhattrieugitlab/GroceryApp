@@ -14,9 +14,7 @@ import { productData } from '../constant/FakeDate';
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
 import SearchInput from '../components/SearchInput';
-import ScreenContainer from '../components/ScreenContainer';
 import { Product } from '../datatypes/Product';
-
 type categoryItem = {
   image: ImageRequireSource;
   title: string;

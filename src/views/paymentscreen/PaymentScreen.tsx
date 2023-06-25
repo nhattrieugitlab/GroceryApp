@@ -103,13 +103,12 @@ const PaymentScreen = () => {
         onPress={() => {
           dispatch(emptyCart());
           setShowThank(true)
-
           setTimeout(() => {
             appNavigation.reset({
-              index: 1, // Chỉ số màn hình hiện tại (tab 2)
-              routes: [{ name: 'Shop' }], // Mảng chứa các màn hình mới
+              index: 1,
+              routes: [{ name: 'Shop' }],
             })
-          }, 2800)
+          }, 2500)
         }}
         style={{ marginTop: 10 }}
         label={`Check out ${formatVNCurrencyTypeNumber(total + (total * 0.05))}`}

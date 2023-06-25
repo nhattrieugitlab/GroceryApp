@@ -1,5 +1,4 @@
-import {Product} from '../datatypes/Product';
-
+import { Product } from '../datatypes/Product';
 const getTotalAmount = (itemOnCart: Product[]) => {
   return itemOnCart.reduce((accumulator, product) => {
     let total = 0;

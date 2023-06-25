@@ -9,9 +9,12 @@ import {
 } from 'react-native';
 import React from 'react';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../redux/store';
-import {add} from '../redux/productSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../redux/store';
+import { add } from '../redux/productSlice';
+import { useNavigation } from '@react-navigation/native';
+import { ShopStackParamList } from '../routes/ShopNavigator';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 type CardProps = {
   id: number;
   image: ImageSourcePropType;
@@ -20,14 +23,14 @@ type CardProps = {
   price: number;
 };
 
-function ProductCard({image, name, weight, price, id}: CardProps): JSX.Element {
+function ProductCard({ image, name, weight, price, id }: CardProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const itemsOnCart = useSelector((state: RootState) => state.product.products);
   const addProduct = async () => {
     if (itemsOnCart.length > 0) {
       let isItemExit = itemsOnCart.find(prod => prod.id === id);
       if (!isItemExit) {
-        dispatch(add({amount: 1, id, image, name, weight, price}));
+        dispatch(add({ amount: 1, id, image, name, weight, price }));
       } else {
         ToastAndroid.showWithGravity(
           'Product is already exits in your cart',
@@ -36,11 +39,14 @@ function ProductCard({image, name, weight, price, id}: CardProps): JSX.Element {
         );
       }
     } else {
-      dispatch(add({amount: 1, id, image, name, weight, price}));
+      dispatch(add({ amount: 1, id, image, name, weight, price }));
     }
   };
+  const navigation = useNavigation<NativeStackNavigationProp<ShopStackParamList>>()
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={() => {
+      navigation.navigate('DetailProductScreen', { image, name, weight, price, id })
+    }} style={styles.container}>
       <View style={styles.boxImage}>
         <Image source={image} resizeMode="contain" style={styles.image} />
       </View>
@@ -52,14 +58,14 @@ function ProductCard({image, name, weight, price, id}: CardProps): JSX.Element {
       <TouchableOpacity onPress={addProduct} style={styles.addButton}>
         <View style={styles.boxImageAdd}>
           <View
-            style={[{width: '100%', height: 2.15, top: 5.12}, styles.line]}
+            style={[{ width: '100%', height: 2.15, top: 5.12 }, styles.line]}
           />
           <View
-            style={[{width: 2.15, height: '100%', left: 5.12}, styles.line]}
+            style={[{ width: 2.15, height: '100%', left: 5.12 }, styles.line]}
           />
         </View>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 }
 
