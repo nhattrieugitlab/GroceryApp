@@ -19,6 +19,11 @@ export const AppIcons = {
   IconLogoMasterCard: require('../assets/icon/ic_logo_mastercard.png'),
   IconDelivery: require('../assets/icon/ic_delivery.png'),
   IconTrash: require('../assets/icon/ic_trash.png'),
+  IconProfile : require('../assets/icon/Profile.png'),
+  IconPayment : require('../assets/icon/Payment.png'),
+  IconAddress : require('../assets/icon/Address.png'),
+  IconOders : require('../assets/icon/Oders.png'),
+  IconBack2 : require('../assets/icon/Back.png'),
 };
 export const AppImage = {
   Welcome: require('../assets/images/img_welcome.png'),
