@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -17,6 +18,8 @@ function EnterPasswordScreen(): JSX.Element {
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [isShowPasswordComfirm, setShowPassWordComfirm] =
     useState<boolean>(false);
+    const [password, setPassword] = useState<string>('');
+    const [passwordComfirm, setPasswordComfirm] = useState<string>('');
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
   return (
@@ -40,15 +43,24 @@ function EnterPasswordScreen(): JSX.Element {
           setShowPassword={setShowPassWord}
           isShowPassword={isShowPassword}
           placeHolder={'Password'}
+          value={password}
+          onChangeText={setPassword}
         />
         <PasswordInput
           setShowPassword={setShowPassWordComfirm}
           isShowPassword={isShowPasswordComfirm}
           placeHolder={'Confirm Password'}
+          value={passwordComfirm}
+          onChangeText={setPasswordComfirm}
         />
         <Button
           style={{marginTop: 20}}
           onPress={() => {
+            if (password !== passwordComfirm) {
+              Alert.alert('Password and Confirm Password must be the same');
+              console.log('password', password);
+              return;
+            }
             navigation.navigate('VerifyCodeScreen');
           }}
           label="Next"
