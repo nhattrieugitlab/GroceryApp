@@ -21,11 +21,13 @@ export const getHNDistrict = (): District[] => {
   });
   return districts;
 };
+
 export const getCommuneByDistrictId = (districtId: string): Commune[] => {
   return data.commune.filter(commune => {
     return commune.idDistrict === districtId;
   });
 };
+
 export const getIdDistrict = (disStictName: string) => {
   const district = data.district.filter(province => {
     return province.name === disStictName;

@@ -1,22 +1,26 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SelectPaymentMethodScreen from '../views/SelectPaymentMethodScreen';
 import PaymentScreen from '../views/paymentscreen/PaymentScreen';
-import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { CreditCardType } from '../datatypes/CreditCard';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 export type PaymentMethodNavigatorParams = {
   SelectPaymentMethodScreen: undefined;
-  PaymentScreen: {defaultMethod: 'cashOnDelivery' | string};
+  PaymentScreen: { paymentMethod: 'Cash on delivery' | CreditCardType };
 };
 export type PaymentScreenProps = NativeStackScreenProps<
   PaymentMethodNavigatorParams,
-  'SelectPaymentMethodScreen'
+  'PaymentScreen'
 >;
 const PaymentMethodStackNavigator =
   createNativeStackNavigator<PaymentMethodNavigatorParams>();
 const PaymentNavigator = () => {
+  const defaulPaymentMethod = useSelector((state: RootState) => state.defaultPaymentMethod.paymentMethod)
   return (
-    <PaymentMethodStackNavigator.Navigator screenOptions={{headerShown: false}}>
+    <PaymentMethodStackNavigator.Navigator screenOptions={{ headerShown: false }}>
       <PaymentMethodStackNavigator.Screen
-        initialParams={{defaultMethod: 'Cash on delivery'}}
+        initialParams={{ paymentMethod: defaulPaymentMethod }}
         component={PaymentScreen}
         name="PaymentScreen"
       />

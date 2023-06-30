@@ -1,5 +1,5 @@
 import ScreenContainer from '../../components/ScreenContainer';
-import { StyleSheet, Text, View, ScrollView, ListRenderItem } from 'react-native';
+import { ScrollView, ListRenderItem } from 'react-native';
 import SelectLocationCard from './SelectLocationCard';
 import { useState, useEffect } from 'react';
 import { AddressToString } from '../../utilities/AddressToString';
@@ -7,12 +7,11 @@ import { Address } from '../../datatypes/LocationDataTypes';
 import TabBar from '../../components/Tabbar';
 import ExpectedTimeCard from './ExpectedTimeCard';
 import ShowItemCard from './SeeItemCard';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { CartNavigationParams } from '../../routes/CartNavigatior';
 import PaymentMethodCard from './PaymentMethodCard';
 import {
-  PaymentMethodNavigatorParams,
-  PaymentScreenProps,
+  PaymentMethodNavigatorParams, PaymentScreenProps,
 } from '../../routes/PaymentmethodNavigator';
 import Button from '../../components/Button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,17 +27,16 @@ import BillCard from '../../components/BillCard';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ThankModal from '../../components/modal/ThankModal';
 import { HomeTabParamList } from '../../routes/HomeNavigator';
-const PaymentScreen = () => {
+const PaymentScreen = ({ route }: PaymentScreenProps) => {
   const [address, setAddress] = useState<string>('');
-
   const cartNavigation =
     useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
   const paymentNavigation =
     useNavigation<NativeStackNavigationProp<PaymentMethodNavigatorParams>>();
   const [showThank, setShowThank] = useState<boolean>(false)
-  const route = useRoute<PaymentScreenProps['route']>();
   const dispatch = useDispatch<AppDispatch>();
-  const { defaultMethod }: any = route.params || 'cash on delivery';
+  const paymentMethod = route.params.paymentMethod
+  console.log('payment', paymentMethod)
   const [delivery, setDelivery] = useState<delivery>(deliverys[0]);
   const itemOnCart = useSelector((state: RootState) => state.product.products);
   useEffect(() => {
@@ -85,11 +83,12 @@ const PaymentScreen = () => {
           }}
         />
         <PaymentMethodCard
-          cashOnDelivery={defaultMethod === 'Cash on delivery'}
+          cashOnDelivery={paymentMethod === 'Cash on delivery'}
           onPress={() => {
             paymentNavigation.navigate('SelectPaymentMethodScreen');
           }}
-          cardNumber={defaultMethod}
+          cardNumber={paymentMethod != 'Cash on delivery' ? paymentMethod.number : ''
+          }
         />
         <FlatList
           showsHorizontalScrollIndicator={false}

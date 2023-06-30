@@ -1,13 +1,11 @@
 import {
   StyleSheet,
-  View,
-  BackHandler,
   ScrollView,
   Modal,
   TouchableOpacity,
 } from 'react-native';
 import TabBar from '../Tabbar';
-import {useCallback, useState, useEffect} from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import {
   validateCreditCardNumber,
   validateCvvCode,
@@ -15,15 +13,13 @@ import {
 import FormTextInput from '../FormTextInput';
 import Button from '../Button';
 import MonthPicker from 'react-native-month-year-picker';
-import {CrediCard} from '../../views/SelectPaymentMethodScreen';
+import { CrediCard } from '../../views/SelectPaymentMethodScreen';
 type AddCrediCardModalProps = {
   isShowModal: boolean;
   setShowModal: Function;
-  onAddCard: Function;
 };
 const AddCrediCardModal: React.FC<AddCrediCardModalProps> = ({
   isShowModal,
-  onAddCard,
   setShowModal,
 }) => {
   const [nameOnCard, setNameOnCard] = useState<string>('');
@@ -63,7 +59,7 @@ const AddCrediCardModal: React.FC<AddCrediCardModalProps> = ({
       visible={isShowModal}
       animationType="slide">
       <TabBar
-        style={{padding: 24}}
+        style={{ padding: 24 }}
         onBackPress={() => {
           setShowModal(false);
         }}
@@ -129,7 +125,7 @@ const AddCrediCardModal: React.FC<AddCrediCardModalProps> = ({
       </ScrollView>
       <Button
         disable={!isValidateCard}
-        style={{marginBottom: 20, width: '95%', alignSelf: 'center'}}
+        style={{ marginBottom: 20, width: '95%', alignSelf: 'center' }}
         onPress={() => {
           let newCard: CrediCard = {
             name: nameOnCard,
@@ -138,7 +134,6 @@ const AddCrediCardModal: React.FC<AddCrediCardModalProps> = ({
             type: undefined,
             number: cardNumber.replace(/\s/g, ''),
           };
-          onAddCard(newCard);
           setShowModal(false);
         }}
         label="Add Credit Card"

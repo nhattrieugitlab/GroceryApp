@@ -10,14 +10,18 @@ import ScreenContainer from '../components/ScreenContainer';
 import TabBar from '../components/Tabbar';
 import Button from '../components/Button';
 import CreditCard from '../components/CreditCard';
-import {useState, useCallback} from 'react';
+import { useState } from 'react';
 import CheckBox from '../components/CheckBox';
 import FloatingActionButton from '../components/FloatingActionButton';
-import {AppIcons} from '../constant/IconPath';
+import { AppIcons } from '../constant/IconPath';
 import AddCrediCardModal from '../components/modal/AddCreditCardModal';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {PaymentMethodNavigatorParams} from '../routes/PaymentmethodNavigator';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { PaymentMethodNavigatorParams } from '../routes/PaymentmethodNavigator';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../redux/store';
+import { updateDefaultPaymentMethod } from '../redux/defaultPaymentMethodSlice';
+import { CreditCardType } from '../datatypes/CreditCard';
 export type CrediCard = {
   name: string;
   cvv: string;
@@ -26,48 +30,25 @@ export type CrediCard = {
   type: string | undefined;
 };
 const SelectPaymentMethodScreen = () => {
-  const PaymentMethods: CrediCard[] = [
-    {
-      cvv: '123',
-      name: 'Hoang Van Thanh 1',
-      exDate: '20/8',
-      number: '625094100652859',
-      type: undefined,
-    },
-    {
-      cvv: '123',
-      name: 'Hoang Van Thanh 2',
-      exDate: '12/2',
-      number: '625094100652822',
-      type: 'masterCard',
-    },
-    {
-      cvv: '123',
-      name: 'Hoang Van Thanh 3',
-      exDate: '19/5',
-      number: '625094100652899',
-      type: 'masterCard',
-    },
-  ];
-  const [creditCards, setCrediCards] = useState(PaymentMethods);
+  //set showmodel
   const [isShowModal, setShowModal] = useState<boolean>(false);
-  const [defaulPaymentMethod, setDefaultPaymentMethod] =
-    useState<string>('625094100652859');
-  const AddCard = useCallback((newCredtiCard: any) => {
-    setCrediCards(prevCrediCard => {
-      return [...prevCrediCard, newCredtiCard];
-    });
-  }, []);
-  const completeSelect = async (newDefaulPaymentMethod: string) => {
-    paymentNavigation.navigate('PaymentScreen', {
-      defaultMethod: newDefaulPaymentMethod,
-    });
+  const defaulPaymentMethod = useSelector((state: RootState) => state.defaultPaymentMethod.paymentMethod)
+  const dispatch = useDispatch<AppDispatch>()
+  const userCreditCards = useSelector((state: RootState) => state.crediCard.creditCards);
+  const completeSelect = async (paymentMethod: CreditCardType | 'Cash on delivery') => {
+    paymentNavigation.navigate('PaymentScreen', { paymentMethod });
   };
+  const changeDefaultPaymentMethod = (newDefaulPaymentMethod: 'Cash on delivery' | CreditCardType) => {
+    dispatch(updateDefaultPaymentMethod(newDefaulPaymentMethod))
+  }
+  const isDefaultMethod = (item: CreditCardType) => {
+    return defaulPaymentMethod != 'Cash on delivery' ? defaulPaymentMethod.number === item.number : false
+  }
   const paymentNavigation =
     useNavigation<NativeStackNavigationProp<PaymentMethodNavigatorParams>>();
   return (
     <ScreenContainer>
-      <TabBar showBackButton onBackPress={() => {}} label="Payment method" />
+      <TabBar showBackButton onBackPress={() => { }} label="Payment method" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <TouchableOpacity
           onPress={() => {
@@ -78,28 +59,27 @@ const SelectPaymentMethodScreen = () => {
           <Text style={styles.deliveryText}>Cash on delivery</Text>
         </TouchableOpacity>
         <CheckBox
-          checked={defaulPaymentMethod === 'cash on delivery'}
+          checked={defaulPaymentMethod === 'Cash on delivery'}
           onSelected={() => {
-            setDefaultPaymentMethod('cash on delivery');
+            changeDefaultPaymentMethod('Cash on delivery')
           }}
           label="Use as default payment method"
         />
-        {creditCards.map(item => {
+        {userCreditCards.map(item => {
           return (
             <View key={item.number}>
               <CreditCard
                 exprityDate={item.exDate}
                 onSelectCard={() => {
-                  completeSelect(item.number);
+                  completeSelect(item);
                 }}
                 cardNumber={item.number}
                 name={item.name}
-                type={item.type}
               />
               <CheckBox
-                checked={defaulPaymentMethod === item.number}
+                checked={isDefaultMethod(item)}
                 onSelected={() => {
-                  setDefaultPaymentMethod(item.number);
+                  changeDefaultPaymentMethod(item)
                 }}
                 label="Use as default payment method"
               />
@@ -114,17 +94,13 @@ const SelectPaymentMethodScreen = () => {
         icon={AppIcons.IconAdd}
       />
       <Button
-        style={{marginTop: 30}}
+        style={{ marginTop: 30 }}
         onPress={() => {
-          paymentNavigation.navigate('PaymentScreen', {
-            defaultMethod: defaulPaymentMethod,
-          });
         }}
         label="Done"
       />
       <AddCrediCardModal
         setShowModal={setShowModal}
-        onAddCard={AddCard}
         isShowModal={isShowModal}
       />
     </ScreenContainer>

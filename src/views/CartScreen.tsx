@@ -3,22 +3,22 @@ import CartItem from '../components/CartItem';
 import TabBar from '../components/Tabbar';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
-import {FlatList, ListRenderItem, StyleSheet, Text, View} from 'react-native';
-import {Product} from '../datatypes/Product';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {CartNavigationParams} from '../routes/CartNavigatior';
-import {useSelector} from 'react-redux';
-import {RootState} from '../redux/store';
-import {useState, useEffect} from 'react';
+import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native';
+import { Product } from '../datatypes/Product';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { CartNavigationParams } from '../routes/CartNavigatior';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { useState, useEffect } from 'react';
 import AnimatedLottieView from 'lottie-react-native';
-import {AppAnimation} from '../constant/IconPath';
+import { AppAnimation } from '../constant/IconPath';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
 import getTotalAmount from '../utilities/GetCartTotalAmount';
 const CartScreen = () => {
   const cartNavigation =
     useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
-  const renderItem: ListRenderItem<Product> = ({item}) => {
+  const renderItem: ListRenderItem<Product> = ({ item }) => {
     return (
       <CartItem
         id={item.id}

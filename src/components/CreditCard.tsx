@@ -9,7 +9,7 @@ import {
 import formatCardNumber from '../utilities/FormatCreaditCardNumber';
 type CreditCardProps = {
   type?: string;
-  name: string;
+  name?: string;
   onSelectCard: Function;
   cardNumber: string;
   exprityDate: string;
@@ -33,7 +33,7 @@ const CreditCard: React.FC<CreditCardProps> = ({
           borderRadius: 18,
         }}
         resizeMode="contain"
-        style={{flex: 1}}
+        style={{ flex: 1 }}
         source={
           type
             ? require('../assets/images/br_creditcard.png')
@@ -50,12 +50,12 @@ const CreditCard: React.FC<CreditCardProps> = ({
           source={require('../assets/icon/ic_chip.png')}
         />
         <Text style={styles.cardNumber}>{formatCardNumber(cardNumber)}</Text>
-        <CardInfo name={name} exDate={exprityDate} />
+        <CardInfo name={name || 'Anonymous'} exDate={exprityDate} />
       </ImageBackground>
     </TouchableOpacity>
   );
 };
-const CardInfo: React.FC<{name: string; exDate: string}> = ({name, exDate}) => {
+const CardInfo: React.FC<{ name: string; exDate: string }> = ({ name, exDate }) => {
   return (
     <View
       style={{

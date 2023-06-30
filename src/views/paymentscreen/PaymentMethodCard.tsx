@@ -1,10 +1,10 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {cardStyle} from './CardStyle';
-import {AppIcons} from '../../constant/IconPath';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { cardStyle } from './CardStyle';
+import { AppIcons } from '../../constant/IconPath';
 import React from 'react';
 import formatCardNumber from '../../utilities/FormatCreaditCardNumber';
 type PaymentMethodCardProps = {
-  cardNumber: string;
+  cardNumber?: any;
   cashOnDelivery: boolean;
   onPress: Function;
 };
@@ -31,13 +31,13 @@ const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
             }
           />
         </View>
-        <Text style={[cardStyle.titleText, {marginLeft: 10}]}>
-          {cashOnDelivery ? cardNumber : formatCardNumber(cardNumber)}
+        <Text style={[cardStyle.titleText, { marginLeft: 10 }]}>
+          {cashOnDelivery ? 'Cash on delivery' : formatCardNumber(cardNumber)}
         </Text>
       </View>
       <Image
         resizeMode="contain"
-        style={[styles.iconLogo, {height: 22, width: 14}]}
+        style={[styles.iconLogo, { height: 22, width: 14 }]}
         source={AppIcons.IconArrowToRight}
       />
     </TouchableOpacity>
