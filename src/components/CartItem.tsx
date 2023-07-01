@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch} from '../redux/store';
-import {increase, reduce, remove} from '../redux/productSlice';
-import {Swipeable} from 'react-native-gesture-handler';
-import {AppIcons} from '../constant/IconPath';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { increase, reduce, remove } from '../redux/productSlice';
+import { Swipeable } from 'react-native-gesture-handler';
+import { AppIcons } from '../constant/IconPath';
 type Props = {
   id: number;
   amount: number;
@@ -20,20 +20,20 @@ type Props = {
   price: number;
   image: ImageSourcePropType;
 };
-function CartItem({id, label, image, price, amount}: Props): JSX.Element {
-  const product = {id, name: label, image, price, amount};
+function CartItem({ id, label, image, price, amount }: Props): JSX.Element {
+  const product = { id, name: label, image, price, amount };
   const [count, setCount] = useState<number>(amount);
   const dispatch = useDispatch<AppDispatch>();
   const increaseCount = async () => {
-    dispatch(increase({...product, amount: count + 1}));
+    dispatch(increase({ ...product, amount: count + 1 }));
   };
   const reduceCount = async () => {
-    dispatch(reduce({...product, amount: count - 1}));
+    dispatch(reduce({ ...product, amount: count - 1 }));
   };
   const renderDeleteMenu = () => (
     <TouchableOpacity
       onPress={async () => {
-        dispatch(remove({...product}));
+        dispatch(remove({ ...product }));
       }}
       style={{
         justifyContent: 'center',

@@ -1,5 +1,5 @@
-import { Text, Image, ScrollView, StyleSheet, View } from 'react-native';
-import React, { useState } from 'react';
+import { Text, Image, ScrollView, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
 import TabBar from '../components/Tabbar';
@@ -9,13 +9,38 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import PhoneNumberInput from '../components/PhoneNumberInput';
 import PasswordInput from '../components/PasswordInput';
 import { validatePhoneNumber } from '../utilities/ValidatePhoneNumber';
-import { validatePass } from '../utilities/ValidatePass';
+import { validatePassword } from '../utilities/ValidatePass';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { setShowLoading } from '../redux/isLoadingSlice';
+import { logIn } from '../service/login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 function LoginScreen(): JSX.Element {
-  const appNavigation =
-    useNavigation<NativeStackNavigationProp<AppStackParams>>();
+  const appNavigation = useNavigation<NativeStackNavigationProp<AppStackParams>>();
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [phoneNumber, setphoneNumber] = useState<string>('');
-  const [isCardNumberErr, setCardNumberErr] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>('');
+  const [isHasPhoneNumberErr, setPhoneNumberErr] = useState<boolean>(false);
+  const [isEmptyPasswordErr, setIsEmptyPasswordErr] = useState<boolean>(false);
+  const getUserNameDefault = async () => {
+    const userName = await AsyncStorage.getItem('userName')
+    setphoneNumber(userName || '')
+  }
+  useEffect(() => {
+    getUserNameDefault()
+  }, [])
+  const valiateUserInfo = () => {
+    if (!validatePhoneNumber(phoneNumber)) {
+      setPhoneNumberErr(true)
+      return false
+    }
+    if (!validatePassword(password)) {
+      setIsEmptyPasswordErr(true)
+      return false
+    }
+    return true
+  }
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <ScreenContainer>
       <ScrollView
@@ -31,30 +56,37 @@ function LoginScreen(): JSX.Element {
         </Text>
         <PhoneNumberInput
           showCountryPicker
-          errMessage="Phone number is invalid"
           onChanePhoneNumber={(phoneNumber: string) => {
+            setPhoneNumberErr(false)
             setphoneNumber(phoneNumber);
-            let isHasErr = !validatePhoneNumber(phoneNumber, setphoneNumber);
-            setCardNumberErr(isHasErr);
-            console.log('isHasErr', isCardNumberErr);
           }}
-          err={isCardNumberErr}
-          value={phoneNumber}
-        />
+          err={isHasPhoneNumberErr}
+          value={phoneNumber} />
         <PasswordInput
-          errMessage="Password is invalid"
-          err={isShowPassword}
+          err={isEmptyPasswordErr}
+          value={password}
           setShowPassword={setShowPassWord}
           isShowPassword={isShowPassword}
-          onChangeText={(pass: string) => {
-            let isHasErr = !validatePass(pass, setShowPassWord);
-            setShowPassWord(isHasErr);
-          }}
-        />
+          onChangeText={(password: string) => {
+            setIsEmptyPasswordErr(false)
+            setPassword(password)
+          }} />
         <Text style={styles.textForgot}>Forget Password</Text>
         <Button
-          onPress={() => {
-            appNavigation.navigate('HomeNavigator');
+          onPress={async () => {
+            console.log(valiateUserInfo())
+            if (valiateUserInfo()) {
+              dispatch(setShowLoading({ isShowLoading: true }))
+              const loginResponse: boolean = await logIn(phoneNumber, password)
+              if (loginResponse) {
+                appNavigation.reset({
+                  index: 0,
+                  routes: [{ name: 'HomeNavigator' }],
+                });
+                await AsyncStorage.setItem('userName', phoneNumber)
+              }
+              dispatch(setShowLoading({ isShowLoading: false }))
+            }
           }}
           label="Sign in"
         />

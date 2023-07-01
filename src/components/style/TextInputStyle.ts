@@ -18,4 +18,10 @@ export const logInTextInputStyles = StyleSheet.create({
     lineHeight: 19,
     color: '#FF5E00',
   },
+  erroText: {
+    marginVertical: 5,
+    fontSize: 14,
+    fontWeight: '400',
+    color: 'red',
+  },
 });

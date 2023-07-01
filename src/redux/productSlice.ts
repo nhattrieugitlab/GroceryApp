@@ -7,7 +7,6 @@ export type ProductsStateType = {
 const initialProductState: ProductsStateType = {
   products: fakeCartData,
 };
-
 export const productSlice = createSlice({
   name: 'product',
   initialState: initialProductState,

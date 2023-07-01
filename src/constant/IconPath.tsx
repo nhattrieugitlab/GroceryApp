@@ -19,18 +19,21 @@ export const AppIcons = {
   IconLogoMasterCard: require('../assets/icon/ic_logo_mastercard.png'),
   IconDelivery: require('../assets/icon/ic_delivery.png'),
   IconTrash: require('../assets/icon/ic_trash.png'),
-  IconProfile : require('../assets/icon/Profile.png'),
-  IconPayment : require('../assets/icon/Payment.png'),
-  IconAddress : require('../assets/icon/Address.png'),
-  IconOders : require('../assets/icon/Oders.png'),
-  IconBack2 : require('../assets/icon/Back.png'),
+  IconProfile: require('../assets/icon/Profile.png'),
+  IconPayment: require('../assets/icon/Payment.png'),
+  IconAddress: require('../assets/icon/Address.png'),
+  IconOders: require('../assets/icon/Oders.png'),
+  IconBack2: require('../assets/icon/Back.png'),
 };
 export const AppImage = {
   Welcome: require('../assets/images/img_welcome.png'),
   EnterPhoneNumber: require('../assets/images/enter_phonenumber_img.png'),
+
 };
 export const AppAnimation = {
+  ShoppingLoading: require('../assets/animation/anm_shopping_loading.json'),
   Thank: require('../assets/animation/success.json'),
   EmptyCart: require('../assets/animation/anm_empty_cart.json'),
   Location: require('../assets/animation/anm_location.json'),
+  Loading: require('../assets/animation/anm_loading.json')
 };
