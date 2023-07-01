@@ -3,7 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AxiosInstance = (contentType = 'application/json') => {
     const axiosInstance = axios.create({
-        baseURL: 'https://fpoly-hcm.herokuapp.com/api/'
+        timeout: 5000,
+        baseURL: 'https://appfoodfoly.onrender.com/'
     });
     axiosInstance.interceptors.request.use(
         async (config: any) => {
@@ -11,7 +12,7 @@ const AxiosInstance = (contentType = 'application/json') => {
             config.headers = {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
-                'Content-Type': contentType
+                'Content-Type': contentType,
             }
             return config;
         },

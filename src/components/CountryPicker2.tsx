@@ -1,6 +1,6 @@
 import CountryPicker from 'rn-country-picker';
-import {ViewStyle} from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
-const CountryPicker2: React.FC<{style: ViewStyle}> = ({style}) => {
+import { ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+const CountryPicker2: React.FC<{ style: ViewStyle }> = ({ style }) => {
   return (
     <CountryPicker
       containerStyle={style}

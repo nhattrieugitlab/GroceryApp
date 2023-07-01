@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { View } from 'react-native';
 import store from './src/redux/store';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import LoadingModal from './src/components/modal/LoadingModal';
 function App(): JSX.Element {
   return (
     <>
@@ -11,8 +12,8 @@ function App(): JSX.Element {
         <GestureHandlerRootView style={{ flex: 1 }}>
           <AppNavigator />
         </GestureHandlerRootView>
+        <LoadingModal />
       </Provider>
-      <View></View>
     </>
 
   );

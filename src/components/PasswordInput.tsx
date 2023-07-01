@@ -11,61 +11,60 @@ import { AppIcons } from '../constant/IconPath';
 import { logInTextInputStyles } from './style/TextInputStyle';
 
 type PasswordInputProp = {
-  placeHolder?: string;
   setShowPassword: Function;
   isShowPassword: boolean;
   value?: string;
   onChangeText?: Function;
   err?: boolean;
-  errMessage?: string;
 };
 function PasswordInput({
   isShowPassword,
   setShowPassword,
-  placeHolder,
   value,
   onChangeText,
   err,
-  errMessage,
 }: PasswordInputProp): JSX.Element {
   return (
-    <View style={logInTextInputStyles.container}>
-      <Image
-        resizeMode="contain"
-        style={[styles.lockIcon]}
-        source={AppIcons.IconKey}
-      />
-      <TextInput
-        value={value}
-        secureTextEntry={!isShowPassword}
-        onChangeText={(text: string) => {
-          onChangeText && onChangeText(text);
-        }}
-        style={[
-          logInTextInputStyles.textInput,
-          { paddingHorizontal: 45 },
-          err && { borderBottomColor: 'red', borderBottomWidth: 1 },
-        ]}
-        placeholder={placeHolder || 'Enter your password'}
-        placeholderTextColor={'#AC8E71'}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          setShowPassword(!isShowPassword);
-        }}
-        style={styles.showPassIconConatainer}>
+    <>
+      <View style={logInTextInputStyles.container}>
         <Image
-          style={styles.showPassIcon}
           resizeMode="contain"
-          source={AppIcons.IconShowPassword}
+          style={[styles.lockIcon]}
+          source={AppIcons.IconKey}
         />
-      </TouchableOpacity>
+        <TextInput
+          value={value}
+          secureTextEntry={!isShowPassword}
+          onChangeText={(text: string) => {
+            onChangeText && onChangeText(text);
+          }}
+          style={[
+            err && { borderBottomColor: 'red', borderBottomWidth: 1 },
+            logInTextInputStyles.textInput,
+            { paddingHorizontal: 45 },
+
+          ]}
+          placeholder={'Enter your password'}
+          placeholderTextColor={'#AC8E71'}
+        />
+        <TouchableOpacity
+          onPress={() => {
+            setShowPassword(!isShowPassword);
+          }}
+          style={styles.showPassIconConatainer}>
+          <Image
+            style={styles.showPassIcon}
+            resizeMode="contain"
+            source={AppIcons.IconShowPassword}
+          />
+        </TouchableOpacity>
+
+      </View>
       {err && (
         <Text style={{ fontSize: 14, fontWeight: '400', color: 'red' }}>
-          {errMessage}
+          Please enter your password
         </Text>
-      )}
-    </View>
+      )}</>
   );
 }
 export default PasswordInput;

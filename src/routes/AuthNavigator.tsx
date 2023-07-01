@@ -1,9 +1,8 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelComeScreen from '../views/WelcomeScreen';
 import LoginScreen from '../views/LoginScreen';
 import EnterPasswordScreen from '../views/EnterPassScreen';
 import EnterPhoneNumberScreen from '../views/EnterPhoneNumerScreen';
-import VerifyPassScreen from '../views/VerifyCodeScreen';
 import VerifyCodeScreen from '../views/VerifyCodeScreen';
 enum AuthStackNames {
   Welcome = 'WelcomeScreen',
@@ -26,10 +25,12 @@ const AuthNavigator = (): React.JSX.Element => {
       screenOptions={{
         headerShown: false,
       }}>
-      <AuthStack.Screen
-        name={AuthStackNames.Welcome}
-        component={WelComeScreen}
-      />
+      <AuthStack.Screen name={AuthStackNames.SignIn} component={LoginScreen} />
+      {/* 
+        <AuthStack.Screen
+          name={AuthStackNames.Welcome}
+          component={WelComeScreen}
+        /> */}
       <AuthStack.Screen
         name={AuthStackNames.EnterPasss}
         component={EnterPasswordScreen}
@@ -42,7 +43,6 @@ const AuthNavigator = (): React.JSX.Element => {
         name={AuthStackNames.VerifyCode}
         component={VerifyCodeScreen}
       />
-      <AuthStack.Screen name={AuthStackNames.SignIn} component={LoginScreen} />
     </AuthStack.Navigator>
   );
 };
