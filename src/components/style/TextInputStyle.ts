@@ -5,7 +5,6 @@ export const logInTextInputStyles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#F3F3F3',
     marginTop: 13,
-    justifyContent: 'space-between',
     flexDirection: 'row',
     width: '100%',
   },

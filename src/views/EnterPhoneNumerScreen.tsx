@@ -4,8 +4,11 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  View,
+  Keyboard,
+  Alert
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
 import TabBar from '../components/Tabbar';
@@ -15,56 +18,82 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthStackParamList } from '../routes/AuthNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { validatePhoneNumber } from '../utilities/ValidatePhoneNumber';
-import { validatePassword } from '../utilities/ValidatePass';
-import SurNameInput from '../components/SurNameInput';
+import { checkPhoneNumberIsExits } from '../service/login';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { setShowLoading } from '../redux/isLoadingSlice';
 function EnterPhoneNumberScreen(): JSX.Element {
   // const appNavigation =
   //   useNavigation<NativeStackNavigationProp<AppStackParams>>();
-  const [phoneNumber, setphoneNumber] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [isPhoneNumber, setPhoneNumber] = useState<boolean>(false);
-  const navigation =
+  const [phoneNumber, setPhoneNumber] = useState<string>('338030682');
+  const [surName, setSurName] = useState<string>('');
+  const authNavigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const validateRegisterInfo = () => {
+    if (!surName || !phoneNumber || !validatePhoneNumber(phoneNumber)) {
+      Alert.alert('Notification', 'Please enter valid and complete registration information.')
+      return false
+    }
+    return true
+  }
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+      setIsKeyboardOpen(true);
+    });
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setIsKeyboardOpen(false);
+    });
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+  const dispatch = useDispatch<AppDispatch>()
   return (
     <ScreenContainer>
-      <ScrollView
-        keyboardShouldPersistTaps="always"
-        showsVerticalScrollIndicator={false}>
-        <TabBar showBackButton onBackPress={() => { }} label="Sign Up" />
-        <Image style={styles.image} source={AppImage.EnterPhoneNumber} />
-        <SurNameInput
-          onChanePass={(pass: string) => {
-            setPassword(pass);
-          }}
-          errMessage="Password is invalid"
-          value={password}
-        />
-
-        <PhoneNumberInput
-          showCountryPicker
-          onChanePhoneNumber={(phoneNumber: string) => {
-            setphoneNumber(phoneNumber);
-            console.log('isHasErr', isPhoneNumber);
-          }}
-          err={isPhoneNumber}
-          errMessage="Phone number is invalid"
-          value={phoneNumber}
-        />
-        <Text style={styles.textForgot}>Forget Password</Text>
+      <View style={[{ justifyContent: 'space-between' }, isKeyboardOpen && { flex: 1 }]}>
+        <ScrollView
+          keyboardShouldPersistTaps="always"
+          showsVerticalScrollIndicator={false}>
+          <TabBar showBackButton onBackPress={() => { }} label="Sign Up" />
+          {
+            !isKeyboardOpen && <Image style={styles.image} source={AppImage.EnterPhoneNumber} />
+          }
+          <PhoneNumberInput
+            onChanePhoneNumber={setSurName}
+            placeHolder='User Surname'
+            value={surName} />
+          <PhoneNumberInput
+            showCountryPicker
+            onChanePhoneNumber={setPhoneNumber}
+            value={phoneNumber}
+          />
+        </ScrollView>
+      </View>
+      <>
         <Button
-          onPress={() => {
-            navigation.navigate('EnterPassWordScreen');
+          style={{ marginVertical: 10 }}
+          onPress={async () => {
+            if (!validateRegisterInfo()) {
+              return
+            }
+            dispatch(setShowLoading({ isShowLoading: true }))
+            const checkPhoneNumberIsExitRes = await checkPhoneNumberIsExits(phoneNumber)
+            if (checkPhoneNumberIsExitRes) {
+              authNavigation.navigate('EnterPassWordScreen', { userName: surName, phoneNumber: phoneNumber });
+            }
+            dispatch(setShowLoading({ isShowLoading: false }))
           }}
           label="Next"
         />
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('SignInScreen', { userName: 'asdasd' });
+            authNavigation.navigate('SignInScreen');
           }}>
-          <Text style={styles.textAccount}>Already have an account? Login</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </ScreenContainer>
+          <Text style={styles.textAccount}>Already have an account? <Text style={{ color: '#FF5E00' }}>Login</Text></Text>
+        </TouchableOpacity></>
+    </ScreenContainer >
   );
 }
 export default EnterPhoneNumberScreen;

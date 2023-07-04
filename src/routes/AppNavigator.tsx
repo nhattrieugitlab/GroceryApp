@@ -2,15 +2,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeNavigator from './HomeNavigator';
 import { View } from 'react-native';
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LightTheme } from '../constant/Theme';
 import AuthStackNavigator from './AuthNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LoadingModal from '../components/modal/LoadingModal';
 import AnimatedLottieView from 'lottie-react-native';
 import { AppAnimation } from '../constant/IconPath';
 const AppStack = createNativeStackNavigator<AppStackParams>();
-enum AppStackNames {
+enum
+  AppStackNames {
   Home = 'HomeNavigator',
   Auth = 'AuthNavigator',
 }
@@ -23,40 +23,58 @@ const AppNavigator = () => {
   const [isCheckLogin, setCheckLogin] = useState(false)
   const checkIsLogined = async () => {
     const accessToken = await AsyncStorage.getItem('accessToken')
-    console.log('accessToken', accessToken)
     if (accessToken != null) {
       setIsLogin(true)
-      setCheckLogin(true)
     }
+    setCheckLogin(true)
   }
   useEffect(() => {
     checkIsLogined()
   }, [])
   return (
     <View style={{ flex: 1 }}>
-      {
-        isCheckLogin && <NavigationContainer theme={LightTheme}>
-          <AppStack.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}>
-            {
-              !isLogined && <AppStack.Screen
-                name={AppStackNames.Auth}
-                component={AuthStackNavigator}
-              />
-            }
+      <NavigationContainer theme={LightTheme}>
+        <AppStack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          {
             <AppStack.Screen
-              name={AppStackNames.Home}
-              component={HomeNavigator}
+              name={AppStackNames.Auth}
+              component={AuthStackNavigator}
             />
-          </AppStack.Navigator>
-        </NavigationContainer>
-      }
-      {
-        !isCheckLogin && <AnimatedLottieView autoPlay loop source={AppAnimation.Loading} />
-      }
+          }
+          <AppStack.Screen
+            name={AppStackNames.Home}
+            component={HomeNavigator}
+          />
+        </AppStack.Navigator>
+      </NavigationContainer>
     </View>
   );
 };
 export default AppNavigator;
+// <View style={{ flex: 1 }}>
+//   {
+//     isCheckLogin && <NavigationContainer theme={LightTheme}>
+//       <AppStack.Navigator
+//         screenOptions={{
+//           headerShown: false,
+//         }}>
+//         {
+//           !isLogined && <AppStack.Screen
+//             name={AppStackNames.Auth}
+//             component={AuthStackNavigator}
+//           />
+//         }
+//         <AppStack.Screen
+//           name={AppStackNames.Home}
+//           component={HomeNavigator}
+//         />
+//       </AppStack.Navigator>
+//     </NavigationContainer>
+//   }
+//   {
+//     !isCheckLogin && <AnimatedLottieView autoPlay loop source={AppAnimation.Loading} />
+//   }
+// </View>

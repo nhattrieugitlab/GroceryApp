@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { ProductsStateType } from '../redux/productSlice';
 import { RootState } from '../redux/store';
 import ShopNavigator from './ShopNavigator';
+import ProfileScreen from '../views/ProfileScreen';
 export type HomeTabParamList = {
   Shop: undefined;
   Explore: undefined;
@@ -53,7 +54,7 @@ const HomeTabs: HomeTab[] = [
     icon: AppIcons.IconFavorie,
   },
   {
-    component: ExploreScreen,
+    component: ProfileScreen,
     name: HomeTabNames.Account,
     icon: AppIcons.IconAccount,
   },

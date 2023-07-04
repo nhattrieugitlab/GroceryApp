@@ -1,4 +1,4 @@
-import { Text, Image, ScrollView, StyleSheet } from 'react-native';
+import { Text, Image, ScrollView, StyleSheet, Keyboard } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
@@ -15,20 +15,29 @@ import { AppDispatch } from '../redux/store';
 import { setShowLoading } from '../redux/isLoadingSlice';
 import { logIn } from '../service/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AuthStackParamList } from '../routes/AuthNavigator';
+import AnimatedLottieView from 'lottie-react-native';
+import { AppAnimation, AppIcons } from '../constant/IconPath';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 function LoginScreen(): JSX.Element {
   const appNavigation = useNavigation<NativeStackNavigationProp<AppStackParams>>();
+  const authNavigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>()
   const [isShowPassword, setShowPassWord] = useState<boolean>(false);
   const [phoneNumber, setphoneNumber] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isHasPhoneNumberErr, setPhoneNumberErr] = useState<boolean>(false);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [isEmptyPasswordErr, setIsEmptyPasswordErr] = useState<boolean>(false);
   const getUserNameDefault = async () => {
     const userName = await AsyncStorage.getItem('userName')
     setphoneNumber(userName || '')
   }
+
   useEffect(() => {
     getUserNameDefault()
   }, [])
+
   const valiateUserInfo = () => {
     if (!validatePhoneNumber(phoneNumber)) {
       setPhoneNumberErr(true)
@@ -40,6 +49,35 @@ function LoginScreen(): JSX.Element {
     }
     return true
   }
+  const onLoginButtonClick = async () => {
+    if (valiateUserInfo()) {
+      dispatch(setShowLoading({ isShowLoading: true }))
+      const loginResponse: boolean = await logIn(phoneNumber, password)
+      if (loginResponse) {
+        appNavigation.reset({
+          index: 0,
+          routes: [{ name: 'HomeNavigator' }],
+        });
+      }
+      dispatch(setShowLoading({ isShowLoading: false }))
+    }
+  }
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+      setIsKeyboardOpen(true);
+    });
+
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setIsKeyboardOpen(false);
+    });
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+
   const dispatch = useDispatch<AppDispatch>();
   return (
     <ScreenContainer>
@@ -47,10 +85,13 @@ function LoginScreen(): JSX.Element {
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}>
         <TabBar showBackButton onBackPress={() => { }} label="Sign In" />
-        <Image
-          style={styles.image}
-          source={require('../assets/images/PhoneKey.png')}
-        />
+        {
+          !isKeyboardOpen ?
+            <Image
+              style={[styles.image,]}
+              source={require('../assets/images/PhoneKey.png')}
+            /> : <AnimatedLottieView autoPlay style={{ width: 200, height: 200, alignSelf: 'center' }} loop source={AppAnimation.LoginUser} />
+        }
         <Text style={styles.textSend}>
           Enter your phone number and password to access your account
         </Text>
@@ -73,24 +114,16 @@ function LoginScreen(): JSX.Element {
           }} />
         <Text style={styles.textForgot}>Forget Password</Text>
         <Button
-          onPress={async () => {
-            console.log(valiateUserInfo())
-            if (valiateUserInfo()) {
-              dispatch(setShowLoading({ isShowLoading: true }))
-              const loginResponse: boolean = await logIn(phoneNumber, password)
-              if (loginResponse) {
-                appNavigation.reset({
-                  index: 0,
-                  routes: [{ name: 'HomeNavigator' }],
-                });
-                await AsyncStorage.setItem('userName', phoneNumber)
-              }
-              dispatch(setShowLoading({ isShowLoading: false }))
-            }
-          }}
+          onPress={onLoginButtonClick}
           label="Sign in"
         />
+        <TouchableOpacity onPress={() => {
+          authNavigation.navigate('EnterPhoneNumberScreen')
+        }}>
+        </TouchableOpacity>
+        <GoogleLoginButton />
         <Text style={styles.textAccount}> Don't have an account? Sign Up</Text>
+
       </ScrollView>
     </ScreenContainer>
   );
@@ -115,6 +148,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   image: {
+    resizeMode: 'contain',
     width: 348,
     height: 348,
   },

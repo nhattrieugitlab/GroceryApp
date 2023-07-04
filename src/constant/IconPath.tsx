@@ -24,6 +24,7 @@ export const AppIcons = {
   IconAddress: require('../assets/icon/Address.png'),
   IconOders: require('../assets/icon/Oders.png'),
   IconBack2: require('../assets/icon/Back.png'),
+  IconGoole: require('../assets/icon/ic_google.png'),
 };
 export const AppImage = {
   Welcome: require('../assets/images/img_welcome.png'),
@@ -31,6 +32,8 @@ export const AppImage = {
 
 };
 export const AppAnimation = {
+  Password: require('../assets/animation/anm_password.json'),
+  LoginUser: require('../assets/animation/anm_loginUser.json'),
   ShoppingLoading: require('../assets/animation/anm_shopping_loading.json'),
   Thank: require('../assets/animation/success.json'),
   EmptyCart: require('../assets/animation/anm_empty_cart.json'),

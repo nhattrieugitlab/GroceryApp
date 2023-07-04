@@ -1,6 +1,5 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 const AxiosInstance = (contentType = 'application/json') => {
     const axiosInstance = axios.create({
         timeout: 5000,
@@ -12,7 +11,7 @@ const AxiosInstance = (contentType = 'application/json') => {
             config.headers = {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
-                'Content-Type': contentType,
+                'content-Type': contentType,
             }
             return config;
         },

@@ -1,26 +1,29 @@
 import AxiosInstance from '../utilities/AxiosInstance';
 import {Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-export const logIn = async (userName: string, password: string) => {
+export const logIn = async (phoneNumber: string, password: string) => {
   try {
     const res: any = await AxiosInstance().post('/auth/login', {
-      userName,
+      phoneNumber,
       password,
     });
-    console.log(res);
     if (res) {
-      await AsyncStorage.setItem('userName', userName);
-      await AsyncStorage.setItem('accessToken', res.accessToken || '');
+      await AsyncStorage.setItem('userName', phoneNumber);
+      await AsyncStorage.setItem('accessToken', res.accessToken);
       return true;
     } else {
       Alert.alert('Thông báo', 'Sever có lỗi, vui lòng thử lại sau');
       return false;
     }
   } catch (err: any) {
-    console.log('loi nek', err);
-    if (err == undefined) {
+    if (!err) {
       Alert.alert('Thông báo', 'Sever có lỗi, vui lòng thử lại sau');
+      return false;
     }
+    // if (err.isAxiosError) {
+    //   Alert.alert('Thông báo', 'Có lỗi mạng');
+    //   return false;
+    // }
     if (err.response.status == 409) {
       Alert.alert(
         'Thông báo',
@@ -30,4 +33,19 @@ export const logIn = async (userName: string, password: string) => {
     return false;
   }
 };
-const saveAccessTokenToLocalStorage = () => {};
+export const logOut = async () => {
+  await AsyncStorage.removeItem('accessToken');
+};
+export const checkPhoneNumberIsExits = async (phoneNumber: string) => {
+  try {
+    const res = await AxiosInstance().post('/auth/checkisexitsphonenumber', {
+      phoneNumber,
+    });
+    console.log(res);
+    return true;
+  } catch (err) {
+    console.log(err);
+    Alert.alert('Notification', 'Your phonenumber is already exits!');
+    return false;
+  }
+};

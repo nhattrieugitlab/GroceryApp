@@ -1,36 +1,33 @@
-import {Text, Image, ScrollView, StyleSheet, View} from 'react-native';
-import React, {useState, useRef} from 'react';
+import { Text, Image, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useState, useRef } from 'react';
 import ScreenContainer from '../components/ScreenContainer';
 import Button from '../components/Button';
-import {useNavigation} from '@react-navigation/native';
-import {AuthStackParamList} from '../routes/AuthNavigator';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { AuthStackParamList, VerifyCodeScreenProps } from '../routes/AuthNavigator';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import VerifyCodeInput from '../components/VerifyCodeInput';
-// qui vip pro
+import TabBar from '../components/Tabbar';
 function VerifyCodeScreen(): JSX.Element {
   const navigation =
     useNavigation<NativeStackNavigationProp<AuthStackParamList>>();
+  const registerInfo = useRoute<VerifyCodeScreenProps['route']>().params
   const [code, setCode] = useState(['', '', '', '', '']);
   const otpInputRefs = useRef([]);
   return (
     <ScreenContainer>
+      <TabBar showBackButton label='SignUp' />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Image
-          style={{width: 8.49, height: 14}}
-          source={require('../assets/icon/Back.png')}
-        />
-        <Text style={styles.textSignUp}>Sign Up</Text>
         <Image
           style={styles.image}
           source={require('../assets/images/PhoneVerifi.png')}
         />
         <Text style={styles.textEnter}>Enter Verification Code</Text>
-        <View style={{width: 180, height: 53, marginTop: 13}}>
-          <Text style={styles.textSend}>
-            We have sent SMS to: 046 XXX XX XX
-          </Text>
-        </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Text style={styles.textSend}>
+          {
+            `We have sent SMS to:\n+84 ${registerInfo.phoneNumber}`
+          }
+        </Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <VerifyCodeInput />
           <VerifyCodeInput />
           <VerifyCodeInput />
@@ -39,11 +36,11 @@ function VerifyCodeScreen(): JSX.Element {
         </View>
       </ScrollView>
       <Button
-        style={{marginTop: 30}}
+        style={{ marginTop: 30 }}
         onPress={() => {
           navigation.navigate('SignInScreen');
         }}
-        label="Sign Up"
+        label="Register"
       />
     </ScreenContainer>
   );
@@ -60,6 +57,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
+    alignSelf: 'center',
+    resizeMode: 'stretch',
     width: 301,
     height: 323,
   },
@@ -71,9 +70,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Klarna Text',
   },
   textSend: {
-    fontWeight: '400',
-    fontSize: 18,
-    lineHeight: 21.6,
+    fontWeight: '500',
+    fontSize: 20,
+    textAlign: 'left',
     color: '#7F4E1D',
     fontFamily: 'Klarna Text',
   },

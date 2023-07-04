@@ -39,10 +39,10 @@ function PasswordInput({
             onChangeText && onChangeText(text);
           }}
           style={[
-            err && { borderBottomColor: 'red', borderBottomWidth: 1 },
             logInTextInputStyles.textInput,
-            { paddingHorizontal: 45 },
-
+            {
+              paddingHorizontal: 45,
+            },
           ]}
           placeholder={'Enter your password'}
           placeholderTextColor={'#AC8E71'}
@@ -64,7 +64,8 @@ function PasswordInput({
         <Text style={{ fontSize: 14, fontWeight: '400', color: 'red' }}>
           Please enter your password
         </Text>
-      )}</>
+      )}
+    </>
   );
 }
 export default PasswordInput;

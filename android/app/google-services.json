@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "753556013473",
+    "project_id": "appfood-72e17",
+    "storage_bucket": "appfood-72e17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753556013473:android:fb4f6a5fbe2f2489264be0",
+        "android_client_info": {
+          "package_name": "com.groceryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753556013473-15r6p0euibqm29erihb7d4ibfbpha479.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.groceryapp",
+            "certificate_hash": "13614aba85bc2bd79f65e6e8abaefe67348d226e"
+          }
+        },
+        {
+          "client_id": "753556013473-31c26o24cf0l1tt5k0g3ovp89i545ttm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPyM-mzPoZFWAU5jRr8XZlJa1rLX8xhvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753556013473-31c26o24cf0l1tt5k0g3ovp89i545ttm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

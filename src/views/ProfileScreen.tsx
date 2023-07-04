@@ -2,15 +2,20 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import ScreenContainer from '../components/ScreenContainer'
 import TabBar from '../components/Tabbar'
-
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { logOut } from '../service/login'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../redux/store'
+import { setShowLoading } from '../redux/isLoadingSlice'
+import { useNavigation } from '@react-navigation/native';
+import { AppStackParams } from '../routes/AppNavigator';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 function ProfileScreen(): JSX.Element {
+    const dispatch = useDispatch<AppDispatch>()
+    const appNavigation = useNavigation<NativeStackNavigationProp<AppStackParams>>();
     return (
         <ScreenContainer>
-            <Image
-                style={styles.imageBack}
-                source={require('../assets/icon/Back.png')}
-            />
-            <TabBar label="Profile" />
+            <TabBar showBackButton label="Profile" />
             <View style={styles.profileItemContainer}>
                 <View style={styles.profileItem}>
                     <Image
@@ -76,18 +81,26 @@ function ProfileScreen(): JSX.Element {
                 </View>
 
             </View>
-            <View style={styles.profileItemContainer}>
+            <TouchableOpacity onPress={async () => {
+                dispatch(setShowLoading({ isShowLoading: true }))
+                await logOut()
+                appNavigation.reset({
+                    index: 0,
+                    routes: [{ name: 'AuthNavigator' }],
+                })
+                dispatch(setShowLoading({ isShowLoading: false }))
+
+            }} style={styles.profileItemContainer}>
                 <View style={styles.profileItem}>
                     <Image
                         style={styles.iconProfile}
                         source={require('../assets/icon/ic_logout.png')} />
                     <Text style={styles.profileLabel}>Logout</Text>
                 </View>
-
                 <Image
                     style={styles.iconBackRight}
                     source={require('../assets/icon/ic_arr_to_right.png')} />
-            </View>
+            </TouchableOpacity>
 
         </ScreenContainer>
     )
@@ -96,7 +109,7 @@ function ProfileScreen(): JSX.Element {
 export default ProfileScreen
 
 const styles = StyleSheet.create({
-    changeLanguageContainer:{
+    changeLanguageContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'

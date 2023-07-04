@@ -2,12 +2,12 @@ import { View, TextInput, Text } from 'react-native';
 import CountryPicker2 from './CountryPicker2';
 import { logInTextInputStyles } from './style/TextInputStyle';
 const PhoneNumberInput: React.FC<{
-  showCountryPicker: boolean;
+  showCountryPicker?: boolean;
   err?: boolean;
-  errMessage?: string;
+  placeHolder?: string,
   onChanePhoneNumber?: Function;
   value?: string;
-}> = ({ showCountryPicker, err, onChanePhoneNumber, value }) => {
+}> = ({ showCountryPicker, err, onChanePhoneNumber, value, placeHolder }) => {
   return (
     <>
       <View style={logInTextInputStyles.container}>
@@ -16,12 +16,11 @@ const PhoneNumberInput: React.FC<{
           keyboardType="number-pad"
           value={value}
           style={[
-            err && { borderBottomColor: 'red', borderBottomWidth: 1 },
             logInTextInputStyles.textInput,
             { paddingLeft: 70 }
           ]}
           placeholderTextColor={'#AC8E71'}
-          placeholder="Phone Number"
+          placeholder={placeHolder || 'Phone Number'}
           onChangeText={(text: string) => {
             onChanePhoneNumber && onChanePhoneNumber(text);
           }}

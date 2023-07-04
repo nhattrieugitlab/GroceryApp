@@ -4,6 +4,8 @@ import LoginScreen from '../views/LoginScreen';
 import EnterPasswordScreen from '../views/EnterPassScreen';
 import EnterPhoneNumberScreen from '../views/EnterPhoneNumerScreen';
 import VerifyCodeScreen from '../views/VerifyCodeScreen';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
 enum AuthStackNames {
   Welcome = 'WelcomeScreen',
   EnterPhoneNubmer = 'EnterPhoneNumberScreen',
@@ -12,12 +14,15 @@ enum AuthStackNames {
   VerifyCode = 'VerifyCodeScreen',
 }
 export type AuthStackParamList = {
-  VerifyCodeScreen: undefined;
+  VerifyCodeScreen: { userName: string, phoneNumber: string, password: string };
   WelcomeScreen: undefined;
   EnterPhoneNumberScreen: undefined;
-  EnterPassWordScreen: undefined;
+  EnterPassWordScreen: { userName: string, phoneNumber: string };
   SignInScreen: undefined;
 };
+export type EnterPasswordScreenProps = NativeStackScreenProps<AuthStackParamList, 'EnterPassWordScreen'>
+export type VerifyCodeScreenProps = NativeStackScreenProps<AuthStackParamList, 'VerifyCodeScreen'>
+
 const AuthStack = createNativeStackNavigator();
 const AuthNavigator = (): React.JSX.Element => {
   return (
