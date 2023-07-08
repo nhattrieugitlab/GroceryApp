@@ -1,39 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextInput } from 'react-native';
-import auth, { firebase } from '@react-native-firebase/auth';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+
 function Test() {
+    // If null, no SMS has been sent
+    const [confirm, setConfirm] = useState(null);
+
+    // verification code (OTP - One-Time-Passcode)
+    const [code, setCode] = useState('');
+
+    // Handle login
+    function onAuthStateChanged(user) {
+        if (user) {
+            // Some Android devices can automatically process the verification code (OTP) message, and the user would NOT need to enter the code.
+            // Actually, if he/she tries to enter it, he/she will get an error message because the code was already used in the background.
+            // In this function, make sure you hide the component(s) for entering the code and/or navigate away from this screen.
+            // It is also recommended to display a message to the user informing him/her that he/she has successfully logged in.
+        }
+    }
+
     useEffect(() => {
-        GoogleSignin.configure({ webClientId: '753556013473-31c26o24cf0l1tt5k0g3ovp89i545ttm.apps.googleusercontent.com' });
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // unsubscribe on unmount
     }, []);
 
-    async function onGoogleButtonPress() {
-        console.log('click');
-
-        // Check if your device supports Google Play
-        await GoogleSignin.hasPlayServices();
-        // Get the users ID token
-        try {
-            const userInfo = await GoogleSignin.signIn();
-
-            console.log(userInfo);
-
-            // Create a Google credential with the token
-            const googleCredential = auth.GoogleAuthProvider.credential(userInfo.idToken);
-            return auth().signInWithCredential(googleCredential);
-        } catch (err) {
-            console.log(err)
-        }
-        // Sign-in the user with the credential
+    // Handle the button press
+    async function signInWithPhoneNumber(phoneNumber) {
+        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+        setConfirm(confirmation);
     }
+
+    async function confirmCode() {
+        try {
+            await confirm.confirm(code);
+        } catch (error) {
+            console.log('Invalid code.');
+        }
+    }
+
+    if (!confirm) {
+        return (
+            <Button
+                title="Phone Number Sign In"
+                onPress={() => signInWithPhoneNumber('+84338030688')}
+            />
+        );
+    }
+
     return (
         <>
-            <Button title="Login" onPress={() => {
-                onGoogleButtonPress()
-                // Somewhere in your code
-
-            }} />
+            <TextInput value={code} onChangeText={text => setCode(text)} />
+            <Button title="Confirm Code" onPress={() => confirmCode()} />
         </>
     );
 }
+
 export default Test

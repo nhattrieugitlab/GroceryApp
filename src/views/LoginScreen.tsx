@@ -81,10 +81,10 @@ function LoginScreen(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <ScreenContainer>
+      <TabBar showBackButton onBackPress={() => { }} label="Sign In" />
       <ScrollView
         keyboardShouldPersistTaps="always"
         showsVerticalScrollIndicator={false}>
-        <TabBar showBackButton onBackPress={() => { }} label="Sign In" />
         {
           !isKeyboardOpen ?
             <Image

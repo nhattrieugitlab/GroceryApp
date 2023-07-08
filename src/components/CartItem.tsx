@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { increase, reduce, remove } from '../redux/productSlice';
 import { Swipeable } from 'react-native-gesture-handler';

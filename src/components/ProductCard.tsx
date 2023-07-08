@@ -5,9 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   ImageSourcePropType,
-  ToastAndroid,
+  ToastAndroid
 } from 'react-native';
-import React from 'react';
+import React, { useMemo, memo, useCallback } from 'react';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
@@ -25,28 +25,15 @@ type CardProps = {
 
 function ProductCard({ image, name, weight, price, id }: CardProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const itemsOnCart = useSelector((state: RootState) => state.product.products);
-  const addProduct = async () => {
-    if (itemsOnCart.length > 0) {
-      let isItemExit = itemsOnCart.find(prod => prod.id === id);
-      if (!isItemExit) {
-        dispatch(add({ amount: 1, id, image, name, weight, price }));
-      } else {
-        ToastAndroid.showWithGravity(
-          'Product is already exits in your cart',
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
-      }
-    } else {
-      dispatch(add({ amount: 1, id, image, name, weight, price }));
-    }
-  };
+  const addProduct = useCallback(async () => {
+    dispatch(add({ amount: 1, id, image, name, weight, price }));
+  }, [])
+  const onProductPress = () => {
+    navigation.navigate('DetailProductScreen', { image, name, weight, price, id })
+  }
   const navigation = useNavigation<NativeStackNavigationProp<ShopStackParamList>>()
   return (
-    <TouchableOpacity onPress={() => {
-      navigation.navigate('DetailProductScreen', { image, name, weight, price, id })
-    }} style={styles.container}>
+    <TouchableOpacity onPress={onProductPress} style={styles.container}>
       <View style={styles.boxImage}>
         <Image source={image} resizeMode="contain" style={styles.image} />
       </View>
@@ -133,4 +120,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-export default ProductCard;
+export default memo(ProductCard);

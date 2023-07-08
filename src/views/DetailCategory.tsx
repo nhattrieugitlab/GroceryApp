@@ -112,6 +112,7 @@ function DetailCategory({ item }: ScreenProps): JSX.Element {
                 .map(item => (
                   <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
                     <ProductCard
+                      id={item.id}
                       image={item.image}
                       name={item.name}
                       weight={item.weight}
@@ -133,6 +134,7 @@ function DetailCategory({ item }: ScreenProps): JSX.Element {
                   } else return (
                     <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
                       <ProductCard
+                        id={item.id}
                         image={item.image}
                         name={item.name}
                         weight={item.weight}

@@ -9,17 +9,17 @@ import {
 import React from 'react';
 
 type CardProps = {
-  image: ImageRequireSource;
+  photo: string;
   title: string;
   backgroundColor: string;
 };
 
-function CategoryCard({image, title, backgroundColor}: CardProps): JSX.Element {
+function CategoryCard({ photo, title, backgroundColor }: CardProps): JSX.Element {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={[styles.boxImage, {backgroundColor: backgroundColor}]}>
-        <Image source={image} resizeMode="center" style={styles.image} />
+        style={[styles.boxImage, { backgroundColor: backgroundColor }]}>
+        <Image source={{ uri: photo }} resizeMode="center" style={styles.image} />
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
     </View>
@@ -28,6 +28,7 @@ function CategoryCard({image, title, backgroundColor}: CardProps): JSX.Element {
 
 const styles = StyleSheet.create({
   container: {
+    height: 100,
     width: 100,
   },
   boxImage: {
@@ -38,8 +39,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    width: '75%',
-    height: '75%',
+    width: '100%',
+    height: '100%',
   },
   title: {
     textAlign: 'center',

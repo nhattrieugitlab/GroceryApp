@@ -29,29 +29,16 @@ function FoodInformationScreen(): JSX.Element {
   const product = useRoute<DetailProductScreenProps['route']>().params
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
-  const itemsOnCart = useSelector((state: RootState) => state.product.products);
+  // const itemsOnCart = useSelector((state: RootState) => state.product.products);
 
-  const increaseCount = async () => {
+  const increaseCount = () => {
     dispatch(increase({ ...product, amount: count + 1 }));
   };
-  const reduceCount = async () => {
+  const reduceCount = () => {
     dispatch(reduce({ ...product, amount: count - 1 }));
   };
-  const addProduct = async () => {
-    if (itemsOnCart.length > 0) {
-      let isItemExit = itemsOnCart.find(prod => prod.id === product.id);
-      if (!isItemExit) {
-        dispatch(add({ ...product, amount: count }));
-      } else {
-        ToastAndroid.showWithGravity(
-          'Product is already exits in your cart',
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
-      }
-    } else {
-      dispatch(add({ ...product, amount: count }));
-    }
+  const addProduct = () => {
+    dispatch(add({ ...product, amount: count }));
   };
   return (
     <ScreenContainer>

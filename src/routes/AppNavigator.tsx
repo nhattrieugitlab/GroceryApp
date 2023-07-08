@@ -31,15 +31,16 @@ const AppNavigator = () => {
   useEffect(() => {
     checkIsLogined()
   }, [])
-  return (
-    <View style={{ flex: 1 }}>
-      <NavigationContainer theme={LightTheme}>
+
+  return <View style={{ flex: 1 }}>
+    {
+      isCheckLogin && <NavigationContainer theme={LightTheme}>
         <AppStack.Navigator
           screenOptions={{
             headerShown: false,
           }}>
           {
-            <AppStack.Screen
+            !isLogined && <AppStack.Screen
               name={AppStackNames.Auth}
               component={AuthStackNavigator}
             />
@@ -50,31 +51,34 @@ const AppNavigator = () => {
           />
         </AppStack.Navigator>
       </NavigationContainer>
-    </View>
-  );
-};
+    }
+    {
+      !isCheckLogin && <AnimatedLottieView autoPlay loop source={AppAnimation.Loading} />
+    }
+  </View>
+}
 export default AppNavigator;
-// <View style={{ flex: 1 }}>
-//   {
-//     isCheckLogin && <NavigationContainer theme={LightTheme}>
-//       <AppStack.Navigator
-//         screenOptions={{
-//           headerShown: false,
-//         }}>
-//         {
-//           !isLogined && <AppStack.Screen
-//             name={AppStackNames.Auth}
-//             component={AuthStackNavigator}
-//           />
-//         }
-//         <AppStack.Screen
-//           name={AppStackNames.Home}
-//           component={HomeNavigator}
-//         />
-//       </AppStack.Navigator>
-//     </NavigationContainer>
-//   }
-//   {
-//     !isCheckLogin && <AnimatedLottieView autoPlay loop source={AppAnimation.Loading} />
-//   }
-// </View>
+{/* <View style={{ flex: 1 }}>
+  {
+    isCheckLogin && <NavigationContainer theme={LightTheme}>
+      <AppStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        {
+          !isLogined && <AppStack.Screen
+            name={AppStackNames.Auth}
+            component={AuthStackNavigator}
+          />
+        }
+        <AppStack.Screen
+          name={AppStackNames.Home}
+          component={HomeNavigator}
+        />
+      </AppStack.Navigator>
+    </NavigationContainer>
+  }
+  {
+    !isCheckLogin && <AnimatedLottieView autoPlay loop source={AppAnimation.Loading} />
+  }
+</View> */}
