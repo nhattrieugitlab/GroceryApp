@@ -1,5 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, FlatList, ToastAndroid, ListRenderItem, ImageSourcePropType, } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import ScreenContainer from '../components/ScreenContainer'
 import Button from '../components/Button';
 import { Product } from '../datatypes/Product';
@@ -7,47 +7,55 @@ import ProductCard from '../components/ProductCard';
 import { useRoute } from '@react-navigation/native';
 import { DetailProductScreenProps } from '../routes/ShopNavigator';
 import formatVNCurrencyTypeNumber from '../utilities/CurrencyConverter';
-import { productData } from '../constant/FakeDate';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { increase, reduce, add } from '../redux/productSlice';
 import TabBar from '../components/Tabbar';
-const renderProductItem: ListRenderItem<Product> = ({ item }) => {
-  return (
-    <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
-      <ProductCard
-        id={item.id}
-        image={item.image}
-        name={item.name}
-        weight={item.weight}
-        price={item.price}
-      />
-    </View>
-  );
-};
+import PopularProductList from '../components/PopularProductList';
+
 function FoodInformationScreen(): JSX.Element {
   const product = useRoute<DetailProductScreenProps['route']>().params
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
-  // const itemsOnCart = useSelector((state: RootState) => state.product.products);
-
+  const itemsOnCart = useSelector((state: RootState) => state.product.products);
+  // const renderProductItem: ListRenderItem<Product> = ({ item }) => {
+  //   return (
+  //     <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
+  //       <ProductCard
+  //         id={item.id}
+  //         image={item.image}
+  //         name={item.name}
+  //         weight={item.weight}
+  //         price={item.price}
+  //       />
+  //     </View>
+  //   );
+  // };
+  const reduceItem = useCallback(() => {
+    if (count > 1) {
+      setCount(prevCount => {
+        return prevCount - 1;
+      });
+      reduceCount();
+    }
+  }, [])
   const increaseCount = () => {
-    dispatch(increase({ ...product, amount: count + 1 }));
+    dispatch(increase({ ...product, count: count + 1 }));
   };
   const reduceCount = () => {
-    dispatch(reduce({ ...product, amount: count - 1 }));
+    dispatch(reduce({ ...product, count: count - 1 }));
   };
   const addProduct = () => {
-    dispatch(add({ ...product, amount: count }));
+    dispatch(add({ ...product, count: count }));
   };
   return (
     <ScreenContainer>
+      <TabBar showBackButton onBackPress={() => { }} label={product.name} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <TabBar showBackButton onBackPress={() => { }} label={product.name} />
-        <Image resizeMode='contain' style={{ width: '100%', height: 400 }} source={product.image} />
+        <Image resizeMode='contain' style={{ width: '100%', height: 400 }} source={{ uri: product.photo }} />
 
         <View style={{ marginTop: 40 }}>
           <Text style={styles.nameFood}>{product.name}</Text>
@@ -60,21 +68,14 @@ function FoodInformationScreen(): JSX.Element {
         </View>
         <View style={styles.quantityAndFavorite} >
           <View style={styles.qualityContainer}>
-            <TouchableOpacity onPress={() => {
-              if (count > 1) {
-                setCount(prevCount => {
-                  return prevCount - 1;
-                });
-                reduceCount();
-              }
-            }} style={styles.touchableOpacity}>
+            <TouchableOpacity onPress={reduceItem} style={styles.touchableOpacity}>
               <Text
                 style={styles.touchableOpacityLabel}>
                 -
               </Text>
             </TouchableOpacity>
             <Text style={styles.touchableOpacityLabel}>{count}</Text>
-            <TouchableOpacity onPress={async () => {
+            <TouchableOpacity onPress={() => {
               setCount(prevCount => {
                 return prevCount + 1;
               });
@@ -94,15 +95,7 @@ function FoodInformationScreen(): JSX.Element {
           addProduct()
         }} label="Add to cart" />
         <Text style={styles.titleYouNeed}>You may also need</Text>
-        <View>
-          <FlatList
-            style={{ marginTop: 28, paddingLeft: 16 }}
-            data={productData}
-            renderItem={renderProductItem}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
+        <PopularProductList />
       </ScrollView>
     </ScreenContainer>
   )

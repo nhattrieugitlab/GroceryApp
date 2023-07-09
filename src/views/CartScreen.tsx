@@ -21,11 +21,12 @@ const CartScreen = () => {
   const renderItem: ListRenderItem<Product> = ({ item }) => {
     return (
       <CartItem
-        id={item.id}
-        amount={item.amount || 0}
+        weight={item.weight}
+        _id={item._id}
+        count={item.count || 0}
         price={item.price}
-        label={item.name}
-        image={item.image}
+        name={item.name}
+        photo={item.photo}
       />
     );
   };
@@ -50,7 +51,7 @@ const CartScreen = () => {
                 }}
               />
             )}
-            extraData={(item: Product) => item.id}
+            extraData={(item: Product) => item._id}
             showsVerticalScrollIndicator={false}
             renderItem={renderItem}
             data={itemOnCart}

@@ -6,7 +6,6 @@ import ScreenContainer from '../components/ScreenContainer';
 import { ScrollView } from 'react-native-gesture-handler';
 import PopularProductList from '../components/PopularProductList';
 function ShopScreen(): JSX.Element {
-  console.log('re-render-shop screen')
   return (
     <ScreenContainer>
       <TabBar label='Home' />

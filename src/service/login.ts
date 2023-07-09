@@ -54,7 +54,6 @@ export const loginWithGooogle = async (idToken: string) => {
   try {
     console.log('dang login');
     const res: any = await AxiosInstance().post('/auth/logingoogle', {idToken});
-
     await AsyncStorage.setItem('accessToken', res.accessToken);
     return res;
   } catch (err) {

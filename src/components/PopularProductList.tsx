@@ -1,15 +1,23 @@
 import { Text, View, TouchableOpacity, StyleSheet, FlatList, ListRenderItem } from 'react-native';
 import ProductCard from './ProductCard';
-import { productData } from '../constant/FakeDate';
-import { useCallback } from 'react'
 import { Product } from '../datatypes/Product';
+import { useCallback, useEffect, useState } from 'react'
+import { getPopularProduct } from '../service/getdata';
 const PopularProductList = () => {
+  const [popularProducts, setPopopularProducts] = useState<Product[]>()
+  useEffect(() => {
+    getPopularProductFromSever()
+  }, [])
+  const getPopularProductFromSever = async () => {
+    const products = await getPopularProduct()
+    setPopopularProducts(products?.data)
+  }
   const renderProductItem: ListRenderItem<Product> = useCallback(({ item }) => {
     return (
       <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
         <ProductCard
-          id={item.id}
-          image={item.image}
+          _id={item._id}
+          photo={item.photo}
           name={item.name}
           weight={item.weight}
           price={item.price}
@@ -33,13 +41,15 @@ const PopularProductList = () => {
         </TouchableOpacity>
       </View>
       <View>
-        <FlatList
-          style={{ marginTop: 28 }}
-          data={productData}
-          renderItem={renderProductItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
+        {
+          popularProducts && <FlatList
+            style={{ marginTop: 28 }}
+            data={popularProducts}
+            renderItem={renderProductItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        }
       </View>
     </>
   );

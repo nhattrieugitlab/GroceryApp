@@ -16,26 +16,26 @@ import { useNavigation } from '@react-navigation/native';
 import { ShopStackParamList } from '../routes/ShopNavigator';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 type CardProps = {
-  id: number;
-  image: ImageSourcePropType;
+  _id: string;
+  photo: string;
   name: string;
-  weight?: number;
+  weight: number;
   price: number;
 };
 
-function ProductCard({ image, name, weight, price, id }: CardProps): JSX.Element {
+function ProductCard({ photo, name, weight, price, _id }: CardProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const addProduct = useCallback(async () => {
-    dispatch(add({ amount: 1, id, image, name, weight, price }));
+    dispatch(add({ count: 1, _id, photo, name, weight, price }));
   }, [])
   const onProductPress = () => {
-    navigation.navigate('DetailProductScreen', { image, name, weight, price, id })
+    navigation.navigate('DetailProductScreen', { count: 1, name, weight, price, _id, photo })
   }
   const navigation = useNavigation<NativeStackNavigationProp<ShopStackParamList>>()
   return (
     <TouchableOpacity onPress={onProductPress} style={styles.container}>
       <View style={styles.boxImage}>
-        <Image source={image} resizeMode="contain" style={styles.image} />
+        <Image source={{ uri: photo }} resizeMode="contain" style={styles.image} />
       </View>
       <View style={styles.boxInfo}>
         <Text style={styles.name}>{name}</Text>

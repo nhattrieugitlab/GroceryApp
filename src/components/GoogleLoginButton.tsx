@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { TouchableOpacity, StyleSheet, Image, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, Image, Text, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AppIcons } from '../constant/IconPath';
@@ -28,7 +28,10 @@ const GoogleLoginButton = () => {
             if (idToken) {
                 dispatch(setShowLoading({ isShowLoading: true }))
                 const userInfo = await loginWithGooogle(idToken);
-                dispatch(setShowLoading({ isShowLoading: false }))
+                if (!userInfo) {
+                    Alert.alert('Sever error', "Sever is not response")
+                    return
+                }
                 console.log('info', userInfo)
                 appNavigation.reset({
                     index: 0,
@@ -40,6 +43,9 @@ const GoogleLoginButton = () => {
         } catch (err) {
             console.log(err)
             console.log("Login google err...")
+        } finally {
+            dispatch(setShowLoading({ isShowLoading: false }))
+
         }
     }
     return <TouchableOpacity style={styles.container} onPress={onGoogleButtonPress}>

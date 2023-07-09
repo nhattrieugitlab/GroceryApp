@@ -13,22 +13,16 @@ import { AppDispatch } from '../redux/store';
 import { increase, reduce, remove } from '../redux/productSlice';
 import { Swipeable } from 'react-native-gesture-handler';
 import { AppIcons } from '../constant/IconPath';
-type Props = {
-  id: number;
-  amount: number;
-  label: string;
-  price: number;
-  image: ImageSourcePropType;
-};
-function CartItem({ id, label, image, price, amount }: Props): JSX.Element {
-  const product = { id, name: label, image, price, amount };
-  const [count, setCount] = useState<number>(amount);
+import { Product } from '../datatypes/Product';
+function CartItem({ _id, name, photo, price, weight }: Product): JSX.Element {
+  const [count, setCount] = useState<number>(0);
+  const product: Product = { _id, name, photo, price, count, weight };
   const dispatch = useDispatch<AppDispatch>();
   const increaseCount = async () => {
-    dispatch(increase({ ...product, amount: count + 1 }));
+    dispatch(increase({ ...product, count: count + 1 }));
   };
   const reduceCount = async () => {
-    dispatch(reduce({ ...product, amount: count - 1 }));
+    dispatch(reduce({ ...product, count: count - 1 }));
   };
   const renderDeleteMenu = () => (
     <TouchableOpacity
@@ -54,9 +48,9 @@ function CartItem({ id, label, image, price, amount }: Props): JSX.Element {
   return (
     <Swipeable renderRightActions={renderDeleteMenu}>
       <View style={styles.container}>
-        <Image source={image} style={styles.image} />
+        <Image source={{ uri: photo }} style={styles.image} />
         <View style={styles.nameAndNumber}>
-          <Text style={styles.title}>{label}</Text>
+          <Text style={styles.title}>{name}</Text>
           <View style={styles.qualityContainer}>
             <TouchableOpacity
               onPress={() => {
