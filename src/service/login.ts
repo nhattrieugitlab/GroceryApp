@@ -7,8 +7,10 @@ export const logIn = async (phoneNumber: string, password: string) => {
       phoneNumber,
       password,
     });
+    console.log(res.data);
     if (res) {
       await AsyncStorage.setItem('userName', phoneNumber);
+      await AsyncStorage.setItem('userData', res.data);
       await AsyncStorage.setItem('accessToken', res.accessToken);
       return true;
     } else {
@@ -55,6 +57,8 @@ export const loginWithGooogle = async (idToken: string) => {
     console.log('dang login');
     const res: any = await AxiosInstance().post('/auth/logingoogle', {idToken});
     await AsyncStorage.setItem('accessToken', res.accessToken);
+    console.log(res.data);
+    await AsyncStorage.setItem('userData', JSON.stringify(res.data));
     return res;
   } catch (err) {
     console.log(err);

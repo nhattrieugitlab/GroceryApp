@@ -1,6 +1,5 @@
 import {
   Image,
-  ImageSourcePropType,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -14,8 +13,9 @@ import { increase, reduce, remove } from '../redux/productSlice';
 import { Swipeable } from 'react-native-gesture-handler';
 import { AppIcons } from '../constant/IconPath';
 import { Product } from '../datatypes/Product';
-function CartItem({ _id, name, photo, price, weight }: Product): JSX.Element {
-  const [count, setCount] = useState<number>(0);
+function CartItem({ _id, name, photo, price, weight, count: initCount }: Product): JSX.Element {
+  console.log(initCount)
+  const [count, setCount] = useState<number>(initCount);
   const product: Product = { _id, name, photo, price, count, weight };
   const dispatch = useDispatch<AppDispatch>();
   const increaseCount = async () => {

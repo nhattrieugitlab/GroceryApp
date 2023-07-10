@@ -27,26 +27,28 @@ import BillCard from '../../components/BillCard';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ThankModal from '../../components/modal/ThankModal';
 import { HomeTabParamList } from '../../routes/HomeNavigator';
+
 const PaymentScreen = ({ route }: PaymentScreenProps) => {
-  const [address, setAddress] = useState<string>('');
   const cartNavigation =
     useNavigation<NativeStackNavigationProp<CartNavigationParams>>();
   const paymentNavigation =
     useNavigation<NativeStackNavigationProp<PaymentMethodNavigatorParams>>();
-  const [showThank, setShowThank] = useState<boolean>(false)
+  const appNavigation = useNavigation<NativeStackNavigationProp<HomeTabParamList>>()
+  const [showThankDialog, setShowThankDialog] = useState<boolean>(false)
   const dispatch = useDispatch<AppDispatch>();
-  const paymentMethod = route.params.paymentMethod
-  console.log('payment', paymentMethod)
+  const defaultpaymentMethod = route.params.paymentMethod
+
+  // bill info
+  const [address, setAddress] = useState<string>('');
   const [delivery, setDelivery] = useState<delivery>(deliverys[0]);
+  const [total, setTotal] = useState(0);
+
   const itemOnCart = useSelector((state: RootState) => state.product.products);
   useEffect(() => {
     let totalMount = getTotalAmount(itemOnCart) + delivery.price;
     setTotal(totalMount);
   }, [delivery]);
-  const [total, setTotal] = useState(0);
-  const appNavigation = useNavigation<NativeStackNavigationProp<HomeTabParamList>>()
   const renderDeliveryItem: ListRenderItem<delivery> = ({ item }) => {
-
     return (
       <DeliveryCard
         setDelivery={() => {
@@ -83,11 +85,11 @@ const PaymentScreen = ({ route }: PaymentScreenProps) => {
           }}
         />
         <PaymentMethodCard
-          cashOnDelivery={paymentMethod === 'Cash on delivery'}
+          cashOnDelivery={defaultpaymentMethod === 'Cash on delivery'}
           onPress={() => {
             paymentNavigation.navigate('SelectPaymentMethodScreen');
           }}
-          cardNumber={paymentMethod != 'Cash on delivery' ? paymentMethod.number : ''
+          cardNumber={defaultpaymentMethod != 'Cash on delivery' ? defaultpaymentMethod.number : ''
           }
         />
         <FlatList
@@ -101,7 +103,7 @@ const PaymentScreen = ({ route }: PaymentScreenProps) => {
       <Button
         onPress={() => {
           dispatch(emptyCart());
-          setShowThank(true)
+          setShowThankDialog(true)
           setTimeout(() => {
             appNavigation.reset({
               index: 1,
@@ -112,7 +114,7 @@ const PaymentScreen = ({ route }: PaymentScreenProps) => {
         style={{ marginTop: 10 }}
         label={`Check out ${formatVNCurrencyTypeNumber(total + (total * 0.05))}`}
       />
-      <ThankModal show={showThank} />
+      <ThankModal show={showThankDialog} />
     </ScreenContainer>
   );
 };

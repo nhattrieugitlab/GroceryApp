@@ -17,35 +17,16 @@ function FoodInformationScreen(): JSX.Element {
   const product = useRoute<DetailProductScreenProps['route']>().params
   const [count, setCount] = useState<number>(1);
   const dispatch = useDispatch<AppDispatch>();
-  const itemsOnCart = useSelector((state: RootState) => state.product.products);
-  // const renderProductItem: ListRenderItem<Product> = ({ item }) => {
-  //   return (
-  //     <View style={{ margin: 5, width: 170, marginBottom: 16 }}>
-  //       <ProductCard
-  //         id={item.id}
-  //         image={item.image}
-  //         name={item.name}
-  //         weight={item.weight}
-  //         price={item.price}
-  //       />
-  //     </View>
-  //   );
-  // };
   const reduceItem = useCallback(() => {
+    console.log('--')
     if (count > 1) {
       setCount(prevCount => {
         return prevCount - 1;
       });
-      reduceCount();
     }
   }, [])
-  const increaseCount = () => {
-    dispatch(increase({ ...product, count: count + 1 }));
-  };
-  const reduceCount = () => {
-    dispatch(reduce({ ...product, count: count - 1 }));
-  };
   const addProduct = () => {
+    console.log({ ...product, count: count })
     dispatch(add({ ...product, count: count }));
   };
   return (
@@ -68,7 +49,11 @@ function FoodInformationScreen(): JSX.Element {
         </View>
         <View style={styles.quantityAndFavorite} >
           <View style={styles.qualityContainer}>
-            <TouchableOpacity onPress={reduceItem} style={styles.touchableOpacity}>
+            <TouchableOpacity onPress={() => {
+              if (count > 1) {
+                setCount(count - 1)
+              }
+            }} style={styles.touchableOpacity}>
               <Text
                 style={styles.touchableOpacityLabel}>
                 -
@@ -79,7 +64,6 @@ function FoodInformationScreen(): JSX.Element {
               setCount(prevCount => {
                 return prevCount + 1;
               });
-              increaseCount();
             }} style={styles.touchableOpacity}>
               <Text
                 style={styles.touchableOpacityLabel}>

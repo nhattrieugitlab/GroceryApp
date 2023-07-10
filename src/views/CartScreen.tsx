@@ -33,6 +33,7 @@ const CartScreen = () => {
   const itemOnCart = useSelector((state: RootState) => state.product.products);
   useEffect(() => {
     setTotalAmount(getTotalAmount(itemOnCart));
+    console.log(getTotalAmount(itemOnCart))
   }, [itemOnCart]);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const itemOnCardCount = itemOnCart.length;
